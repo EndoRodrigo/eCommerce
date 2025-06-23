@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public abstract  class Person {
     protected Integer id;
     protected String name;
+    protected String lastName;
     protected String email;
     protected String phone;
 
@@ -29,6 +30,14 @@ public abstract  class Person {
         this.name = name;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -47,9 +56,9 @@ public abstract  class Person {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
+        return  "id=" + id +
                 ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';

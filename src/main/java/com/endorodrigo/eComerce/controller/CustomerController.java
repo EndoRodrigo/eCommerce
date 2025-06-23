@@ -2,13 +2,14 @@ package com.endorodrigo.eComerce.controller;
 
 import com.endorodrigo.eComerce.model.Customer;
 import com.endorodrigo.eComerce.service.CustomerService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-@RestController
-@RequestMapping("/api")
+@Controller
 public class CustomerController {
 
     Logger log = Logger.getLogger(String.valueOf(CustomerController.class));
@@ -19,21 +20,32 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @RequestMapping(value = "/customer/all", method = RequestMethod.GET)
-    public List<Customer> getCustomers() {
-        List<Customer> data = customerService.getAll();
-        return data;
-    }
+    @RequestMapping(value = "/customer", method = RequestMethod.GET)
+    public String customerPage(@RequestParam(value = "id", required = false) Integer id, Model model) {
+        List<Customer> customers = customerService.getAll();
+        Customer customer;
 
-    @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
-    public Customer getCustomer(@PathVariable Integer id) {
-        return customerService.findId(id);
+        if (id != null) {
+            customer = customerService.findId(id); // cliente existente
+        } else {
+            customer = new Customer(); // cliente nuevo
+        }
+
+        model.addAttribute("customers", customers);
+        model.addAttribute("customer", customer);
+        return "customer";
     }
 
     @RequestMapping(value = "/customer/create", method = RequestMethod.POST)
-    public Customer createCustomer(@RequestBody Customer customer) {
-        log.info("createCustomer"+ customer);
-        return customerService.insert(customer);
+    public String createCustomer(@ModelAttribute("customerForma") Customer customer) {
+        log.info("Customer create"+ customer);
+        customerService.insert(customer);
+        return "redirect:/customer";
+    }
+
+    public String updateCustomer(@ModelAttribute("customerForma") Customer customer) {
+        log.info("Customer update"+ customer);
+        return "redirect:/customer";
     }
 
     @RequestMapping(value = "/customer/delete/{id}", method = RequestMethod.GET)
