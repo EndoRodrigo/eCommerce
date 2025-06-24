@@ -56,10 +56,10 @@
                             <label for="category">Categoría</label>
                             <select class="form-control" id="category" name="category">
                                 <option th:value="${article.category}">Seleccione una categoría</option>
-                                <option value="tecnologia">Tecnología</option>
-                                <option value="ropa">Ropa</option>
-                                <option value="hogar">Hogar</option>
-                                <option value="libros">Libros</option>
+                                <option value="Tecnologia">Tecnología</option>
+                                <option value="Ropa">Ropa</option>
+                                <option value="Hogar">Hogar</option>
+                                <option value="Libros">Libros</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
@@ -80,19 +80,12 @@
                     <div class="form-group">
                         <label>Estado</label><br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="activo" value="activo" checked>
-                            <label class="form-check-label" for="activo" th:value="${article.status}">Activo</label>
+                            <input class="form-check-input" type="radio" name="status" id="activo" th:checked="${article.status}" value="activo" checked>
+                            <label class="form-check-label" for="activo" >Activo</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="inactivo" value="inactivo">
-                            <label class="form-check-label" for="inactivo" th:checked="${article.status}">Inactivo</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="featured" name="featured">
-                            <label class="form-check-label" for="featured" th:value="${article.outstanding}">Producto destacado</label>
+                            <input class="form-check-input" type="radio" name="status" id="inactivo" th:checked="${article.status}" value="inactivo">
+                            <label class="form-check-label" for="inactivo" >Inactivo</label>
                         </div>
                     </div>
 
@@ -120,7 +113,6 @@
                                     <th>PRICE</th>
                                     <th>DATE</th>
                                     <th>STATUS</th>
-                                    <th>OUTSTANDING</th>
                                     <th>ACCIONES</th>
                                 </tr>
                                 </thead>
@@ -134,22 +126,22 @@
                                     <td th:text="${data.getPrice()}"></td>
                                     <td th:text="${data.getCaducate()}"></td>
                                     <td th:text="${data.getStatus()}"></td>
-                                    <td th:text="${data.getOutstanding()}"></td>
+
                                     <td>
-                                        <!--a th:href="#"
+                                        <a th:href="@{/product(code=${data.getCode()})}"
                                            class="btn btn-warning btn-icon-split me-2">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
                                             <span class="text">UPDATE</span>
                                         </a>
-                                        <a th:href="#"
+                                        <a th:href="@{/product/delite/{code}(code=${data.getCode()})}"
                                            class="btn btn-danger btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                             </span>
                                             <span class="text">DELETE</span>
-                                        </a-->
+                                        </a>
                                     </td>
 
                                 </tr>

@@ -32,6 +32,6 @@ public class ProductService implements IGenericService<Product, String> {
 
     @Override
     public void delete(Product entity) {
-
+        productRepository.delete(entity);
     }
 }

@@ -6,10 +6,7 @@ import com.endorodrigo.eComerce.service.ProductService;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +29,9 @@ public class ProductController {
         logger.info("listado de product: " + listProduct);
         Product article;
         if (id != null) {
+            logger.info("buscando product por id: " + id);
             article = productService.findId(id);
+            logger.info("buscando product por id: " + article);
         }else {
             article =  new Product();
         }
@@ -48,4 +47,21 @@ public class ProductController {
         logger.info("Creando product " + product);
         return "redirect:/product";
     }
+
+    @RequestMapping(value = "/product/update", method = RequestMethod.POST)
+    public String updateProduct(@ModelAttribute("productForm") Product product, Model model) {
+        productService.insert(product);
+        logger.info("Creando product " + product);
+        return "redirect:/product";
+    }
+
+    @RequestMapping(value = "/product/delite/{code}", method = RequestMethod.GET)
+    public String deleteProduct(@PathVariable String code, Model model) {
+        Product product = productService.findId(code);
+        logger.info("buscando product por id para eliminar: " + code);
+        productService.delete(product);
+        return "redirect:/product";
+    }
+
+
 }

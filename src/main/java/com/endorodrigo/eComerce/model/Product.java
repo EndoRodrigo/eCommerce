@@ -15,7 +15,6 @@ public class Product {
     private int quantity;
     private String caducate;
     private String status;
-    private boolean outstanding;
 
     public Product() {
     }
@@ -93,14 +92,6 @@ public class Product {
     }
 
 
-    public boolean getOutstanding() {
-        return outstanding;
-    }
-
-    public void setOutstanding(boolean outstanding) {
-        this.outstanding = outstanding;
-    }
-
     @Override
     public String toString() {
         return  "id=" + id +
@@ -112,7 +103,6 @@ public class Product {
                 ", quantity=" + quantity +
                 ", caducate='" + caducate + '\'' +
                 ", status=" + status +
-                ", outstanding=" + outstanding +
                 '}';
     }
 }
