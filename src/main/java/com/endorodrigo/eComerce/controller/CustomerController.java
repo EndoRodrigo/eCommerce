@@ -14,7 +14,7 @@ public class CustomerController {
 
     Logger log = Logger.getLogger(String.valueOf(CustomerController.class));
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
@@ -48,11 +48,11 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
-    @RequestMapping(value = "/customer/delete/{id}", method = RequestMethod.GET)
-    public Customer deleteCustomer(@PathVariable Integer id) {
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
+    public String deleteCustomer(@PathVariable Integer id) {
         Customer customer = customerService.findId(id);
         customerService.delete(customer);
-        return customer;
+        return "redirect:/customer";
     }
 
 }
