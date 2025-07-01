@@ -216,7 +216,8 @@
                                 Activity Log
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" customerForma-toggle="modal" customerForma-target="#logoutModal">
+                            <a class="dropdown-item" href="#" customerForma-toggle="modal"
+                               customerForma-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
@@ -237,7 +238,7 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                   id="code" name="code" placeholder="Code Product" >
+                                   id="code" name="code" placeholder="Code Product">
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user"
@@ -259,43 +260,52 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="customerFormaTable" width="100%" cellspacing="0">
                                 <thead>
-                                <tr>
-                                    <th>ID CARD</th>
+                                <tr class="table-dark">
+                                    <th>ID CART</th>
                                     <th>PRODUCT CODE</th>
                                     <th>PRODUCT NAME</th>
                                     <th>PRODUCT PRICE</th>
                                     <th>PRODUCT QUANTITY</th>
-                                    <th>TOTAL</th>
+                                    <th>SUBTOTAL</th>
                                     <th>ACCIONES</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="car : ${cart.getItems()}">
+                                <!-- Lista de productos en el carrito -->
+                                <tr th:each="car : ${cart.items}">
                                     <td th:text="${cart.idCar}"></td>
                                     <td th:text="${car.product.code}"></td>
                                     <td th:text="${car.product.name}"></td>
                                     <td th:text="${car.product.price}"></td>
                                     <td th:text="${car.quantity}"></td>
-                                    <td th:text="${cart.total}"></td>
+                                    <td th:text="${car.product.price * car.quantity}"></td>
                                     <td>
-                                        <a th:href="@{/customer(id=${cart.idCar})}" class="btn btn-warning btn-icon-split me-2">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-exclamation-triangle"></i>
-                                            </span>
+                                        <a th:href="@{/customer(id=${cart.idCar})}"
+                                           class="btn btn-warning btn-icon-split me-2">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </span>
                                             <span class="text">UPDATE</span>
                                         </a>
-                                        <a th:href="@{/customer/{id}(id=${cart.idCar})}" class="btn btn-danger btn-icon-split">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-trash"></i>
-                                            </span>
-                                            <span class="text">DELETE</span>
+                                        <a th:href="@{/pos/clear}"
+                                           class="btn btn-danger btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            <span class="text">CLEAR</span>
                                         </a>
                                     </td>
-
                                 </tr>
 
+                                <!-- Fila del total general -->
+                                <tr class="table-success fw-bold">
+                                    <td colspan="5" class="text-end">TOTAL GENERAL</td>
+                                    <td th:text="${cart.total}"></td>
+                                    <td></td>
+                                </tr>
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>

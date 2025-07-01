@@ -38,4 +38,12 @@ public class PosController {
         return "redirect:/pos";
 
     }
+
+    @RequestMapping(value = "/pos/clear", method =  RequestMethod.GET)
+    public String clearCart(Model model) {
+        logger.info("clearCart for id. "+ cart.toString());
+        cart.clear();
+        logger.info("list cart = " + cart);
+        return "redirect:/pos";
+    }
 }
