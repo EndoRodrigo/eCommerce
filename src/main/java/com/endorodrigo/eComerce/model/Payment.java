@@ -17,6 +17,12 @@ public class Payment {
     public Payment() {
     }
 
+    public Payment(int idPayment, String description, double price) {
+        this.idPayment = idPayment;
+        this.description = description;
+        this.price = price;
+    }
+
     public void setIdPayment(int idPayment) {
         this.idPayment = idPayment;
     }

@@ -6,24 +6,24 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Component
 @SessionScope  // Cada usuario tendrá su propio carrito
 @Entity
 public class Cart {
 
-
-    public Cart() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idCar;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
 
+    // Constructor vacío requerido por JPA
+    public Cart() {
+    }
+
+    // Getters y setters
     public Integer getIdCar() {
         return idCar;
     }
@@ -47,11 +47,17 @@ public class Cart {
                 return;
             }
         }
-        items.add(new CartItem(product, 1));
+
+        CartItem newItem = new CartItem(product, 1);
+        newItem.setCart(this); // 🔥 Esencial para que Hibernate lo relacione con este Cart
+        items.add(newItem);
+
     }
 
     public double getTotal() {
-        return items.stream().mapToDouble(CartItem::getTotalPrice).sum();
+        return items.stream()
+                .mapToDouble(CartItem::getTotalPrice)
+                .sum();
     }
 
     public void clear() {
