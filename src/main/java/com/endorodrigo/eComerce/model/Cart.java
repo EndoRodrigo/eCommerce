@@ -1,5 +1,6 @@
 package com.endorodrigo.eComerce.model;
 
+import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -9,21 +10,25 @@ import java.util.logging.Logger;
 
 @Component
 @SessionScope  // Cada usuario tendrá su propio carrito
+@Entity
 public class Cart {
 
-    Logger logger = Logger.getLogger(String.valueOf(Cart.class));
 
     public Cart() {
     }
 
-    private int idCar;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idCar;
+
+    @OneToMany
     private List<CartItem> items = new ArrayList<>();
 
-    public int getIdCar() {
+    public Integer getIdCar() {
         return idCar;
     }
 
-    public void setIdCar(int idCar) {
+    public void setIdCar(Integer idCar) {
         this.idCar = idCar;
     }
 
@@ -43,7 +48,6 @@ public class Cart {
             }
         }
         items.add(new CartItem(product, 1));
-        logger.info("addProduct add list. "+ product);
     }
 
     public double getTotal() {

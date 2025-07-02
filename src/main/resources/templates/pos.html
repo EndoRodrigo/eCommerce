@@ -280,12 +280,12 @@
                                     <td th:text="${car.quantity}"></td>
                                     <td th:text="${car.product.price * car.quantity}"></td>
                                     <td>
-                                        <a th:href="@{/customer(id=${cart.idCar})}"
+                                        <a th:href="@{/pos/cash}"
                                            class="btn btn-warning btn-icon-split me-2">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-exclamation-triangle"></i>
                                                 </span>
-                                            <span class="text">UPDATE</span>
+                                            <span class="text">GENERAR ORDEN</span>
                                         </a>
                                         <a th:href="@{/pos/clear}"
                                            class="btn btn-danger btn-icon-split">

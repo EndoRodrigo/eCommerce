@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 @Controller
 public class ProductController {
 
-    Logger logger = Logger.getLogger(ProductService.class.getName());
+    public static Logger logger = (Logger) LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService productService;
 

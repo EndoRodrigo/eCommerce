@@ -2,6 +2,7 @@ package com.endorodrigo.eComerce.controller;
 
 import com.endorodrigo.eComerce.model.Customer;
 import com.endorodrigo.eComerce.service.CustomerService;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 @Controller
 public class CustomerController {
 
-    Logger log = Logger.getLogger(String.valueOf(CustomerController.class));
+    public static Logger log = (Logger) LoggerFactory.getLogger(CustomerController.class);
 
     private final CustomerService customerService;
 
