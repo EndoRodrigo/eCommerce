@@ -4,13 +4,21 @@ import jakarta.persistence.*;
 
 @Entity
 public class CartItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idItem;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id") // FK hacia la tabla Cart
+    private Cart cart;
+
     @OneToOne
     private Product product;
+
     private int quantity;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Payment payment;
 
     public CartItem() {
@@ -19,7 +27,22 @@ public class CartItem {
     public CartItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        this.payment = getPayment();
+    }
+
+    public Integer getIdItem() {
+        return idItem;
+    }
+
+    public void setIdItem(Integer idItem) {
+        this.idItem = idItem;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public Product getProduct() {
@@ -38,18 +61,17 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public double getTotalPrice(){
-        return product.getPrice() * quantity;
-    }
-
     public Payment getPayment() {
-        payment = new Payment();
-        payment.setIdPayment(1);
-        payment.setDescription("Cash");
-        payment.setPrice(getTotalPrice());
         return payment;
     }
 
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public double getTotalPrice() {
+        return product.getPrice() * quantity;
+    }
 
     @Override
     public String toString() {

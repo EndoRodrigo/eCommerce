@@ -1,16 +1,13 @@
 package com.endorodrigo.eComerce.controller;
 
 import com.endorodrigo.eComerce.model.Product;
-import com.endorodrigo.eComerce.service.CustomerService;
 import com.endorodrigo.eComerce.service.ProductService;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 @Controller
 public class ProductController {
