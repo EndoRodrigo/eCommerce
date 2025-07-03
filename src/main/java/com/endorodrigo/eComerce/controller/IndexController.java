@@ -10,7 +10,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(ModelMap model) {
-        return "index";
+        return "login";
     }
 
 
