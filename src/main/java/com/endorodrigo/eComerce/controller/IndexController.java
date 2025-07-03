@@ -13,5 +13,15 @@ public class IndexController {
         return "login";
     }
 
+    @GetMapping("/login")
+    public String login(ModelMap model) {
+        return "index";
+    }
+
+    @GetMapping("/register")
+    public String register(ModelMap model) {
+        return "register";
+    }
+
 
 }
