@@ -5,6 +5,8 @@ import com.endorodrigo.eComerce.service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,19 +22,29 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+
+    @GetMapping("/")
+    public String index(ModelMap model) {
+        logger.info("Iniciando loggin");
+        return "login";
+    }
+
+
+    @GetMapping("/register")
+    public String register(ModelMap model) {
+        logger.info("Iniciando register");
+        return "register";
+    }
+
+    @RequestMapping(value = "/app/index", method = RequestMethod.POST)
     public String login(@ModelAttribute("formUser") User user){
         logger.info("In login"+ user);
         String res = authService.loginUser(user.getEmail(),  user.getPassword());
-        if(res != "Incorrect Password"){
-            return "index";
-        }else {
-            return "login";
-        }
+        return "redirect:/app/index";
 
     }
 
-    @RequestMapping(value = "/login/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/app/register", method = RequestMethod.POST)
     public String register(@ModelAttribute("formRegister") User user){
         logger.info("Register User"+ user.getPassword());
         authService.registerUser(user);

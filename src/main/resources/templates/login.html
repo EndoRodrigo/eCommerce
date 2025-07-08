@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragmentos/cabecera::cabecero-seccion}">
 
 <body class="bg-gradient-primary">
@@ -21,9 +21,9 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" th:action="@{/login}" method="post" modelAttribute="formUser">
+                                    <form class="user" th:action="@{app/index}" method="post" modelAttribute="formUser">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address..." name="email">
                                         </div>
@@ -54,7 +54,7 @@
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" th:href="@{/register}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
