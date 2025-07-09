@@ -1,75 +1,85 @@
 package com.endorodrigo.eComerce.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 
 @Entity
-public class User extends Person {
+public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
+    private String email;
 
     private String password;
 
-    private Role role;
-    private boolean enabled;
-    private String resetToken;
+    private String role; // Ej: "ROLE_USER", "ROLE_ADMIN"
 
 
-    @Override
-    public Integer getId() {
+    public User() {
+    }
+
+    public User(String email, String password, String role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getResetToken() {
-        return resetToken;
-    }
-
-    public void setResetToken(String resetToken) {
-        this.resetToken = resetToken;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                ", enabled=" + enabled +
-                ", resetToken='" + resetToken + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(() -> role); // Lambda como GrantedAuthority
+    }
+
+    @Override public String getUsername() { return email; }
+    @Override public String getPassword() { return password; }
+
+    // Los siguientes pueden ser true si no manejas estados de cuenta
+    @Override public boolean isAccountNonExpired() { return true; }
+    @Override public boolean isAccountNonLocked() { return true; }
+    @Override public boolean isCredentialsNonExpired() { return true; }
+    @Override public boolean isEnabled() { return true; }
 }
