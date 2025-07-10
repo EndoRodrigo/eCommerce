@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login") // Página de login personalizada
                         .defaultSuccessUrl("/index", true) // Redirigir después del login exitoso
+                        .failureUrl("/?error=true")
                         .permitAll() // Permitir acceso al formulario de login
                 )
                 .logout(logout -> logout

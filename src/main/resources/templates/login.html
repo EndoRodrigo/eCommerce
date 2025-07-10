@@ -41,6 +41,12 @@
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
+                                        <!-- login.html -->
+                                        <div th:if="${param.error}">
+                                            <div class="alert alert-danger">
+                                                Correo o contraseña inválidos.
+                                            </div>
+                                        </div>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
