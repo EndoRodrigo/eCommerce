@@ -30,6 +30,11 @@
 		<java.version>23</java.version>
 	</properties>
 	<dependencies>
+		<!-- pom.xml -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId> <!-- O 5 según versión -->
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
