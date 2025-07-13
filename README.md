@@ -63,23 +63,23 @@ Este proyecto es una solución completa de **comercio electrónico (eCommerce)**
 
 ---
 
-## 📂 Estructura del proyecto
 
-´
-src/
-├── main/
-│ ├── java/
-│ │ └── com.ejemplo.ecommerce/
-│ │ ├── controller/
-│ │ ├── model/
-│ │ ├── repository/
-│ │ ├── service/
-│ │ ├── security/
-│ │ └── EcommerceApplication.java
-│ └── resources/
-│ ├── static/
-│ ├── templates/
-│ ├── application.properties
-└── test/
-´
+---
+
+## ⚙️ Instalación y ejecución
+
+### 🔧 Requisitos
+
+- Java 17+
+- Maven
+- MySQL (o usar H2 para pruebas locales)
+
+### ▶️ Pasos
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tu-usuario/ecommerce-springboot.git
+cd ecommerce-springboot
+
 
