@@ -65,3 +65,18 @@ Este proyecto es una solución completa de **comercio electrónico (eCommerce)**
 
 ## 📂 Estructura del proyecto
 
+src/
+├── main/
+│ ├── java/
+│ │ └── com.ejemplo.ecommerce/
+│ │ ├── controller/
+│ │ ├── model/
+│ │ ├── repository/
+│ │ ├── service/
+│ │ ├── security/
+│ │ └── EcommerceApplication.java
+│ └── resources/
+│ ├── static/
+│ ├── templates/
+│ ├── application.properties
+└── test/
