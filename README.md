@@ -65,6 +65,7 @@ Este proyecto es una solución completa de **comercio electrónico (eCommerce)**
 
 ## 📂 Estructura del proyecto
 
+´
 src/
 ├── main/
 │ ├── java/
@@ -80,3 +81,5 @@ src/
 │ ├── templates/
 │ ├── application.properties
 └── test/
+´
+
