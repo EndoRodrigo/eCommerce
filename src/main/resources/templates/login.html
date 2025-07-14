@@ -26,10 +26,12 @@
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address..." name="username">
+                                            <!--span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span-->
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password" name="password">
+                                            <!--span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></-span-->
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
