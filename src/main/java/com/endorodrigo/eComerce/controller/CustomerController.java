@@ -3,8 +3,10 @@ package com.endorodrigo.eComerce.controller;
 import com.endorodrigo.eComerce.model.Customer;
 import com.endorodrigo.eComerce.service.CustomerService;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +40,10 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customer/create", method = RequestMethod.POST)
-    public String createCustomer(@ModelAttribute("customerForma") Customer customer) {
+    public String createCustomer(@Valid @ModelAttribute("customer") Customer customer, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            return "customer";
+        }
         log.info("Customer create"+ customer);
         customerService.insert(customer);
         return "redirect:/customer";
