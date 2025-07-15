@@ -1,14 +1,26 @@
 package com.endorodrigo.eComerce.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 
 @Entity
 public abstract  class Person {
+    @NotNull
+    @Min(18)
+    @Max(99)
     protected Integer id;
+    @NotEmpty
+    @Size(min = 3, max = 30)
     protected String name;
+    @NotEmpty
+    @Size(min = 3, max = 30)
     protected String lastName;
+    @NotEmpty
+    @Size(min = 3, max = 30)
     protected String email;
+    @NotEmpty
+    @Size(min = 3, max = 30)
     protected String phone;
 
     public Person() {
