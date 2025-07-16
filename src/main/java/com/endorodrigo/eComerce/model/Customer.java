@@ -6,8 +6,6 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 public class Customer extends Person {
-    @NotEmpty
-    @Size(min = 3, max = 30)
     private String address;
 
     public Customer() {

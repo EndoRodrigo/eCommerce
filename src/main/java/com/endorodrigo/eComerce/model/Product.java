@@ -1,19 +1,29 @@
 package com.endorodrigo.eComerce.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty
     private String code;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private String category;
+    @NotNull
     private double price;
+    @NotNull
     private int quantity;
+    @NotEmpty
     private String caducate;
+    @NotEmpty
     private String status;
 
     public Product() {
