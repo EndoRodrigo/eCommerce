@@ -2,9 +2,11 @@ package com.endorodrigo.eComerce.controller;
 
 import com.endorodrigo.eComerce.model.Product;
 import com.endorodrigo.eComerce.service.ProductService;
+import jakarta.validation.Valid;
 import org.slf4j.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -28,7 +30,6 @@ public class ProductController {
         if (id != null) {
             logger.info("buscando product por id: " + id);
             article = productService.findId(id);
-            logger.info("buscando product por id: " + article);
         }else {
             article =  new Product();
         }
@@ -39,16 +40,19 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/create", method = RequestMethod.POST)
-    public String createProduct(@ModelAttribute("productForm") Product product, Model model) {
+    public String createProduct(@Valid @ModelAttribute("article") Product product, Model model, Errors errors) {
+        if (errors.hasErrors()) {
+            return "product";
+        }
         productService.insert(product);
         logger.info("Creando product " + product);
         return "redirect:/product";
     }
 
     @RequestMapping(value = "/product/update", method = RequestMethod.POST)
-    public String updateProduct(@ModelAttribute("productForm") Product product, Model model) {
+    public String updateProduct(@Valid @ModelAttribute("article") Product product, Model model) {
         productService.insert(product);
-        logger.info("Creando product " + product);
+        logger.info("Update product " + product);
         return "redirect:/product";
     }
 

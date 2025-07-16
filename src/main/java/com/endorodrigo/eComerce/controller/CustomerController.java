@@ -41,10 +41,10 @@ public class CustomerController {
 
     @RequestMapping(value = "/customer/create", method = RequestMethod.POST)
     public String createCustomer(@Valid @ModelAttribute("customer") Customer customer, Errors errors, Model model) {
+        log.info("Customer create"+ customer);
         if (errors.hasErrors()) {
             return "customer";
         }
-        log.info("Customer create"+ customer);
         customerService.insert(customer);
         return "redirect:/customer";
     }
