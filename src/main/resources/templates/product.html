@@ -24,7 +24,7 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Product Information</h1>
-                <form class="user" action="/product/create" th:object="${article}" method="post" enctype="multipart/form-data">
+                <form class="user" th:action="@{/product/create}" th:object="${product}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label >Code</label>
@@ -58,8 +58,8 @@
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label >Categoría</label>
-                            <select class="form-control" >
-                                <option th:value="*{category}">Seleccione una categoría</option>
+                            <select class="form-control" th:field="*{category}">
+                                <option value="">Seleccione una categoría</option>
                                 <option value="Tecnologia">Tecnología</option>
                                 <option value="Ropa">Ropa</option>
                                 <option value="Hogar">Hogar</option>
