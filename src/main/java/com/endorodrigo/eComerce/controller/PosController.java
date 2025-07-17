@@ -4,6 +4,7 @@ import com.endorodrigo.eComerce.model.Cart;
 import com.endorodrigo.eComerce.model.Product;
 import com.endorodrigo.eComerce.service.PosService;
 import com.endorodrigo.eComerce.service.ProductService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,12 @@ public class PosController {
     @RequestMapping(value = "/pos", method = RequestMethod.GET)
     public String pos(Model model) {
         model.addAttribute("cart", cart);
+        model.addAttribute("product", new Product());
         return "pos";
     }
 
     @RequestMapping(value = "/pos/add", method = RequestMethod.POST)
-    public String addProduct(Model model,@ModelAttribute Product cartForm ) {
+    public String addProduct(Model model,@Valid @ModelAttribute("product") Product cartForm ) {
         logger.info("addProduct for id. "+ cartForm.getCode());
         Product product = productService.findId(cartForm.getCode());
 

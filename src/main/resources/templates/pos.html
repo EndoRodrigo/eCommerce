@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragmentos/cabecera::cabecero-seccion}"></head>
 
@@ -234,11 +234,12 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">POST information</h1>
-                <form class="user" action="/pos/add" modelAttribute="cartForm" method="post">
+                <form class="user" action="/pos/add" th:object="${product}" method="post">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                   id="code" name="code" placeholder="Code Product">
+                                   placeholder="Code Product" th:field="*{code}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user"

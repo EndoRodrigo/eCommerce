@@ -6,7 +6,9 @@ import jakarta.validation.Valid;
 import org.slf4j.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -25,22 +27,23 @@ public class ProductController {
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public String getProduct(@RequestParam(value = "code", required = false) String id, Model model) {
         List<Product> listProduct = productService.getAll();
-        logger.info("listado de product: " + listProduct);
-        Product article;
+        logger.info("listado de productos: " + listProduct);
+
+        Product product;
         if (id != null) {
-            logger.info("buscando product por id: " + id);
-            article = productService.findId(id);
-        }else {
-            article =  new Product();
+            logger.info("buscando producto por id: " + id);
+            product = productService.findId(id);
+        } else {
+            product = new Product();
         }
 
         model.addAttribute("listProduct", listProduct);
-        model.addAttribute("article", article);
+        model.addAttribute("product", product);
         return "product";
     }
 
     @RequestMapping(value = "/product/create", method = RequestMethod.POST)
-    public String createProduct(@Valid @ModelAttribute("article") Product product, Model model, Errors errors) {
+    public String createProduct(@Valid @ModelAttribute("product") Product product, Model model, Errors errors) {
         if (errors.hasErrors()) {
             return "product";
         }
@@ -50,7 +53,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/update", method = RequestMethod.POST)
-    public String updateProduct(@Valid @ModelAttribute("article") Product product, Model model) {
+    public String updateProduct(@ModelAttribute("product") Product product, Model model) {
         productService.insert(product);
         logger.info("Update product " + product);
         return "redirect:/product";
