@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -43,8 +42,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/create", method = RequestMethod.POST)
-    public String createProduct(@Valid @ModelAttribute("product") Product product, Model model, Errors errors) {
-        if (errors.hasErrors()) {
+    public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("listProduct", productService.getAll());
             return "product";
         }
         productService.insert(product);
