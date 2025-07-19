@@ -1,6 +1,8 @@
 package com.endorodrigo.eComerce.controller;
 
 import com.endorodrigo.eComerce.model.Cart;
+import com.endorodrigo.eComerce.model.Data;
+import com.endorodrigo.eComerce.model.Payment;
 import com.endorodrigo.eComerce.model.Product;
 import com.endorodrigo.eComerce.service.PosService;
 import com.endorodrigo.eComerce.service.ProductService;
@@ -10,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -29,17 +32,22 @@ public class PosController {
     @RequestMapping(value = "/pos", method = RequestMethod.GET)
     public String pos(Model model) {
         model.addAttribute("cart", cart);
-        model.addAttribute("product", new Product());
+        model.addAttribute("data", new Data());
         return "pos";
     }
 
     @RequestMapping(value = "/pos/add", method = RequestMethod.POST)
-    public String addProduct(Model model,@Valid @ModelAttribute("product") Product cartForm ) {
-        logger.info("addProduct for id. "+ cartForm.getCode());
-        Product product = productService.findId(cartForm.getCode());
+    public String addProduct(@Valid @ModelAttribute("data") Data cartForm, Errors errors, Model model ) {
 
+        if (errors.hasErrors()) {
+            model.addAttribute("cart", cart);
+            return "pos";
+        }
+        logger.info("addProduct for id -> "+ cartForm.getCode());
+        Product product = productService.findId(cartForm.getCode());
         logger.info("product = " + product);
         cart.addProduct(product);
+        cart.setPayment(new Payment(1,"Efectivo",cart.getTotal()));
         logger.info("list cart = " + cart);
         return "redirect:/pos";
 
