@@ -19,6 +19,9 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Payment payment;
+
     // Constructor vacío requerido por JPA
     public Cart() {
     }
@@ -60,15 +63,25 @@ public class Cart {
                 .sum();
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
     public void clear() {
         items.clear();
     }
+
 
     @Override
     public String toString() {
         return "Cart{" +
                 "idCar=" + idCar +
                 ", items=" + items +
+                ", payment=" + payment +
                 '}';
     }
 }

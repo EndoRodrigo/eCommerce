@@ -18,8 +18,6 @@ public class CartItem {
 
     private int quantity;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Payment payment;
 
     public CartItem() {
     }
@@ -61,14 +59,6 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
-
     public double getTotalPrice() {
         return product.getPrice() * quantity;
     }
@@ -78,7 +68,6 @@ public class CartItem {
         return "CartItem{" +
                 "product=" + product +
                 ", quantity=" + quantity +
-                ", payment=" + payment +
                 '}';
     }
 }

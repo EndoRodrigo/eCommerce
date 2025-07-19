@@ -7,8 +7,8 @@ import jakarta.validation.constraints.*;
 @Entity
 public abstract  class Person {
     @NotNull
-    @Min(18)
-    @Max(99)
+    @Min(3)
+    @Max(999999)
     protected Integer id;
     @NotEmpty
     @Size(min = 3, max = 30)
