@@ -8,13 +8,13 @@ public class Data {
     private Integer id;
     @NotEmpty
     private String code;
-    @NotEmpty
-    private String client;
+    @NotNull
+    private Integer client;
 
     public Data() {
     }
 
-    public Data(Integer id, String code, String client) {
+    public Data(Integer id, String code, Integer client) {
         this.id = id;
         this.code = code;
         this.client = client;
@@ -36,11 +36,11 @@ public class Data {
         this.code = code;
     }
 
-    public String getClient() {
+    public Integer getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(Integer client) {
         this.client = client;
     }
 

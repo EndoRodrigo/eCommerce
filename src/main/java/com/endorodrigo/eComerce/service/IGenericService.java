@@ -7,4 +7,5 @@ public interface IGenericService<T, ID> {
     List<T> getAll();
     T insert(T entity);
     void delete(T entity);
+
 }

@@ -19,8 +19,20 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     private Payment payment;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     // Constructor vacío requerido por JPA
     public Cart() {
@@ -63,6 +75,8 @@ public class Cart {
                 .sum();
     }
 
+
+
     public Payment getPayment() {
         return payment;
     }
@@ -81,6 +95,7 @@ public class Cart {
         return "Cart{" +
                 "idCar=" + idCar +
                 ", items=" + items +
+                ", customer=" + customer +
                 ", payment=" + payment +
                 '}';
     }
