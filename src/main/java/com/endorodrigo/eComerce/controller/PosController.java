@@ -1,9 +1,7 @@
 package com.endorodrigo.eComerce.controller;
 
-import com.endorodrigo.eComerce.model.Cart;
-import com.endorodrigo.eComerce.model.Data;
-import com.endorodrigo.eComerce.model.Payment;
-import com.endorodrigo.eComerce.model.Product;
+import com.endorodrigo.eComerce.model.*;
+import com.endorodrigo.eComerce.service.CustomerService;
 import com.endorodrigo.eComerce.service.PosService;
 import com.endorodrigo.eComerce.service.ProductService;
 import jakarta.validation.Valid;
@@ -23,6 +21,9 @@ public class PosController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CustomerService customerService;
 
     @Autowired
     private PosService posService;
@@ -45,8 +46,11 @@ public class PosController {
         }
         logger.info("addProduct for id -> "+ cartForm.getCode());
         Product product = productService.findId(cartForm.getCode());
+        logger.info("addCliente for id -> "+ cartForm.getClient());
+        Customer customer = customerService.findId(cartForm.getClient());
         logger.info("product = " + product);
         cart.addProduct(product);
+        cart.setCustomer(customer);
         cart.setPayment(new Payment(1,"Efectivo",cart.getTotal()));
         logger.info("list cart = " + cart);
         return "redirect:/pos";
