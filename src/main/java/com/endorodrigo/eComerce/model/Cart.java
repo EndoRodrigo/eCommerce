@@ -13,8 +13,7 @@ import java.util.List;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer idCar;
+    private Long idCar;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
@@ -39,11 +38,11 @@ public class Cart {
     }
 
     // Getters y setters
-    public Integer getIdCar() {
+    public Long getIdCar() {
         return idCar;
     }
 
-    public void setIdCar(Integer idCar) {
+    public void setIdCar(Long idCar) {
         this.idCar = idCar;
     }
 
