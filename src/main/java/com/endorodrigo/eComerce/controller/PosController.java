@@ -13,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 @Controller
 public class PosController {
@@ -49,6 +52,9 @@ public class PosController {
         logger.info("addCliente for id -> "+ cartForm.getClient());
         Customer customer = customerService.findId(cartForm.getClient());
         logger.info("product = " + product);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        Long timestamp = Long.valueOf(LocalDateTime.now().format(formatter));
+        cart.setIdCar(timestamp);
         cart.addProduct(product);
         cart.setCustomer(customer);
         cart.setPayment(new Payment(1,"Efectivo",cart.getTotal()));
@@ -61,7 +67,7 @@ public class PosController {
     public String clearCart(Model model) {
         logger.info("clearCart for id. "+ cart.toString());
         cart.clear();
-        logger.info("list cart = " + cart);
+        logger.info("list carts = " + cart);
         return "redirect:/pos";
     }
 
