@@ -240,17 +240,25 @@
                             <input type="text" class="form-control form-control-user"
                                    placeholder="Code Product" th:field="*{code}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user"
                                    placeholder="Code Empployed" th:field="*{client}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
+
                         </div>
+
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                         REGISTER
                     </button>
                     <hr>
+                    <div class="text-center">
+                        <span class="text-danger small" th:if="${msg1}" th:text="${msg1}"></span>
+                        <br>
+                        <span class="text-danger small" th:if="${msg2}" th:text="${msg2}"></span>
+                    </div>
                 </form>
 
                 <!-- customerFormaTales Example -->
