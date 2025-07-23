@@ -52,12 +52,18 @@ public class PosController {
         logger.info("addCliente for id -> "+ cartForm.getClient());
         Customer customer = customerService.findId(cartForm.getClient());
         logger.info("product = " + product);
+        if (product == null && customer == null) {
+            model.addAttribute("cart", cart);
+            model.addAttribute("msg1", "Product not found");
+            model.addAttribute("msg2", "Customer not found");
+            return "pos";
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         Long timestamp = Long.valueOf(LocalDateTime.now().format(formatter));
         cart.setIdCar(timestamp);
         cart.addProduct(product);
         cart.setCustomer(customer);
-        cart.setPayment(new Payment(1,"Efectivo",cart.getTotal()));
+        cart.setPayment(new Payment("Efectivo",cart.getTotal()));
         logger.info("list cart = " + cart);
         return "redirect:/pos";
 

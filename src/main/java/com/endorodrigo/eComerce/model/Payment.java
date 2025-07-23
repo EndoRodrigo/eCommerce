@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private int idPayment;
     private String description;
@@ -17,8 +17,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(int idPayment, String description, double price) {
-        this.idPayment = idPayment;
+    public Payment(String description, double price) {
         this.description = description;
         this.price = price;
     }
