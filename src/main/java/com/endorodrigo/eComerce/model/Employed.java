@@ -1,6 +1,10 @@
 package com.endorodrigo.eComerce.model;
 
 public class Employed extends Person {
+    /**
+     * Entidad que representa un empleado del sistema.
+     * Incluye información personal y laboral.
+     */
     private String access;
 
     public Employed() {

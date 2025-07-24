@@ -7,4 +7,8 @@ import java.util.Optional;
 
 public interface IUserRepository extends CrudRepository<User,Integer> {
     Optional<User> findByEmail(String email);
-}
+/**
+ * Repositorio para la entidad User.
+ * Proporciona operaciones CRUD sobre usuarios.
+ */
+public interface IUserRepository extends CrudRepository<User, Integer> {

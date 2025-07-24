@@ -6,32 +6,60 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Servicio para la gestión de clientes.
+ * Proporciona métodos CRUD para la entidad Customer.
+ */
+/**
+ * Servicio para la gestión de clientes.
+ * Proporciona métodos CRUD para la entidad Customer.
+ */
 @Service
 public class CustomerService implements IGenericService<Customer, Integer> {
 
-    private ICustomerRepository customerRepository;
+    private final ICustomerRepository customerRepository;
 
     public CustomerService(ICustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
     @Override
+    /**
+     * Busca un cliente por su ID.
+     * @param id Identificador del cliente
+     * @return Cliente encontrado o null si no existe
+     */
     public Customer findId(Integer id) {
-        return customerRepository.findById(id);
+        if (id == null) return null;
+        return customerRepository.findById(id).orElse(null);
     }
 
     @Override
+    /**
+     * Obtiene todos los clientes registrados.
+     * @return Lista de clientes
+     */
     public List<Customer> getAll() {
         return (List<Customer>) customerRepository.findAll();
     }
 
     @Override
+    /**
+     * Inserta o actualiza un cliente en la base de datos.
+     * @param entity Cliente a guardar
+     * @return Cliente guardado
+     */
     public Customer insert(Customer entity) {
+        if (entity == null) return null;
         return customerRepository.save(entity);
     }
 
     @Override
+    /**
+     * Elimina un cliente de la base de datos si no es nulo.
+     * @param entity Cliente a eliminar
+     */
     public void delete(Customer entity) {
-        customerRepository.delete(entity);
+        if (entity != null) customerRepository.delete(entity);
     }
 }

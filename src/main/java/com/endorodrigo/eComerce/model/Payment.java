@@ -14,6 +14,10 @@ public class Payment {
     private String description;
     private double price;
 
+/**
+ * Entidad que representa un pago realizado en el sistema.
+ * Incluye información sobre el monto, método y estado del pago.
+ */
     public Payment() {
     }
 
