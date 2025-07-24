@@ -3,19 +3,24 @@ package com.endorodrigo.eComerce.controller;
 import com.endorodrigo.eComerce.model.Product;
 import com.endorodrigo.eComerce.service.ProductService;
 import jakarta.validation.Valid;
-import org.slf4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
+/**
+ * Controlador para la gestión de productos.
+ * Permite listar, crear y actualizar productos.
+ */
 @Controller
 public class ProductController {
 
-    public static Logger logger = (Logger) LoggerFactory.getLogger(ProductController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService productService;
 
@@ -26,16 +31,8 @@ public class ProductController {
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public String getProduct(@RequestParam(value = "code", required = false) String id, Model model) {
         List<Product> listProduct = productService.getAll();
-        logger.info("listado de productos: " + listProduct);
-
-        Product product;
-        if (id != null) {
-            logger.info("buscando producto por id: " + id);
-            product = productService.findId(id);
-        } else {
-            product = new Product();
-        }
-
+        logger.info("Listado de productos: {}", listProduct);
+        Product product = (id != null) ? productService.findId(id) : new Product();
         model.addAttribute("listProduct", listProduct);
         model.addAttribute("product", product);
         return "product";
@@ -48,14 +45,14 @@ public class ProductController {
             return "product";
         }
         productService.insert(product);
-        logger.info("Creando product " + product);
+        logger.info("Creando producto: {}", product);
         return "redirect:/product";
     }
 
     @RequestMapping(value = "/product/update", method = RequestMethod.POST)
     public String updateProduct(@ModelAttribute("product") Product product, Model model) {
         productService.insert(product);
-        logger.info("Update product " + product);
+        logger.info("Actualizando producto: {}", product);
         return "redirect:/product";
     }
 

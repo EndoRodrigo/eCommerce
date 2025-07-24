@@ -1,14 +1,12 @@
 package com.endorodrigo.eComerce.config;
 
 import com.endorodrigo.eComerce.service.CustomUserDetailsService;
-import org.springframework.context.annotation.*;
-
-
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,34 +26,29 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/",
-                                "/login",
-                                "/register",
-                                "/css/**",
-                                "/img/**",
-                                "/js/**",
-                                "/scss/**",
-                                "/vendor/**"
-                        ).permitAll() // Permitir acceso a login y recursos estáticos
-                        .anyRequest().authenticated() // Cualquier otra solicitud requiere autenticación
-                )
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login") // Página de login personalizada
-                        .defaultSuccessUrl("/index", true) // Redirigir después del login exitoso
-                        .failureUrl("/?error=true")
-                        .permitAll() // Permitir acceso al formulario de login
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                )
-                .exceptionHandling(exceptionHandling -> exceptionHandling
-                        .accessDeniedPage("/errores/403")
-                );
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/", "/login", "/register",
+                    "/css/**", "/img/**", "/js/**", "/scss/**", "/vendor/**"
+                ).permitAll() // Acceso libre a login y recursos estáticos
+                .anyRequest().authenticated() // Resto requiere autenticación
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/index", true)
+                .failureUrl("/?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+            )
+            .exceptionHandling(ex -> ex
+                .accessDeniedPage("/errores/403")
+            );
         return http.build();
     }
 

@@ -8,16 +8,37 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
 
+/**
+ * Servicio personalizado para la autenticación de usuarios.
+ * Implementa UserDetailsService para cargar usuarios por email.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    /**
+     * Logger para registrar eventos de autenticación.
+     */
     public Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
+
+    /**
+     * Repositorio de usuarios para consultas en la base de datos.
+     */
     private final IUserRepository userRepository;
 
+    /**
+     * Constructor que inyecta el repositorio de usuarios.
+     * @param userRepository Repositorio de usuarios
+     */
     public CustomUserDetailsService(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Carga un usuario por su email para autenticación.
+     * @param email Email del usuario
+     * @return Detalles del usuario para Spring Security
+     * @throws UsernameNotFoundException Si el usuario no existe
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         logger.info("Email encontrado: " + email);

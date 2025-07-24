@@ -10,6 +10,10 @@ import java.util.Collection;
 import java.util.List;
 
 
+/**
+ * Entidad que representa un usuario del sistema.
+ * Implementa UserDetails para integración con Spring Security.
+ */
 @Entity
 public class User implements UserDetails {
 

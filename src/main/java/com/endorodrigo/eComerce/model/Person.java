@@ -23,6 +23,10 @@ public abstract  class Person {
     @Size(min = 3, max = 30)
     protected String phone;
 
+    /**
+     * Entidad base para personas en el sistema.
+     * Incluye atributos comunes como nombre y email.
+     */
     public Person() {
     }
     @Id

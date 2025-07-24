@@ -11,16 +11,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
+/**
+ * Controlador para la gestión del punto de venta (POS).
+ * Permite agregar productos y clientes al carrito y procesar ventas.
+ */
 @Controller
 public class PosController {
 
-    public static Logger logger = (Logger) LoggerFactory.getLogger(PosController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PosController.class);
 
     @Autowired
     private ProductService productService;
@@ -37,21 +43,21 @@ public class PosController {
     public String pos(Model model) {
         model.addAttribute("cart", cart);
         model.addAttribute("data", new Data());
+        // Muestra la vista POS
         return "pos";
     }
 
     @RequestMapping(value = "/pos/add", method = RequestMethod.POST)
     public String addProduct(@Valid @ModelAttribute("data") Data cartForm, Errors errors, Model model ) {
-
         if (errors.hasErrors()) {
             model.addAttribute("cart", cart);
             return "pos";
         }
-        logger.info("addProduct for id -> "+ cartForm.getCode());
+        logger.info("addProduct for id -> {}", cartForm.getCode());
         Product product = productService.findId(cartForm.getCode());
-        logger.info("addCliente for id -> "+ cartForm.getClient());
+        logger.info("addCliente for id -> {}", cartForm.getClient());
         Customer customer = customerService.findId(cartForm.getClient());
-        logger.info("product = " + product);
+        logger.info("product = {}", product);
         if (product == null && customer == null) {
             model.addAttribute("cart", cart);
             model.addAttribute("msg1", "Product not found");

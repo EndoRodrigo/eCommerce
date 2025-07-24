@@ -7,6 +7,10 @@ import org.springframework.web.context.annotation.SessionScope;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entidad que representa el carrito de compras de un usuario.
+ * Contiene los ítems, el cliente y el pago asociado.
+ */
 @Component
 @SessionScope  // Cada usuario tendrá su propio carrito
 @Entity
@@ -57,15 +61,30 @@ public class Cart {
     public void addProduct(Product product) {
         for (CartItem item : items) {
             if (item.getProduct().getId().equals(product.getId())) {
-                item.setQuantity(item.getQuantity() + 1);
+                item.addQuantity(1);
                 return;
             }
         }
-
         CartItem newItem = new CartItem(product, 1);
-        newItem.setCart(this); // 🔥 Esencial para que Hibernate lo relacione con este Cart
+        newItem.setCart(this);
         items.add(newItem);
+    }
 
+    public void removeProduct(Product product) {
+        items.removeIf(item -> item.getProduct().getId().equals(product.getId()));
+    }
+
+    public void updateProductQuantity(Product product, int quantity) {
+        for (CartItem item : items) {
+            if (item.getProduct().getId().equals(product.getId())) {
+                item.setQuantity(quantity);
+                return;
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        return items.isEmpty();
     }
 
     public double getTotal() {
