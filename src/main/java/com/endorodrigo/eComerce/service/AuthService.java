@@ -13,11 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
-/**
- * Servicio para autenticación y registro de usuarios.
- * Proporciona métodos para login y registro.
- */
-@Service
     private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 

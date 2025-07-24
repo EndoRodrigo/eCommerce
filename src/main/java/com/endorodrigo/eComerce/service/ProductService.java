@@ -19,11 +19,6 @@ public class ProductService implements IGenericService<Product, String> {
         this.productRepository = productRepository;
     }
 
-    /**
-     * Servicio para la gestión de productos.
-     * Proporciona métodos CRUD para la entidad Product.
-     */
-    @Service
     @Override
     /**
      * Busca un producto por su código.
