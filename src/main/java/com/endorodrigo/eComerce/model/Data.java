@@ -17,6 +17,8 @@ public class Data {
     /** Identificador del cliente relacionado. */
     @NotNull
     private Integer client;
+    /** Método de pago seleccionado */
+    private String paymentMethod;
 
     /**
      * Constructor por defecto.
@@ -85,6 +87,22 @@ public class Data {
     }
 
     /**
+     * Obtiene el método de pago seleccionado.
+     * @return paymentMethod
+     */
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    /**
+     * Establece el método de pago seleccionado.
+     * @param paymentMethod Método de pago
+     */
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    /**
      * Representación en texto de la entidad Data.
      * @return Cadena con los valores de los atributos
      */
@@ -94,6 +112,7 @@ public class Data {
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", client='" + client + '\'' +
+                ", paymentMethod='" + paymentMethod + '\'' +
                 '}';
     }
 }

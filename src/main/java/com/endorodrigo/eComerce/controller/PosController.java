@@ -69,7 +69,9 @@ public class PosController {
         cart.setIdCar(timestamp);
         cart.addProduct(product);
         cart.setCustomer(customer);
-        cart.setPayment(new Payment("Efectivo",cart.getTotal()));
+        // Integración de medios de pago
+        String paymentMethod = cartForm.getPaymentMethod() != null ? cartForm.getPaymentMethod() : "Efectivo";
+        cart.setPayment(new Payment("Pago de compra", cart.getTotal(), paymentMethod, "Pendiente"));
         logger.info("list cart = " + cart);
         return "redirect:/pos";
 

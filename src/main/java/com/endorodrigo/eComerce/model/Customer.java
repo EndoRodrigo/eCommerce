@@ -1,8 +1,6 @@
 package com.endorodrigo.eComerce.model;
 
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 
 /**
  * Entidad que representa un cliente en el sistema eCommerce.

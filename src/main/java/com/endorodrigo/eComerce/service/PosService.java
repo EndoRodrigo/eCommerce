@@ -1,10 +1,11 @@
 package com.endorodrigo.eComerce.service;
 
 import com.endorodrigo.eComerce.model.Cart;
+import com.endorodrigo.eComerce.model.CartItem;
 import com.endorodrigo.eComerce.repository.IPosRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,6 +62,22 @@ public class PosService implements IGenericService<Cart, Integer>{
      */
     @Override
     public Cart insert(Cart entity) {
+        // Elimina duplicados y suma cantidades antes de guardar
+        List<CartItem> uniqueItems = new ArrayList<>();
+        for (CartItem item : entity.getItems()) {
+            boolean found = false;
+            for (CartItem unique : uniqueItems) {
+                if (unique.getProduct().getId().equals(item.getProduct().getId())) {
+                    unique.setQuantity(unique.getQuantity() + item.getQuantity());
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                uniqueItems.add(item);
+            }
+        }
+        entity.setItems(uniqueItems);
         return repository.save(entity);
     }
 
