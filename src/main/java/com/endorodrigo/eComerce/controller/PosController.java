@@ -87,6 +87,7 @@ public class PosController {
     public String Order(){
         logger.info("Order for id. "+ cart);
         posService.insert(cart);
+        cart.clear();
         return "redirect:/pos";
     }
 }
