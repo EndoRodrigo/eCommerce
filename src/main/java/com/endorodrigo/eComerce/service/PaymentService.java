@@ -58,6 +58,16 @@ public class PaymentService implements IGenericService<Payment, Integer>{
     }
 
     /**
+     * Inserta o actualiza un pago en la base de datos.
+     * @param entity Pago a guardar
+     * @return Pago guardado
+     */
+    @Override
+    public Payment update(Payment entity) {
+        return paymentRepository.save(entity);
+    }
+
+    /**
      * Elimina un pago de la base de datos.
      * Actualmente no implementado.
      * @param entity Pago a eliminar

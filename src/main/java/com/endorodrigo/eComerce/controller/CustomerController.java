@@ -49,8 +49,14 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
-    public String updateCustomer(@ModelAttribute("customerForma") Customer customer) {
+    @RequestMapping(value = "/customer/update", method = RequestMethod.POST)
+    public String updateCustomer(@Valid @ModelAttribute("customer") Customer customer, Errors errors, Model model) {
         logger.info("Actualizando cliente: {}", customer);
+        if (errors.hasErrors()) {
+            model.addAttribute("customers", customerService.getAll());
+            return "customer";
+        }
+        customerService.update(customer);
         return "redirect:/customer";
     }
 

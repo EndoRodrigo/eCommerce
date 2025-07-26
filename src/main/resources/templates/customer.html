@@ -233,7 +233,7 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Customer information</h1>
-                <form class="user" action="/customer/create" th:object="${customer}" method="post">
+                <form class="user" th:action="@{${customer.id != null} ? '/customer/update' : '/customer/create'}" th:object="${customer}" method="post">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
@@ -271,8 +271,11 @@
                             <span class="text-danger small" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                        REGISTER
+                    <button type="submit" class="btn btn-success btn-user btn-block" th:if="${customer.id == null}">
+                        Register
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${customer.id != null}" formaction="/customer/update">
+                        Update
                     </button>
                     <hr>
                 </form>

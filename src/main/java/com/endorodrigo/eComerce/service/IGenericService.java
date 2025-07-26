@@ -12,6 +12,7 @@ public interface IGenericService<T, ID> {
     T findId(ID id);
     List<T> getAll();
     T insert(T entity);
+    T update(T entity);
     void delete(T entity);
 
 }

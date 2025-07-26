@@ -82,6 +82,32 @@ public class PosService implements IGenericService<Cart, Integer>{
     }
 
     /**
+     * Actualiza un carrito existente, asegurando que no haya productos duplicados.
+     * @param entity Carrito a actualizar
+     * @return El carrito actualizado, o null si el carrito no existe
+     */
+    public Cart update(Cart entity) {
+        if (entity == null || entity.getIdCar() == null) return null;
+        // Elimina duplicados y suma cantidades antes de guardar
+        List<CartItem> uniqueItems = new ArrayList<>();
+        for (CartItem item : entity.getItems()) {
+            boolean found = false;
+            for (CartItem unique : uniqueItems) {
+                if (unique.getProduct().getId().equals(item.getProduct().getId())) {
+                    unique.setQuantity(unique.getQuantity() + item.getQuantity());
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                uniqueItems.add(item);
+            }
+        }
+        entity.setItems(uniqueItems);
+        return repository.save(entity);
+    }
+
+    /**
      * Elimina un carrito de la base de datos si no es nulo.
      * Si el carrito es null, no realiza ninguna acción.
      * @param entity Carrito a eliminar

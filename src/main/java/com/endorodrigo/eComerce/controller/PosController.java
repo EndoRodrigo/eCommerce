@@ -92,4 +92,11 @@ public class PosController {
         cart.clear();
         return "redirect:/pos";
     }
+
+    @RequestMapping(value = "/pos/update", method = RequestMethod.POST)
+    public String updateCart(@ModelAttribute("cart") Cart cartForm, Model model) {
+        posService.update(cartForm);
+        model.addAttribute("cart", cartForm);
+        return "redirect:/pos";
+    }
 }
