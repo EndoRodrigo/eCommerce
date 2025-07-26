@@ -69,7 +69,9 @@ public class PosController {
         cart.setIdCar(timestamp);
         cart.addProduct(product);
         cart.setCustomer(customer);
-        cart.setPayment(new Payment("Efectivo",cart.getTotal()));
+        // Integración de medios de pago
+        String paymentMethod = cartForm.getPaymentMethod() != null ? cartForm.getPaymentMethod() : "Efectivo";
+        cart.setPayment(new Payment("Pago de compra", cart.getTotal(), paymentMethod, "Pendiente"));
         logger.info("list cart = " + cart);
         return "redirect:/pos";
 
@@ -88,6 +90,13 @@ public class PosController {
         logger.info("Order for id. "+ cart);
         posService.insert(cart);
         cart.clear();
+        return "redirect:/pos";
+    }
+
+    @RequestMapping(value = "/pos/update", method = RequestMethod.POST)
+    public String updateCart(@ModelAttribute("cart") Cart cartForm, Model model) {
+        posService.update(cartForm);
+        model.addAttribute("cart", cartForm);
         return "redirect:/pos";
     }
 }

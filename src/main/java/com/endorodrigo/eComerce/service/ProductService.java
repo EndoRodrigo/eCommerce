@@ -47,6 +47,26 @@ public class ProductService implements IGenericService<Product, String> {
      */
     public Product insert(Product entity) {
         if (entity == null) return null;
+        // Validar unicidad de código
+        Product existing = productRepository.findByCode(entity.getCode());
+        if (existing != null && (entity.getId() == null || !existing.getId().equals(entity.getId()))) {
+            throw new RuntimeException("Ya existe un producto con el código: " + entity.getCode());
+        }
+        return productRepository.save(entity);
+    }
+
+    @Override
+    /**
+     * Actualiza un producto en la base de datos.
+     * @param entity Producto a actualizar
+     * @return Producto actualizado
+     */
+    public Product update(Product entity) {
+        if (entity == null || entity.getId() == null) return null;
+        Product existing = productRepository.findByCode(entity.getCode());
+        if (existing != null && !existing.getId().equals(entity.getId())) {
+            throw new RuntimeException("Ya existe un producto con el código: " + entity.getCode());
+        }
         return productRepository.save(entity);
     }
 

@@ -250,8 +250,21 @@
                         </div>
 
                     </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <select class="form-control form-control-user" th:field="*{paymentMethod}">
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Tarjeta">Tarjeta</option>
+                                <option value="Transferencia">Transferencia</option>
+                            </select>
+                            <span class="text-danger small" th:if="${#fields.hasErrors('paymentMethod')}" th:errors="*{paymentMethod}"></span>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
-                        REGISTER
+                        Register
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${data.id != null}" formaction="/pos/update">
+                        Update
                     </button>
                     <hr>
                     <div class="text-center">
@@ -290,10 +303,18 @@
                                     <td th:text="${car.quantity}"></td>
                                     <td th:text="${car.product.price * car.quantity}"></td>
                                     <td>
-                                        <a th:href="@{/pos/cash}"
+                                        <span th:text="${cart.payment != null ? cart.payment.method : 'Efectivo'}" class="badge bg-info"></span>
+                                        <a th:href="@{/pos/edit(id=${car.id})}"
                                            class="btn btn-warning btn-icon-split me-2">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-exclamation-triangle"></i>
+                                                </span>
+                                            <span class="text">UPDATE</span>
+                                        </a>
+                                        <a th:href="@{/pos/cash}"
+                                           class="btn btn-success btn-icon-split me-2">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-check"></i>
                                                 </span>
                                             <span class="text">GENERAR ORDEN</span>
                                         </a>

@@ -98,8 +98,15 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-success btn-user btn-block">
+                    <div class="form-group">
+                        <span class="text-danger small" th:if="${errorMsg}" th:text="${errorMsg}"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-user btn-block" th:if="${product.id == null}">
                         Register
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${product.id != null}" formaction="/product/update">
+                        Update
                     </button>
                 </form>
 

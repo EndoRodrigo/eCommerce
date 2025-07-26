@@ -44,14 +44,31 @@ public class ProductController {
             model.addAttribute("listProduct", productService.getAll());
             return "product";
         }
-        productService.insert(product);
+        try {
+            productService.insert(product);
+        } catch (RuntimeException e) {
+            model.addAttribute("listProduct", productService.getAll());
+            model.addAttribute("errorMsg", e.getMessage());
+            return "product";
+        }
         logger.info("Creando producto: {}", product);
         return "redirect:/product";
     }
 
     @RequestMapping(value = "/product/update", method = RequestMethod.POST)
-    public String updateProduct(@ModelAttribute("product") Product product, Model model) {
-        productService.insert(product);
+    public String updateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("listProduct", productService.getAll());
+            return "product";
+        }
+        try {
+            productService.update(product);
+        } catch (RuntimeException e) {
+            model.addAttribute("listProduct", productService.getAll());
+            model.addAttribute("errorMsg", e.getMessage());
+            model.addAttribute("product", product);
+            return "product";
+        }
         logger.info("Actualizando producto: {}", product);
         return "redirect:/product";
     }

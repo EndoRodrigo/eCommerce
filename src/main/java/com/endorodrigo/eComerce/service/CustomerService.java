@@ -62,4 +62,14 @@ public class CustomerService implements IGenericService<Customer, Integer> {
     public void delete(Customer entity) {
         if (entity != null) customerRepository.delete(entity);
     }
+
+    /**
+     * Actualiza la información de un cliente existente.
+     * @param entity Cliente con la información actualizada
+     * @return Cliente actualizado o null si el cliente no existe
+     */
+    public Customer update(Customer entity) {
+        if (entity == null || entity.getId() == null) return null;
+        return customerRepository.save(entity);
+    }
 }
