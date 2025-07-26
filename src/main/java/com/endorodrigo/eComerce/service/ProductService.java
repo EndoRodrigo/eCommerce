@@ -1,10 +1,14 @@
 package com.endorodrigo.eComerce.service;
 
+import com.endorodrigo.eComerce.controller.ProductController;
 import com.endorodrigo.eComerce.model.Product;
 import com.endorodrigo.eComerce.repository.IProductRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Servicio para la gestión de productos.
@@ -12,6 +16,8 @@ import java.util.List;
  */
 @Service
 public class ProductService implements IGenericService<Product, String> {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     private final IProductRepository productRepository;
 
@@ -62,11 +68,7 @@ public class ProductService implements IGenericService<Product, String> {
      * @return Producto actualizado
      */
     public Product update(Product entity) {
-        if (entity == null || entity.getId() == null) return null;
-        Product existing = productRepository.findByCode(entity.getCode());
-        if (existing != null && !existing.getId().equals(entity.getId())) {
-            throw new RuntimeException("Ya existe un producto con el código: " + entity.getCode());
-        }
+        logger.info("Actualizando producto capa service: {}", entity);
         return productRepository.save(entity);
     }
 

@@ -69,7 +69,6 @@ public class CustomerService implements IGenericService<Customer, Integer> {
      * @return Cliente actualizado o null si el cliente no existe
      */
     public Customer update(Customer entity) {
-        if (entity == null || entity.getId() == null) return null;
         return customerRepository.save(entity);
     }
 }
