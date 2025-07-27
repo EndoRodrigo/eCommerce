@@ -26,6 +26,7 @@
                 <h1 class="h3 mb-2 text-gray-800">Product Information</h1>
                 <form th:action="@{/product/create}" th:object="${product}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
+                        <input type="hidden" th:field="*{id}">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label >Code</label>
                             <input type="text" class="form-control form-control-user"

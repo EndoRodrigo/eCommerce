@@ -40,6 +40,7 @@ public class ProductController {
 
     @RequestMapping(value = "/product/create", method = RequestMethod.POST)
     public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
+        logger.info("Creando producto: {}", product);
         if (result.hasErrors()) {
             model.addAttribute("listProduct", productService.getAll());
             return "product";
@@ -51,7 +52,7 @@ public class ProductController {
             model.addAttribute("errorMsg", e.getMessage());
             return "product";
         }
-        logger.info("Creando producto: {}", product);
+    
         return "redirect:/product";
     }
 
