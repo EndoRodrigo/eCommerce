@@ -249,19 +249,21 @@
                             <span class="text-danger small" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
 
                         </div>
-
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <select class="form-control form-control-user" th:field="*{paymentMethod}">
+                         <div class="col-sm-6">
+                            <label >Categoría</label>
+                            <select class="form-control" th:field="*{paymentMethod}">
+                                <option value="">Seleccione medio de pago</option>
                                 <option value="Efectivo">Efectivo</option>
-                                <option value="Tarjeta">Tarjeta</option>
-                                <option value="Transferencia">Transferencia</option>
+                                <option value="Traferencia">Traferencia</option>
+                                <option value="Cheque">Cheque</option>
+                               
                             </select>
                             <span class="text-danger small" th:if="${#fields.hasErrors('paymentMethod')}" th:errors="*{paymentMethod}"></span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${data.id == null}">
                         Register
                     </button>
                     <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${data.id != null}" formaction="/pos/update">
@@ -291,6 +293,7 @@
                                     <th>PRODUCT PRICE</th>
                                     <th>PRODUCT QUANTITY</th>
                                     <th>SUBTOTAL</th>
+                                    <th>MEDIO DE PAGO</th>
                                     <th>ACCIONES</th>
                                 </tr>
                                 </thead>
@@ -303,9 +306,9 @@
                                     <td th:text="${car.product.price}"></td>
                                     <td th:text="${car.quantity}"></td>
                                     <td th:text="${car.product.price * car.quantity}"></td>
+                                    <td th:text="${cart.payment.method}"></td>
                                     <td>
-                                        <span th:text="${cart.payment != null ? cart.payment.method : 'Efectivo'}" class="badge bg-info"></span>
-                                        <a th:href="@{/pos/edit(id=${car.id})}"
+                                        <a th:href="@{/pos/update(id=${cart.idCar})}"
                                            class="btn btn-warning btn-icon-split me-2">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-exclamation-triangle"></i>

@@ -52,12 +52,7 @@ public class ProductService implements IGenericService<Product, String> {
      * @return Producto guardado
      */
     public Product insert(Product entity) {
-        if (entity == null) return null;
-        // Validar unicidad de código
-        Product existing = productRepository.findByCode(entity.getCode());
-        if (existing != null && (entity.getId() == null || !existing.getId().equals(entity.getId()))) {
-            throw new RuntimeException("Ya existe un producto con el código: " + entity.getCode());
-        }
+        logger.info("Creacion producto capa service: {}", entity);
         return productRepository.save(entity);
     }
 

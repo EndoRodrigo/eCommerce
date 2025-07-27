@@ -51,10 +51,6 @@ public class CustomerService implements IGenericService<Customer, Integer> {
      */
     public Customer insert(Customer entity) {
         if (entity == null) return null;
-        if (entity.getId() == null) {
-            Integer maxId = customerRepository.findMaxId();
-            entity.setId(maxId + 1);
-        }
         return customerRepository.save(entity);
     }
 

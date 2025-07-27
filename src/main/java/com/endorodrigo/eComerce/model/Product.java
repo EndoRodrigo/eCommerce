@@ -6,7 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 /**
  * Entidad que representa un producto en el sistema eCommerce.
- * Incluye información como código, nombre, descripción, categoría, precio y estado.
+ * Incluye información como código, nombre, descripción, categoría, precio y
+ * estado.
  */
 @Entity
 public class Product {
@@ -30,44 +31,80 @@ public class Product {
     @NotEmpty
     private String status;
 
-    public Product() {}
+    public Product() {
+    }
 
-    public Integer getId() { return id; }
+    public Integer getId() {
+        return id;
+    }
 
-    public void setId(Integer id) { this.id = id; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public String getCode() { return code; }
+    public String getCode() {
+        return code;
+    }
 
-    public void setCode(String code) { this.code = code; }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public String getCategory() { return category; }
+    public String getCategory() {
+        return category;
+    }
 
-    public void setCategory(String category) { this.category = category; }
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-    public double getPrice() { return price; }
+    public double getPrice() {
+        return price;
+    }
 
-    public void setPrice(double price) { this.price = price; }
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-    public int getQuantity() { return quantity; }
+    public int getQuantity() {
+        return quantity;
+    }
 
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-    public String getCaducate() { return caducate; }
+    public String getCaducate() {
+        return caducate;
+    }
 
-    public void setCaducate(String caducate) { this.caducate = caducate; }
+    public void setCaducate(String caducate) {
+        this.caducate = caducate;
+    }
 
-    public String getStatus() { return status; }
+    public String getStatus() {
+        return status;
+    }
 
-    public void setStatus(String status) { this.status = status; }
-
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {

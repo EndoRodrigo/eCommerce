@@ -1,13 +1,14 @@
 package com.endorodrigo.eComerce.model;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 
 @Entity
-public abstract class Person {
+public class Person {
     @Id
     @Min(3)
-    @Max(999999)
     protected Integer id;
     @NotEmpty
     @Size(min = 3, max = 30)

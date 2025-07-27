@@ -234,7 +234,6 @@
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Customer information</h1>
                 <form class="user" th:action="@{${customer.id != null} ? '/customer/update' : '/customer/create'}" th:object="${customer}" method="post">
-                    <input type="hidden" th:field="*{id}" />
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
