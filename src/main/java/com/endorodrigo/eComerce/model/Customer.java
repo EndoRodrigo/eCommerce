@@ -1,6 +1,8 @@
 package com.endorodrigo.eComerce.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Entidad que representa un cliente en el sistema eCommerce.
@@ -8,16 +10,24 @@ import jakarta.persistence.Entity;
  */
 @Entity
 public class Customer extends Person {
+    @NotEmpty(message = "{NotEmpty.customer.identification}")
     @Column(nullable = false)
     private String identification;
+    @NotEmpty(message = "{NotEmpty.customer.dv}")
     private String dv;
     private String company;
     private String trade_name;
+    @NotEmpty(message = "{NotEmpty.customer.names}")
     private String names;
+    @NotEmpty(message = "{NotEmpty.customer.address}")
     private String address;
+    @NotEmpty(message = "{NotEmpty.customer.legal_organization_id}")
     private String legal_organization_id;
+    @NotEmpty(message = "{NotEmpty.customer.tribute_id}")
     private String tribute_id;
+    @NotNull(message = "{NotNull.customer.identification_document_id}")
     private Integer identification_document_id;
+    @NotEmpty(message = "{NotEmpty.customer.municipality_id}")
     private String municipality_id;
 
     public Customer() {}

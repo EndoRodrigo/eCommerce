@@ -254,8 +254,8 @@
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Trade Name" th:field="*{tradeName}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('tradeName')}" th:errors="*{tradeName}"></span>
+                                   placeholder="Trade Name" th:field="*{trade_name}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('trade_name')}" th:errors="*{trade_name}"></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -283,27 +283,25 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-4 mb-3 mb-sm-0">
+                        <div class="col-sm-3 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Legal Organization ID" th:field="*{legalOrganizationId}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('legalOrganizationId')}" th:errors="*{legalOrganizationId}"></span>
+                                   placeholder="Legal Organization ID" th:field="*{legal_organization_id}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('legal_organization_id')}" th:errors="*{legal_organization_id}"></span>
                         </div>
-                        <div class="col-sm-4 mb-3 mb-sm-0">
+                        <div class="col-sm-3 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Tribute ID" th:field="*{tributeId}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('tributeId')}" th:errors="*{tributeId}"></span>
+                                   placeholder="Tribute ID" th:field="*{tribute_id}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('tribute_id')}" th:errors="*{tribute_id}"></span>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Identification Document ID" th:field="*{identificationDocumentId}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('identificationDocumentId')}" th:errors="*{identificationDocumentId}"></span>
+                                   placeholder="Identification Document ID" th:field="*{identification_document_id}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('identification_document_id')}" th:errors="*{identification_document_id}"></span>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
+                        <div class="col-sm-3">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Municipality ID" th:field="*{municipalityId}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('municipalityId')}" th:errors="*{municipalityId}"></span>
+                                   placeholder="Municipality ID" th:field="*{municipality_id}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('municipality_id')}" th:errors="*{municipality_id}"></span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success btn-user btn-block" th:if="${customer.id == null}">
@@ -345,15 +343,15 @@
                                     <td th:text="${customer.identification}"></td>
                                     <td th:text="${customer.dv}"></td>
                                     <td th:text="${customer.company}"></td>
-                                    <td th:text="${customer.tradeName}"></td>
+                                    <td th:text="${customer.trade_name}"></td>
                                     <td th:text="${customer.names}"></td>
                                     <td th:text="${customer.address}"></td>
                                     <td th:text="${customer.email}"></td>
                                     <td th:text="${customer.phone}"></td>
-                                    <td th:text="${customer.legalOrganizationId}"></td>
-                                    <td th:text="${customer.tributeId}"></td>
-                                    <td th:text="${customer.identificationDocumentId}"></td>
-                                    <td th:text="${customer.municipalityId}"></td>
+                                    <td th:text="${customer.legal_organization_id}"></td>
+                                    <td th:text="${customer.tribute_id}"></td>
+                                    <td th:text="${customer.identification_document_id}"></td>
+                                    <td th:text="${customer.municipality_id}"></td>
                                     <td>
                                         <a th:href="@{/customer(id=${customer.id})}" class="btn btn-warning btn-icon-split me-2">
                                             <span class="icon text-white-50">
