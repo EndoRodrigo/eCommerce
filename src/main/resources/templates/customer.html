@@ -237,38 +237,73 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Customer ID"  th:field="*{id}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
-
+                                   placeholder="Identification" th:field="*{identification}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('identification')}" th:errors="*{identification}"></span>
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Name"  th:field="*{name}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                                   placeholder="DV" th:field="*{dv}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('dv')}" th:errors="*{dv}"></span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Last Name"  th:field="*{lastName}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                                   placeholder="Company" th:field="*{company}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></span>
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Email" th:field="*{email}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                                   placeholder="Trade Name" th:field="*{tradeName}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('tradeName')}" th:errors="*{tradeName}"></span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Phone Number" th:field="*{phone}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                                   placeholder="Names" th:field="*{names}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('names')}" th:errors="*{names}"></span>
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user"
                                    placeholder="Address" th:field="*{address}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control form-control-user"
+                                   placeholder="Email" th:field="*{email}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-user"
+                                   placeholder="Phone" th:field="*{phone}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <input type="text" class="form-control form-control-user"
+                                   placeholder="Legal Organization ID" th:field="*{legalOrganizationId}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('legalOrganizationId')}" th:errors="*{legalOrganizationId}"></span>
+                        </div>
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <input type="text" class="form-control form-control-user"
+                                   placeholder="Tribute ID" th:field="*{tributeId}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('tributeId')}" th:errors="*{tributeId}"></span>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control-user"
+                                   placeholder="Identification Document ID" th:field="*{identificationDocumentId}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('identificationDocumentId')}" th:errors="*{identificationDocumentId}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control form-control-user"
+                                   placeholder="Municipality ID" th:field="*{municipalityId}">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('municipalityId')}" th:errors="*{municipalityId}"></span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success btn-user btn-block" th:if="${customer.id == null}">
@@ -290,38 +325,49 @@
                             <table class="table table-bordered" id="customerFormaTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>ID CARD</th>
-                                    <th>NAME</th>
-                                    <th>LAST NAME</th>
-                                    <th>EMAIL</th>
-                                    <th>PHONE</th>
-                                    <th>ADDRESS</th>
+                                    <th>Identification</th>
+                                    <th>DV</th>
+                                    <th>Company</th>
+                                    <th>Trade Name</th>
+                                    <th>Names</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Legal Org. ID</th>
+                                    <th>Tribute ID</th>
+                                    <th>Identification Doc. ID</th>
+                                    <th>Municipality ID</th>
                                     <th>ACCIONES</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="customer : ${customers}">
-                                    <td th:text="${customer.getId()}"></td>
-                                    <td th:text="${customer.getName()}"></td>
-                                    <td th:text="${customer.getLastName()}"></td>
-                                    <td th:text="${customer.getEmail()}"></td>
-                                    <td th:text="${customer.getPhone()}"></td>
-                                    <td th:text="${customer.getAddress()}"></td>
+                                    <td th:text="${customer.identification}"></td>
+                                    <td th:text="${customer.dv}"></td>
+                                    <td th:text="${customer.company}"></td>
+                                    <td th:text="${customer.tradeName}"></td>
+                                    <td th:text="${customer.names}"></td>
+                                    <td th:text="${customer.address}"></td>
+                                    <td th:text="${customer.email}"></td>
+                                    <td th:text="${customer.phone}"></td>
+                                    <td th:text="${customer.legalOrganizationId}"></td>
+                                    <td th:text="${customer.tributeId}"></td>
+                                    <td th:text="${customer.identificationDocumentId}"></td>
+                                    <td th:text="${customer.municipalityId}"></td>
                                     <td>
-                                        <a th:href="@{/customer(id=${customer.getId()})}" class="btn btn-warning btn-icon-split me-2">
+                                        <a th:href="@{/customer(id=${customer.id})}" class="btn btn-warning btn-icon-split me-2">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
                                             <span class="text">UPDATE</span>
                                         </a>
-                                        <a th:href="@{/customer/{id}(id=${customer.getId()})}" class="btn btn-danger btn-icon-split">
+                                        <a th:href="@{/customer/{id}(id=${customer.id})}" class="btn btn-danger btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                             </span>
                                             <span class="text">DELETE</span>
                                         </a>
                                     </td>
-
                                 </tr>
 
                                 </tbody>
