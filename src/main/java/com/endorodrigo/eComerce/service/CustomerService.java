@@ -50,8 +50,14 @@ public class CustomerService implements IGenericService<Customer, Integer> {
      * @return Cliente guardado
      */
     public Customer insert(Customer entity) {
-        if (entity == null) return null;
-        return customerRepository.save(entity);
+        if (entity == null) {
+            System.out.println("[CustomerService] Entidad nula, no se inserta");
+            return null;
+        }
+        System.out.println("[CustomerService] Insertando cliente: " + entity);
+        Customer saved = customerRepository.save(entity);
+        System.out.println("[CustomerService] Cliente guardado: " + saved);
+        return saved;
     }
 
     @Override
