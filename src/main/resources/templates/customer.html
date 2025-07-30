@@ -235,71 +235,87 @@
                 <h1 class="h3 mb-2 text-gray-800">Customer information</h1>
                 <form class="user" th:action="@{${customer.id != null} ? '/customer/update' : '/customer/create'}" th:object="${customer}" method="post">
                     <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user"
+                        <div class="col-sm-3 mb-3 mb-sm-0">
+                            <select class="form-control" th:field="*{identification_document_id}">
+                                <option value="">Seleccione un tipo de documento</option>
+                                <option value="1">Registro civil</option>
+                                <option value="2">Tarjeta de identidad</option>
+                                <option value="3">Cédula de ciudadanía</option>
+                                <option value="4">Tarjeta de extranjería</option>
+                                <option value="5">Cédula de extranjería</option>
+                                <option value="6">NIT</option>
+                                <option value="7">Pasaporte</option>
+                                <option value="8">Documento de identificación extranjero</option>
+                                <option value="9">PEP</option>
+                                <option value="10">NIT otro país</option>
+                                <option value="11">NUIP*</option>
+                            </select>
+                            <span class="text-danger small" th:if="${#fields.hasErrors('identification_document_id')}" th:errors="*{identification_document_id}"></span>
+                        </div>
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <input type="text" class="form-control"
                                    placeholder="Identification" th:field="*{identification}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('identification')}" th:errors="*{identification}"></span>
                         </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control form-control-user"
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
                                    placeholder="DV" th:field="*{dv}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('dv')}" th:errors="*{dv}"></span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user"
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <input type="text" class="form-control"
                                    placeholder="Company" th:field="*{company}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></span>
                         </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control form-control-user"
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <input type="text" class="form-control"
                                    placeholder="Trade Name" th:field="*{trade_name}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('trade_name')}" th:errors="*{trade_name}"></span>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user"
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
                                    placeholder="Names" th:field="*{names}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('names')}" th:errors="*{names}"></span>
                         </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control form-control-user"
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <input type="text" class="form-control"
                                    placeholder="Address" th:field="*{address}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user"
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <input type="text" class="form-control"
                                    placeholder="Email" th:field="*{email}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                         </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control form-control-user"
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
                                    placeholder="Phone" th:field="*{phone}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-3 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user"
-                                   placeholder="Legal Organization ID" th:field="*{legal_organization_id}">
+                            <select class="form-control" th:field="*{legal_organization_id}">
+                                <option value="">Seleccione tipo de organización</option>
+                                <option value="1">Persona Jurídica</option>
+                                <option value="2">Persona Natural</option>
+                            </select>
                             <span class="text-danger small" th:if="${#fields.hasErrors('legal_organization_id')}" th:errors="*{legal_organization_id}"></span>
                         </div>
                         <div class="col-sm-3 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user"
-                                   placeholder="Tribute ID" th:field="*{tribute_id}">
+                            <select class="form-control" th:field="*{tribute_id}">
+                                <option value="">Seleccione una categoría</option>
+                                <option value="18">IVA</option>
+                                <option value="24">No aplica </option>
+                            </select>
                             <span class="text-danger small" th:if="${#fields.hasErrors('tribute_id')}" th:errors="*{tribute_id}"></span>
                         </div>
-                        <div class="col-sm-3 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user"
-                                   placeholder="Identification Document ID" th:field="*{identification_document_id}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('identification_document_id')}" th:errors="*{identification_document_id}"></span>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-user"
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control "
                                    placeholder="Municipality ID" th:field="*{municipality_id}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('municipality_id')}" th:errors="*{municipality_id}"></span>
                         </div>
