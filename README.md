@@ -70,7 +70,7 @@ Este proyecto es una solución completa de **comercio electrónico (eCommerce)**
 
 ### 🔧 Requisitos
 
-- Java 17+
+- Java 23+
 - Maven
 - MySQL (o usar H2 para pruebas locales)
 
