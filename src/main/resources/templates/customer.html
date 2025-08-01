@@ -233,7 +233,7 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Customer information</h1>
-                <form class="user" th:action="@{${customer.id != null} ? '/customer/update' : '/customer/create'}" th:object="${customer}" method="post">
+                <form class="user" th:action="@{/customer/create}" th:object="${customer}" method="post">
                     <div class="form-group row">
                         <div class="col-sm-3 mb-3 mb-sm-0">
                             <select class="form-control" th:field="*{identification_document_id}">
@@ -243,7 +243,6 @@
                                 <option value="3">Cédula de ciudadanía</option>
                                 <option value="4">Tarjeta de extranjería</option>
                                 <option value="5">Cédula de extranjería</option>
-                                <option value="6">NIT</option>
                                 <option value="7">Pasaporte</option>
                                 <option value="8">Documento de identificación extranjero</option>
                                 <option value="9">PEP</option>
@@ -257,23 +256,8 @@
                                    placeholder="Identification" th:field="*{identification}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('identification')}" th:errors="*{identification}"></span>
                         </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control"
-                                   placeholder="DV" th:field="*{dv}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('dv')}" th:errors="*{dv}"></span>
-                        </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <input type="text" class="form-control"
-                                   placeholder="Company" th:field="*{company}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></span>
-                        </div>
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <input type="text" class="form-control"
-                                   placeholder="Trade Name" th:field="*{trade_name}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('trade_name')}" th:errors="*{trade_name}"></span>
-                        </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control"
                                    placeholder="Names" th:field="*{names}">
@@ -286,22 +270,11 @@
                                    placeholder="Address" th:field="*{address}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                         </div>
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <input type="text" class="form-control"
-                                   placeholder="Email" th:field="*{email}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control"
-                                   placeholder="Phone" th:field="*{phone}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
-                        </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-3 mb-3 mb-sm-0">
                             <select class="form-control" th:field="*{legal_organization_id}">
                                 <option value="">Seleccione tipo de organización</option>
-                                <option value="1">Persona Jurídica</option>
                                 <option value="2">Persona Natural</option>
                             </select>
                             <span class="text-danger small" th:if="${#fields.hasErrors('legal_organization_id')}" th:errors="*{legal_organization_id}"></span>
@@ -340,13 +313,8 @@
                                 <thead>
                                 <tr>
                                     <th>Identification</th>
-                                    <th>DV</th>
-                                    <th>Company</th>
-                                    <th>Trade Name</th>
                                     <th>Names</th>
                                     <th>Address</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
                                     <th>Legal Org. ID</th>
                                     <th>Tribute ID</th>
                                     <th>Identification Doc. ID</th>
@@ -357,13 +325,8 @@
                                 <tbody>
                                 <tr th:each="customer : ${customers}">
                                     <td th:text="${customer.identification}"></td>
-                                    <td th:text="${customer.dv}"></td>
-                                    <td th:text="${customer.company}"></td>
-                                    <td th:text="${customer.trade_name}"></td>
                                     <td th:text="${customer.names}"></td>
                                     <td th:text="${customer.address}"></td>
-                                    <td th:text="${customer.email}"></td>
-                                    <td th:text="${customer.phone}"></td>
                                     <td th:text="${customer.legal_organization_id}"></td>
                                     <td th:text="${customer.tribute_id}"></td>
                                     <td th:text="${customer.identification_document_id}"></td>
