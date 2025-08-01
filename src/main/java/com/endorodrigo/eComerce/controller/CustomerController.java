@@ -36,6 +36,7 @@ public class CustomerController {
         Customer customer = (id != null) ? customerService.findId(id) : new Customer();
         model.addAttribute("customers", customers);
         model.addAttribute("customer", customer);
+        logger.info("Informacion encontrada -> " + customer);
         return "customer";
     }
 
@@ -46,17 +47,6 @@ public class CustomerController {
             return "customer";
         }
         customerService.insert(customer);
-        return "redirect:/customer";
-    }
-
-    @RequestMapping(value = "/customer/update", method = RequestMethod.POST)
-    public String updateCustomer(@Valid @ModelAttribute("customer") Customer customer, Errors errors, Model model) {
-        logger.info("Actualizando cliente: {}", customer);
-        if (errors.hasErrors()) {
-            model.addAttribute("customers", customerService.getAll());
-            return "customer";
-        }
-        customerService.update(customer);
         return "redirect:/customer";
     }
 

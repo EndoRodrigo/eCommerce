@@ -234,6 +234,7 @@
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Customer information</h1>
                 <form class="user" th:action="@{/customer/create}" th:object="${customer}" method="post">
+                    <input type="hidden" class="form-control" th:field="*{id}">
                     <div class="form-group row">
                         <div class="col-sm-3 mb-3 mb-sm-0">
                             <select class="form-control" th:field="*{identification_document_id}">
@@ -256,8 +257,6 @@
                                    placeholder="Identification" th:field="*{identification}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('identification')}" th:errors="*{identification}"></span>
                         </div>
-                    </div>
-                    <div class="form-group row">
                         <div class="col-sm-4">
                             <input type="text" class="form-control"
                                    placeholder="Names" th:field="*{names}">
@@ -270,8 +269,6 @@
                                    placeholder="Address" th:field="*{address}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                         </div>
-                    </div>
-                    <div class="form-group row">
                         <div class="col-sm-3 mb-3 mb-sm-0">
                             <select class="form-control" th:field="*{legal_organization_id}">
                                 <option value="">Seleccione tipo de organización</option>
@@ -287,16 +284,22 @@
                             </select>
                             <span class="text-danger small" th:if="${#fields.hasErrors('tribute_id')}" th:errors="*{tribute_id}"></span>
                         </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control "
-                                   placeholder="Municipality ID" th:field="*{municipality_id}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('municipality_id')}" th:errors="*{municipality_id}"></span>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3 mb-3 mb-sm-0">
+                            <select class="form-control" th:field="*{municipality_id}">
+                                <option value="">Seleccione un municipio</option>
+                                <option value="1">El Encanto</option>
+                                <option value="2">La Chorrera</option>
+                                <option value="3">La Pedrera</option>
+                            </select>
+                            <span class="text-danger small" th:if="${#fields.hasErrors('tribute_id')}" th:errors="*{tribute_id}"></span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-user btn-block" th:if="${customer.id == null}">
-                        Register
+                    <button type="submit" class="btn btn-success btn-user btn-block" th:if="${customer.id == 0}">
+                        Save
                     </button>
-                    <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${customer.id != null}" formaction="/customer/update">
+                    <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${customer.id != 0}" formaction="/customer/update">
                         Update
                     </button>
                     <hr>
@@ -312,24 +315,26 @@
                             <table class="table table-bordered" id="customerFormaTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
+                                    <th>ID</th>
+                                    <th>Identification Doc. ID</th>
                                     <th>Identification</th>
                                     <th>Names</th>
                                     <th>Address</th>
                                     <th>Legal Org. ID</th>
                                     <th>Tribute ID</th>
-                                    <th>Identification Doc. ID</th>
                                     <th>Municipality ID</th>
                                     <th>ACCIONES</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="customer : ${customers}">
+                                    <td th:text="${customer.id}"></td>
+                                    <td th:text="${customer.identification_document_id}"></td>
                                     <td th:text="${customer.identification}"></td>
                                     <td th:text="${customer.names}"></td>
                                     <td th:text="${customer.address}"></td>
                                     <td th:text="${customer.legal_organization_id}"></td>
                                     <td th:text="${customer.tribute_id}"></td>
-                                    <td th:text="${customer.identification_document_id}"></td>
                                     <td th:text="${customer.municipality_id}"></td>
                                     <td>
                                         <a th:href="@{/customer(id=${customer.id})}" class="btn btn-warning btn-icon-split me-2">

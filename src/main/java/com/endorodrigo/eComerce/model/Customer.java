@@ -100,14 +100,14 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "identification='" + identification + '\'' +
+                "id=" + id +
+                ", identification_document_id=" + identification_document_id +
+                ", identification='" + identification + '\'' +
                 ", names='" + names + '\'' +
                 ", address='" + address + '\'' +
                 ", legal_organization_id='" + legal_organization_id + '\'' +
                 ", tribute_id='" + tribute_id + '\'' +
-                ", identification_document_id='" + identification_document_id + '\'' +
                 ", municipality_id='" + municipality_id + '\'' +
-                ", " + super.toString() +
                 '}';
     }
 }
