@@ -1,7 +1,7 @@
 package com.endorodrigo.eComerce.service;
 
 import com.endorodrigo.eComerce.controller.ProductController;
-import com.endorodrigo.eComerce.model.Product;
+import com.endorodrigo.eComerce.model.Items;
 import com.endorodrigo.eComerce.repository.IProductRepository;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * Proporciona métodos CRUD para la entidad Product.
  */
 @Service
-public class ProductService implements IGenericService<Product, String> {
+public class ProductService implements IGenericService<Items, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
@@ -31,7 +31,7 @@ public class ProductService implements IGenericService<Product, String> {
      * @param i Código del producto
      * @return Producto encontrado o null si no existe
      */
-    public Product findId(String i) {
+    public Items findId(String i) {
         if (i == null) return null;
         return productRepository.findByCode(i);
     }
@@ -41,8 +41,8 @@ public class ProductService implements IGenericService<Product, String> {
      * Obtiene todos los productos registrados.
      * @return Lista de productos
      */
-    public List<Product> getAll() {
-        return (List<Product>) productRepository.findAll();
+    public List<Items> getAll() {
+        return (List<Items>) productRepository.findAll();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ProductService implements IGenericService<Product, String> {
      * @param entity Producto a guardar
      * @return Producto guardado
      */
-    public Product insert(Product entity) {
+    public Items insert(Items entity) {
         logger.info("Creacion producto capa service: {}", entity);
         return productRepository.save(entity);
     }
@@ -62,7 +62,7 @@ public class ProductService implements IGenericService<Product, String> {
      * @param entity Producto a actualizar
      * @return Producto actualizado
      */
-    public Product update(Product entity) {
+    public Items update(Items entity) {
         logger.info("Actualizando producto capa service: {}", entity);
         return productRepository.save(entity);
     }
@@ -72,7 +72,7 @@ public class ProductService implements IGenericService<Product, String> {
      * Elimina un producto de la base de datos si no es nulo.
      * @param entity Producto a eliminar
      */
-    public void delete(Product entity) {
+    public void delete(Items entity) {
         if (entity != null) productRepository.delete(entity);
     }
 }

@@ -1,6 +1,6 @@
 package com.endorodrigo.eComerce.controller;
 
-import com.endorodrigo.eComerce.model.Product;
+import com.endorodrigo.eComerce.model.Items;
 import com.endorodrigo.eComerce.service.ProductService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -30,16 +30,16 @@ public class ProductController {
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public String getProduct(@RequestParam(value = "code", required = false) String id, Model model) {
-        List<Product> listProduct = productService.getAll();
+        List<Items> listProduct = productService.getAll();
         logger.info("Listado de productos: {}", listProduct);
-        Product product = (id != null) ? productService.findId(id) : new Product();
+        Items product = (id != null) ? productService.findId(id) : new Items();
         model.addAttribute("listProduct", listProduct);
         model.addAttribute("product", product);
         return "product";
     }
 
     @RequestMapping(value = "/product/create", method = RequestMethod.POST)
-    public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
+    public String createProduct(@Valid @ModelAttribute("product") Items product, BindingResult result, Model model) {
         logger.info("Creando producto: {}", product);
         if (result.hasErrors()) {
             model.addAttribute("listProduct", productService.getAll());
@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/update", method = RequestMethod.POST)
-    public String updateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
+    public String updateProduct(@Valid @ModelAttribute("product") Items product, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("listProduct", productService.getAll());
             return "product";
@@ -76,7 +76,7 @@ public class ProductController {
 
     @RequestMapping(value = "/product/delite/{code}", method = RequestMethod.GET)
     public String deleteProduct(@PathVariable String code, Model model) {
-        Product product = productService.findId(code);
+        Items product = productService.findId(code);
         logger.info("buscando product por id para eliminar: " + code);
         productService.delete(product);
         return "redirect:/product";

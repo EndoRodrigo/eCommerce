@@ -18,13 +18,13 @@ public class CartItem {
     private Cart cart;
 
     @OneToOne
-    private Product product;
+    private Items product;
 
     private int quantity;
 
 
     public CartItem() {}
-    public CartItem(Product product, int quantity) {
+    public CartItem(Items product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
@@ -32,8 +32,8 @@ public class CartItem {
     public void setIdItem(Integer idItem) { this.idItem = idItem; }
     public Cart getCart() { return cart; }
     public void setCart(Cart cart) { this.cart = cart; }
-    public Product getProduct() { return product; }
-    public void setProduct(Product product) { this.product = product; }
+    public Items getProduct() { return product; }
+    public void setProduct(Items product) { this.product = product; }
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
     @Override

@@ -1,12 +1,12 @@
 package com.endorodrigo.eComerce.repository;
 
-import com.endorodrigo.eComerce.model.Product;
+import com.endorodrigo.eComerce.model.Items;
 import org.springframework.data.repository.CrudRepository;
 
-public interface IProductRepository extends CrudRepository<Product, Integer> {
+public interface IProductRepository extends CrudRepository<Items, Integer> {
     /**
      * Repositorio para la entidad Product.
      * Proporciona operaciones CRUD sobre productos.
      */
-    Product findByCode(String code);
+    Items findByCode(String code);
 }
