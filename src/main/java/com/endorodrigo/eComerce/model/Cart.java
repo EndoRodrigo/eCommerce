@@ -58,7 +58,7 @@ public class Cart {
         this.items = items;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(Items product) {
         for (CartItem item : items) {
             if (item.getProduct().getId().equals(product.getId())) {
                 item.addQuantity(1);
@@ -70,11 +70,11 @@ public class Cart {
         items.add(newItem);
     }
 
-    public void removeProduct(Product product) {
+    public void removeProduct(Items product) {
         items.removeIf(item -> item.getProduct().getId().equals(product.getId()));
     }
 
-    public void updateProductQuantity(Product product, int quantity) {
+    public void updateProductQuantity(Items product, int quantity) {
         for (CartItem item : items) {
             if (item.getProduct().getId().equals(product.getId())) {
                 item.setQuantity(quantity);

@@ -54,7 +54,7 @@ public class PosController {
             return "pos";
         }
         logger.info("addProduct for id -> {}", cartForm.getCode());
-        Product product = productService.findId(cartForm.getCode());
+        Items product = productService.findId(cartForm.getCode());
         logger.info("addCliente for id -> {}", cartForm.getClient());
         Customer customer = customerService.findId(cartForm.getClient());
         logger.info("product = {}", product);
