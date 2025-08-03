@@ -58,9 +58,9 @@ public class Cart {
         this.items = items;
     }
 
-    public void addProduct(Items product) {
+    public void addProduct(Item product) {
         for (CartItem item : items) {
-            if (item.getProduct().getId().equals(product.getId())) {
+            if (item.getProduct().getCode_reference().equals(product.getCode_reference())) {
                 item.addQuantity(1);
                 return;
             }
@@ -70,13 +70,13 @@ public class Cart {
         items.add(newItem);
     }
 
-    public void removeProduct(Items product) {
-        items.removeIf(item -> item.getProduct().getId().equals(product.getId()));
+    public void removeProduct(Item product) {
+        items.removeIf(item -> item.getProduct().getCode_reference().equals(product.getCode_reference()));
     }
 
-    public void updateProductQuantity(Items product, int quantity) {
+    public void updateProductQuantity(Item product, int quantity) {
         for (CartItem item : items) {
-            if (item.getProduct().getId().equals(product.getId())) {
+            if (item.getProduct().getCode_reference().equals(product.getCode_reference())) {
                 item.setQuantity(quantity);
                 return;
             }
