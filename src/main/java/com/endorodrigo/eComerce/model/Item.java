@@ -128,21 +128,4 @@ public class Item {
     public void setWithholding_taxes(List<WithholdingTaxes> withholding_taxes) {
         this.withholding_taxes = withholding_taxes;
     }
-
-    @Override
-    public String toString() {
-        return "Items{" +
-                "code_reference='" + code_reference + '\'' +
-                ", name='" + name + '\'' +
-                ", quantity=" + quantity +
-                ", discount_rate='" + discount_rate + '\'' +
-                ", price=" + price +
-                ", tax_rate='" + tax_rate + '\'' +
-                ", unit_measure_id=" + unit_measure_id +
-                ", standard_code_id=" + standard_code_id +
-                ", is_excluded=" + is_excluded +
-                ", tribute_id=" + tribute_id +
-                ", withholding_taxes=" + withholding_taxes +
-                '}';
-    }
 }

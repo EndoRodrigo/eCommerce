@@ -34,7 +34,7 @@ public class ItemService implements IGenericService<Item, String> {
      */
     public Item findId(String i) {
         if (i == null) return null;
-        return productRepository.findByCodeReference(i);
+        return productRepository.findById(i).get();
     }
 
     @Override
