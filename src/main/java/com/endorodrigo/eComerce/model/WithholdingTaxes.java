@@ -1,17 +1,23 @@
 package com.endorodrigo.eComerce.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class WithholdingTaxes {
-    private String code;
+
+    @Id
+    private int code;
     private boolean withholding_tax_rate;
 
     public WithholdingTaxes() {
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -27,7 +33,7 @@ public class WithholdingTaxes {
     public String toString() {
         return "WithholdingTaxes{" +
                 "code=" + code +
-                ", withholding_tax_rate='" + withholding_tax_rate + '\'' +
+                ", withholding_tax_rate=" + withholding_tax_rate +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.endorodrigo.eComerce.controller;
 
-import com.endorodrigo.eComerce.model.Items;
-import com.endorodrigo.eComerce.service.ProductService;
+import com.endorodrigo.eComerce.model.Item;
+import com.endorodrigo.eComerce.service.ItemService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,28 +18,29 @@ import java.util.List;
  * Permite listar, crear y actualizar productos.
  */
 @Controller
-public class ProductController {
+public class ItemController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
-    private final ProductService productService;
+    private final ItemService productService;
 
-    public ProductController(ProductService productService) {
+    public ItemController(ItemService productService) {
         this.productService = productService;
     }
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public String getProduct(@RequestParam(value = "code", required = false) String id, Model model) {
-        List<Items> listProduct = productService.getAll();
+        List<Item> listProduct = productService.getAll();
         logger.info("Listado de productos: {}", listProduct);
-        Items product = (id != null) ? productService.findId(id) : new Items();
+        logger.info("Id: {}", id);
+        Item product = (id != null) ? productService.findId(id) : new Item();
         model.addAttribute("listProduct", listProduct);
         model.addAttribute("product", product);
         return "product";
     }
 
     @RequestMapping(value = "/product/create", method = RequestMethod.POST)
-    public String createProduct(@Valid @ModelAttribute("product") Items product, BindingResult result, Model model) {
+    public String createProduct(@Valid @ModelAttribute("product") Item product, BindingResult result, Model model) {
         logger.info("Creando producto: {}", product);
         if (result.hasErrors()) {
             model.addAttribute("listProduct", productService.getAll());
@@ -57,7 +58,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/update", method = RequestMethod.POST)
-    public String updateProduct(@Valid @ModelAttribute("product") Items product, BindingResult result, Model model) {
+    public String updateProduct(@Valid @ModelAttribute("product") Item product, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("listProduct", productService.getAll());
             return "product";
@@ -76,7 +77,7 @@ public class ProductController {
 
     @RequestMapping(value = "/product/delite/{code}", method = RequestMethod.GET)
     public String deleteProduct(@PathVariable String code, Model model) {
-        Items product = productService.findId(code);
+        Item product = productService.findId(code);
         logger.info("buscando product por id para eliminar: " + code);
         productService.delete(product);
         return "redirect:/product";

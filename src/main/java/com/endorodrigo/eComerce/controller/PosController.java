@@ -3,7 +3,7 @@ package com.endorodrigo.eComerce.controller;
 import com.endorodrigo.eComerce.model.*;
 import com.endorodrigo.eComerce.service.CustomerService;
 import com.endorodrigo.eComerce.service.PosService;
-import com.endorodrigo.eComerce.service.ProductService;
+import com.endorodrigo.eComerce.service.ItemService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class PosController {
     private static final Logger logger = LoggerFactory.getLogger(PosController.class);
 
     @Autowired
-    private ProductService productService;
+    private ItemService productService;
 
     @Autowired
     private CustomerService customerService;
@@ -54,7 +54,7 @@ public class PosController {
             return "pos";
         }
         logger.info("addProduct for id -> {}", cartForm.getCode());
-        Items product = productService.findId(cartForm.getCode());
+        Item product = productService.findId(cartForm.getCode());
         logger.info("addCliente for id -> {}", cartForm.getClient());
         Customer customer = customerService.findId(cartForm.getClient());
         logger.info("product = {}", product);

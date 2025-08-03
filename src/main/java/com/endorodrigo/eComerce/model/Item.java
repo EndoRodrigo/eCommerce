@@ -12,7 +12,7 @@ import java.util.List;
  * estado.
  */
 @Entity
-public class Items {
+public class Item {
     @Id
     @NotEmpty
     private String code_reference;
@@ -34,9 +34,11 @@ public class Items {
     private Integer is_excluded;
     @NotNull
     private Integer tribute_id;
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<WithholdingTaxes> withholding_taxes;
 
-    public Items() {
+    public Item() {
     }
 
     public String getCode_reference() {

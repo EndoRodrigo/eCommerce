@@ -18,24 +18,51 @@ public class CartItem {
     private Cart cart;
 
     @OneToOne
-    private Items product;
+    private Item product;
 
     private int quantity;
 
 
-    public CartItem() {}
-    public CartItem(Items product, int quantity) {
+    public CartItem() {
+    }
+
+    public CartItem(Item product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
-    public Integer getIdItem() { return idItem; }
-    public void setIdItem(Integer idItem) { this.idItem = idItem; }
-    public Cart getCart() { return cart; }
-    public void setCart(Cart cart) { this.cart = cart; }
-    public Items getProduct() { return product; }
-    public void setProduct(Items product) { this.product = product; }
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public Integer getIdItem() {
+        return idItem;
+    }
+
+    public void setIdItem(Integer idItem) {
+        this.idItem = idItem;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Item getProduct() {
+        return product;
+    }
+
+    public void setProduct(Item product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "CartItem{" +
