@@ -1,17 +1,13 @@
 package com.endorodrigo.eComerce.service;
 
 import com.endorodrigo.eComerce.model.Cart;
-import com.endorodrigo.eComerce.model.CartItem;
+import com.endorodrigo.eComerce.model.Item;
 import com.endorodrigo.eComerce.repository.IPosRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Servicio para la gestión de carritos de compra (POS).
- * Proporciona métodos CRUD para la entidad Cart.
- */
 /**
  * Servicio para la gestión de carritos de compra (POS).
  * Proporciona métodos CRUD para la entidad Cart.
@@ -63,11 +59,11 @@ public class PosService implements IGenericService<Cart, Integer>{
     @Override
     public Cart insert(Cart entity) {
         // Elimina duplicados y suma cantidades antes de guardar
-        List<CartItem> uniqueItems = new ArrayList<>();
-        for (CartItem item : entity.getItems()) {
+        List<Item> uniqueItems = new ArrayList<>();
+        for (Item item : entity.getItems()) {
             boolean found = false;
-            for (CartItem unique : uniqueItems) {
-                if (unique.getProduct().getCode_reference().equals(item.getProduct().getCode_reference())) {
+            for (Item unique : uniqueItems) {
+                if (unique.getCode_reference().equals(item.getCode_reference())) {
                     unique.setQuantity(unique.getQuantity() + item.getQuantity());
                     found = true;
                     break;
@@ -87,13 +83,13 @@ public class PosService implements IGenericService<Cart, Integer>{
      * @return El carrito actualizado, o null si el carrito no existe
      */
     public Cart update(Cart entity) {
-        if (entity == null || entity.getIdCar() == null) return null;
+        if (entity == null || entity.getReference_code() == null) return null;
         // Elimina duplicados y suma cantidades antes de guardar
-        List<CartItem> uniqueItems = new ArrayList<>();
-        for (CartItem item : entity.getItems()) {
+        List<Item> uniqueItems = new ArrayList<>();
+        for (Item item : entity.getItems()) {
             boolean found = false;
-            for (CartItem unique : uniqueItems) {
-                if (unique.getProduct().getCode_reference().equals(item.getProduct().getCode_reference())) {
+            for (Item unique : uniqueItems) {
+                if (unique.getCode_reference().equals(item.getCode_reference())) {
                     unique.setQuantity(unique.getQuantity() + item.getQuantity());
                     found = true;
                     break;

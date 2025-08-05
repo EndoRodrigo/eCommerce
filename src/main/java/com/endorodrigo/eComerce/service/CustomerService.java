@@ -10,6 +10,7 @@ import java.util.List;
  * Servicio para la gestión de clientes.
  * Proporciona métodos CRUD para la entidad Customer.
  */
+
 /**
  * Servicio para la gestión de clientes.
  * Proporciona métodos CRUD para la entidad Customer.
@@ -34,12 +35,17 @@ public class CustomerService implements IGenericService<Customer, Integer> {
         return customerRepository.findById(id).orElse(null);
     }
 
+    public Customer findIdIntification(String s) {
+        return customerRepository.findByIdentification(s);
+    }
+
     @Override
     /**
      * Obtiene todos los clientes registrados.
      * @return Lista de clientes
      */
     public List<Customer> getAll() {
+
         return (List<Customer>) customerRepository.findAll();
     }
 
@@ -71,6 +77,7 @@ public class CustomerService implements IGenericService<Customer, Integer> {
 
     /**
      * Actualiza la información de un cliente existente.
+     *
      * @param entity Cliente con la información actualizada
      * @return Cliente actualizado o null si el cliente no existe
      */

@@ -53,11 +53,12 @@ public class PosController {
             model.addAttribute("cart", cart);
             return "pos";
         }
-        logger.info("addProduct for id -> {}", cartForm.getCode());
+
+        Customer customer = customerService.findIdIntification(cartForm.getClient());
+        logger.info("Information customer -> {}", customer);
+
         Item product = productService.findId(cartForm.getCode());
-        logger.info("addCliente for id -> {}", cartForm.getClient());
-        Customer customer = customerService.findId(cartForm.getClient());
-        logger.info("product = {}", product);
+        logger.info("Information product = {}", product.getCode_reference());
         if (product == null && customer == null) {
             model.addAttribute("cart", cart);
             model.addAttribute("msg1", "Product not found");
@@ -66,12 +67,10 @@ public class PosController {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         Long timestamp = Long.valueOf(LocalDateTime.now().format(formatter));
-        cart.setIdCar(timestamp);
         cart.addProduct(product);
         cart.setCustomer(customer);
         // Integración de medios de pago
         String paymentMethod = cartForm.getPaymentMethod() != null ? cartForm.getPaymentMethod() : "Efectivo";
-        cart.setPayment(new Payment("Pago de compra", cart.getTotal(), paymentMethod, "Pendiente"));
         logger.info("list cart = " + cart);
         return "redirect:/pos";
 
