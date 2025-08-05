@@ -41,6 +41,9 @@ public class Item {
     public Item() {
     }
 
+    public Item(Item product, int i) {
+    }
+
     public String getCode_reference() {
         return code_reference;
     }

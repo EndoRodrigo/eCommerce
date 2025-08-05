@@ -16,7 +16,7 @@ public class Data {
     private String code;
     /** Identificador del cliente relacionado. */
     @NotNull
-    private Integer client;
+    private String client;
     /** Método de pago seleccionado */
     private String paymentMethod;
 
@@ -32,7 +32,7 @@ public class Data {
      * @param code Código asociado
      * @param client Identificador del cliente
      */
-    public Data(Integer id, String code, Integer client) {
+    public Data(Integer id, String code, String client) {
         this.id = id;
         this.code = code;
         this.client = client;
@@ -74,7 +74,7 @@ public class Data {
      * Obtiene el identificador del cliente relacionado.
      * @return client
      */
-    public Integer getClient() {
+    public String getClient() {
         return client;
     }
 
@@ -82,7 +82,7 @@ public class Data {
      * Establece el identificador del cliente relacionado.
      * @param client Identificador del cliente
      */
-    public void setClient(Integer client) {
+    public void setClient(String client) {
         this.client = client;
     }
 

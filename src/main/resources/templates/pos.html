@@ -238,15 +238,15 @@
                     <input type="hidden" th:field="*{id}" />
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-user"
+                                       placeholder="Code Empployed" th:field="*{client}">
+                                <span class="text-danger small" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
+
+                            </div>
                             <input type="text" class="form-control form-control-user"
                                    placeholder="Code Product" th:field="*{code}">
                             <span class="text-danger small" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control form-control-user"
-                                   placeholder="Code Empployed" th:field="*{client}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
 
                         </div>
                     </div>
@@ -278,7 +278,7 @@
                 </form>
 
                 <!-- customerFormaTales Example -->
-                <div class="card shadow mb-4">
+                <!--div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Tables of customer</h6>
                     </div>
@@ -297,9 +297,9 @@
                                     <th>ACCIONES</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody-->
                                 <!-- Lista de productos en el carrito -->
-                                <tr th:each="car : ${cart.items}">
+                                <!--tr th:each="car : ${cart.items}">
                                     <td th:text="${cart.idCar}"></td>
                                     <td th:text="${car.product.code}"></td>
                                     <td th:text="${car.product.name}"></td>
@@ -330,10 +330,10 @@
                                             <span class="text">CLEAR</span>
                                         </a>
                                     </td>
-                                </tr>
+                                </tr-->
 
                                 <!-- Fila del total general -->
-                                <tr class="table-success fw-bold">
+                                <!--tr class="table-success fw-bold">
                                     <td colspan="5" class="text-end">TOTAL GENERAL</td>
                                     <td th:text="${cart.total}"></td>
                                     <td></td>
@@ -347,7 +347,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div-->
             <!-- /.container-fluid -->
 
         </div>
