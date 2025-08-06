@@ -5,18 +5,12 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
-
-/**
- * Entidad que representa un producto en el sistema eCommerce.
- * Incluye información como código, nombre, descripción, categoría, precio y
- * estado.
- */
 @Entity
 public class Item {
+
     @Id
     @NotEmpty
     private String code_reference;
-    @NotEmpty
     private String name;
     @NotNull
     private Integer quantity;
@@ -34,15 +28,16 @@ public class Item {
     private Integer is_excluded;
     @NotNull
     private Integer tribute_id;
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<WithholdingTaxes> withholding_taxes;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
     public Item() {
     }
 
-    public Item(Item product, int i) {
-    }
 
     public String getCode_reference() {
         return code_reference;
@@ -130,5 +125,23 @@ public class Item {
 
     public void setWithholding_taxes(List<WithholdingTaxes> withholding_taxes) {
         this.withholding_taxes = withholding_taxes;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "code_reference='" + code_reference + '\'' +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", discount_rate='" + discount_rate + '\'' +
+                ", price=" + price +
+                ", tax_rate='" + tax_rate + '\'' +
+                ", unit_measure_id=" + unit_measure_id +
+                ", standard_code_id=" + standard_code_id +
+                ", is_excluded=" + is_excluded +
+                ", tribute_id=" + tribute_id +
+                ", withholding_taxes=" + withholding_taxes +
+                ", cart=" + cart +
+                '}';
     }
 }
