@@ -1,35 +1,35 @@
 package com.endorodrigo.eComerce.model;
 
 import jakarta.persistence.*;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Entidad que representa el carrito de compras de un usuario.
- * Contiene los ítems, el cliente y el pago asociado.
- */
-@Component
-@SessionScope  // Cada usuario tendrá su propio carrito
 @Entity
 public class Cart {
 
-    private int numbering_range_id = 8;
+    private static Logger LOG = LoggerFactory.getLogger(Cart.class);
+
     @Id
     private String reference_code;
+
     private String description;
+
     private String payment_method_code;
+
+    private int numbering_range_id = 8;
 
     @OneToOne
     private Customer customer;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
 
-    public Cart() {
-    }
+    public Cart() {}
+
+    // Getters y Setters
 
     public int getNumbering_range_id() {
         return numbering_range_id;
@@ -79,15 +79,10 @@ public class Cart {
         this.items = items;
     }
 
+    // Métodos de negocio
+
     public void addProduct(Item product) {
-        for (Item item : items) {
-            if (item.getCode_reference().equals(product.getCode_reference())) {
-                item.setQuantity(item.getQuantity() + product.getQuantity());
-                return;
-            }
-        }
-        Item newItem = new Item(product, 1);
-        items.add(newItem);
+        items.add(product);
     }
 
     public void removeProduct(Item product) {
@@ -109,15 +104,13 @@ public class Cart {
 
     public double getTotal() {
         return items.stream()
-                .mapToDouble(Item::getPrice)
+                .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
     }
-
 
     public void clear() {
         items.clear();
     }
-
 
     @Override
     public String toString() {
@@ -127,7 +120,7 @@ public class Cart {
                 ", description='" + description + '\'' +
                 ", payment_method_code='" + payment_method_code + '\'' +
                 ", customer=" + customer +
-                ", items=" + items
-                ;
+                ", items=" + items +
+                '}';
     }
 }

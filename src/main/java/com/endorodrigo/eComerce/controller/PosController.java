@@ -70,7 +70,7 @@ public class PosController {
         cart.addProduct(product);
         cart.setCustomer(customer);
         // Integración de medios de pago
-        String paymentMethod = cartForm.getPaymentMethod() != null ? cartForm.getPaymentMethod() : "Efectivo";
+
         logger.info("list cart = " + cart);
         return "redirect:/pos";
 
