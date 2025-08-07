@@ -234,58 +234,41 @@
 
                 <h1 class="h3 mb-2 text-gray-800">Información de la Venta</h1>
 
-                <form class="user" action="/pos/add" th:object="${data}" method="post" id="posForm">
-                    <input type="hidden" th:field="*{id}" />
 
-                    <!-- CLIENTE -->
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="client">Código del Cliente</label>
-                            <input type="text" class="form-control form-control-user"
-                                   placeholder="Ingrese el código del cliente"
-                                   th:field="*{client}" id="client" name="client">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
-                        </div>
+                <form th:action="@{/pos}" th:object="${data}" method="post">
+
+                    <!-- PASO 1: CLIENTE -->
+                    <div th:if="${currentStep == 1}">
+                        <label>Cédula del Cliente:</label>
+                        <input type="text" th:field="*{client}" placeholder="Ingrese la cédula"
+                               class="form-control"/><br>
+                        <button type="submit" name="action" value="saveClient">Siguiente</button>
                     </div>
 
-                    <!-- PRODUCTO -->
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="code">Código del Producto</label>
-                            <input type="text" class="form-control form-control-user"
-                                   placeholder="Ingrese el código del producto"
-                                   th:field="*{code}" id="code" name="code">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
-                        </div>
+                    <!-- PASO 2: PRODUCTOS -->
+                    <div th:if="${currentStep == 2}">
+                        <h4>Agregar productos</h4>
+                        <input type="text" th:field="*{code}" placeholder="Ingrese un producto" class="form-control"/>
+                        <button type="submit" name="action" value="addProduct">Agregar otro producto</button>
+                        <button type="submit" name="action" value="backToClient">Anterior</button>
+                        <button type="submit" name="action" value="nextToPayment">Siguiente</button>
                     </div>
 
-                    <!-- MEDIO DE PAGO -->
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="paymentMethod">Medio de Pago</label>
-                            <select class="form-control" th:field="*{paymentMethod}" id="paymentMethod" name="paymentMethod">
-                                <option value="">Seleccione medio de pago</option>
-                                <option value="Efectivo">Efectivo</option>
-                                <option value="Transferencia">Transferencia</option>
-                                <option value="Cheque">Cheque</option>
-                            </select>
-                            <span class="text-danger small" th:if="${#fields.hasErrors('paymentMethod')}" th:errors="*{paymentMethod}"></span>
-                        </div>
+                    <!-- PASO 3: MEDIO DE PAGO -->
+                    <div th:if="${currentStep == 3}">
+                        <label>Medio de pago:</label>
+                        <select th:field="*{paymentMethod}" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option value="10">Efectivo</option>
+                            <option value="49">Tarjeta Débito</option>
+                            <option value="48">Tarjeta Crédito</option>
+                        </select><br>
+                        <button type="submit" name="action" value="backToClient">Anterior</button>
+                        <button type="submit" name="action" value="nextAddPayment">Siguiente</button>
+                        <button type="submit" name="action" value="submit">Finalizar</button>
+
                     </div>
 
-                    <!-- BOTONES -->
-                    <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${data.id == null}">
-                        Registrar
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${data.id != null}" formaction="/pos/update">
-                        Actualizar
-                    </button>
-
-                    <hr>
-                    <div class="text-center">
-                        <span class="text-danger small" th:if="${msg1}" th:text="${msg1}"></span><br>
-                        <span class="text-danger small" th:if="${msg2}" th:text="${msg2}"></span>
-                    </div>
                 </form>
 
                 <!-- TABLA DEL CARRITO -->
@@ -307,7 +290,6 @@
                                     <th>CANTIDAD</th>
                                     <th>SUBTOTAL</th>
                                     <th>MEDIO DE PAGO</th>
-                                    <th>ACCIONES</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -322,27 +304,26 @@
                                     <td th:text="${car.quantity}"></td>
                                     <td th:text="${car.price * car.quantity}"></td>
                                     <td th:text="${cart.payment_method_code}"></td>
-                                    <td>
-                                        <a th:href="@{/pos/update(id=${cart.reference_code})}" class="btn btn-warning btn-sm mb-1">
-                                            <i class="fas fa-exclamation-triangle"></i> Actualizar
-                                        </a>
-                                        <a th:href="@{/pos/cash}" class="btn btn-success btn-sm mb-1">
-                                            <i class="fas fa-check"></i> Generar Orden
-                                        </a>
-                                        <a th:href="@{/pos/clear}" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i> Vaciar
-                                        </a>
-                                    </td>
                                 </tr>
 
                                 <!-- Total general -->
                                 <tr class="table-success font-weight-bold">
                                     <td colspan="7" class="text-end">TOTAL GENERAL</td>
                                     <td th:text="${cart.total}"></td>
-                                    <td colspan="2"></td>
+                                    <td colspan="2">
+
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
+                            <form method="post" th:action="@{/pos/generate}">
+                                <button  type="submit" class="btn btn-success btn-sm mb-1">
+                                    <i class="fas fa-check"></i> Generar Orden
+                                </button>
+                                <a th:href="@{/pos/clear}" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Vaciar
+                                </a>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -381,63 +362,63 @@
 
             <!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
                 </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" customerForma-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" customerForma-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" customerForma-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" customerForma-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="/static/vendor/jquery/jquery.min.js"></script>
-<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="/static/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="/static/vendor/customerFormatables/jquery.customerFormaTables.min.js"></script>
-<script src="/static/vendor/customerFormatables/customerFormaTables.bootstrap4.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="/static/vendor/customerFormatables/jquery.customerFormaTables.min.js"></script>
+    <script src="/static/vendor/customerFormatables/customerFormaTables.bootstrap4.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="/static/js/demo/customerFormatables-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="/static/js/demo/customerFormatables-demo.js"></script>
 
 </body>
 

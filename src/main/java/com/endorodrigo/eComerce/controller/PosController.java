@@ -11,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +23,8 @@ import java.time.format.DateTimeFormatter;
  * Permite agregar productos y clientes al carrito y procesar ventas.
  */
 @Controller
+@RequestMapping("/pos")
+@SessionAttributes("data")
 public class PosController {
 
     private static final Logger logger = LoggerFactory.getLogger(PosController.class);
@@ -39,63 +40,69 @@ public class PosController {
 
     private final Cart cart = new Cart();
 
-    @RequestMapping(value = "/pos", method = RequestMethod.GET)
-    public String pos(Model model) {
+    @GetMapping
+    public String pos(@RequestParam(defaultValue = "1") int step, Model model) {
+        cart.setReference_code(posService.generateIdCard());
         model.addAttribute("cart", cart);
         model.addAttribute("data", new Data());
+        model.addAttribute("currentStep", step);
         // Muestra la vista POS
         return "pos";
     }
 
-    @RequestMapping(value = "/pos/add", method = RequestMethod.POST)
-    public String addProduct(@Valid @ModelAttribute("data") Data cartForm, Errors errors, Model model ) {
-        if (errors.hasErrors()) {
-            model.addAttribute("cart", cart);
-            return "pos";
-        }
-
-        Customer customer = customerService.findIdIntification(cartForm.getClient());
+    @PostMapping(params = "action=saveClient")
+    public String saveCliente(@ModelAttribute("data") Data data, Model model) {
+        Customer customer = customerService.findIdIntification(data.getClient());
         logger.info("Information customer -> {}", customer);
-
-        Item product = productService.findId(cartForm.getCode());
-        logger.info("Information product = {}", product.getCode_reference());
-        if (product == null && customer == null) {
-            model.addAttribute("cart", cart);
-            model.addAttribute("msg1", "Product not found");
+        if (customer == null) {
             model.addAttribute("msg2", "Customer not found");
             return "pos";
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-        Long timestamp = Long.valueOf(LocalDateTime.now().format(formatter));
-        cart.addProduct(product);
         cart.setCustomer(customer);
-        // Integración de medios de pago
-
-        logger.info("list cart = " + cart);
-        return "redirect:/pos";
-
+        return "redirect:/pos?step=2";
     }
 
-    @RequestMapping(value = "/pos/clear", method =  RequestMethod.GET)
-    public String clearCart(Model model) {
-        logger.info("clearCart for id. "+ cart.toString());
-        cart.clear();
-        logger.info("list carts = " + cart);
-        return "redirect:/pos";
+    @PostMapping(params = "action=addProduct")
+    public String addProduct(@ModelAttribute("data") Data data, Model model) {
+        Item product = productService.findId(data.getCode());
+        logger.info("Information product = {}", product);
+        if (product == null) {
+            model.addAttribute("msg1", "Product not found");
+            return "pos";
+        }
+        cart.addProduct(product);
+        return "redirect:/pos?step=2";
     }
 
-    @RequestMapping(value = "/pos/cash", method =  RequestMethod.GET)
-    public String Order(){
-        logger.info("Order for id. "+ cart);
+
+    @PostMapping(params = "action=nextToPayment")
+    public String nextToPayment() {
+        return "redirect:/pos?step=3";
+    }
+
+    @PostMapping(params = "action=nextAddPayment")
+    public String nextToPayment(@ModelAttribute("data") Data data, Model model) {
+        cart.setPayment_method_code(data.getPaymentMethod());
+        logger.info("Information pago = {}", data.getPaymentMethod());
+        if (data.getPaymentMethod() == null) {
+            model.addAttribute("msg1", "Payment not found");
+            return "pos";
+        }
+        return "redirect:/pos?step=3";
+    }
+
+    @PostMapping("/generate")
+    public String submit(SessionStatus status) {
+        logger.info("Information cart = {}", cart);
+        // Guardar venta
         posService.insert(cart);
+        status.setComplete(); // Limpiar sesión
         cart.clear();
         return "redirect:/pos";
     }
 
-    @RequestMapping(value = "/pos/update", method = RequestMethod.POST)
-    public String updateCart(@ModelAttribute("cart") Cart cartForm, Model model) {
-        posService.update(cartForm);
-        model.addAttribute("cart", cartForm);
-        return "redirect:/pos";
+    @PostMapping("/pos/clear")
+    public void clearCart() {
+        cart.clear();
     }
 }

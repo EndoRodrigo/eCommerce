@@ -5,6 +5,8 @@ import com.endorodrigo.eComerce.model.Item;
 import com.endorodrigo.eComerce.repository.IPosRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,4 +114,10 @@ public class PosService implements IGenericService<Cart, Integer>{
     public void delete(Cart entity) {
         if (entity != null) repository.delete(entity);
     }
+
+    public String generateIdCard(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        return LocalDateTime.now().format(formatter);
+    }
+
 }
