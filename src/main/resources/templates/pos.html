@@ -232,126 +232,154 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">POST information</h1>
-                <form class="user" action="/pos/add" th:object="${data}" method="post">
+                <h1 class="h3 mb-2 text-gray-800">Información de la Venta</h1>
+
+                <form class="user" action="/pos/add" th:object="${data}" method="post" id="posForm">
                     <input type="hidden" th:field="*{id}" />
+
+                    <!-- CLIENTE -->
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user"
-                                       placeholder="Code Empployed" th:field="*{client}">
-                                <span class="text-danger small" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
-
-                            </div>
+                            <label for="client">Código del Cliente</label>
                             <input type="text" class="form-control form-control-user"
-                                   placeholder="Code Product" th:field="*{code}">
-                            <span class="text-danger small" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
-
+                                   placeholder="Ingrese el código del cliente"
+                                   th:field="*{client}" id="client" name="client">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
                         </div>
                     </div>
+
+                    <!-- PRODUCTO -->
                     <div class="form-group row">
-                         <div class="col-sm-6">
-                            <label >Categoría</label>
-                            <select class="form-control" th:field="*{paymentMethod}">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="code">Código del Producto</label>
+                            <input type="text" class="form-control form-control-user"
+                                   placeholder="Ingrese el código del producto"
+                                   th:field="*{code}" id="code" name="code">
+                            <span class="text-danger small" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+                        </div>
+                    </div>
+
+                    <!-- MEDIO DE PAGO -->
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="paymentMethod">Medio de Pago</label>
+                            <select class="form-control" th:field="*{paymentMethod}" id="paymentMethod" name="paymentMethod">
                                 <option value="">Seleccione medio de pago</option>
                                 <option value="Efectivo">Efectivo</option>
-                                <option value="Traferencia">Traferencia</option>
+                                <option value="Transferencia">Transferencia</option>
                                 <option value="Cheque">Cheque</option>
-                               
                             </select>
                             <span class="text-danger small" th:if="${#fields.hasErrors('paymentMethod')}" th:errors="*{paymentMethod}"></span>
                         </div>
                     </div>
+
+                    <!-- BOTONES -->
                     <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${data.id == null}">
-                        Register
+                        Registrar
                     </button>
                     <button type="submit" class="btn btn-primary btn-user btn-block" th:if="${data.id != null}" formaction="/pos/update">
-                        Update
+                        Actualizar
                     </button>
+
                     <hr>
                     <div class="text-center">
-                        <span class="text-danger small" th:if="${msg1}" th:text="${msg1}"></span>
-                        <br>
+                        <span class="text-danger small" th:if="${msg1}" th:text="${msg1}"></span><br>
                         <span class="text-danger small" th:if="${msg2}" th:text="${msg2}"></span>
                     </div>
                 </form>
 
-                <!-- customerFormaTales Example -->
-                <!--div class="card shadow mb-4">
+                <!-- TABLA DEL CARRITO -->
+                <div class="card shadow mb-4 mt-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tables of customer</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Detalle del Carrito</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="customerFormaTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr class="table-dark">
-                                    <th>ID CART</th>
-                                    <th>PRODUCT CODE</th>
-                                    <th>PRODUCT NAME</th>
-                                    <th>PRODUCT PRICE</th>
-                                    <th>PRODUCT QUANTITY</th>
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>ID CARRITO</th>
+                                    <th>TIPO DE FACTURA</th>
+                                    <th># DOCUMENTO</th>
+                                    <th>NOMBRES</th>
+                                    <th># PRODUCTO</th>
+                                    <th>NOMBRE DEL PRODUCTO</th>
+                                    <th>CANTIDAD</th>
                                     <th>SUBTOTAL</th>
                                     <th>MEDIO DE PAGO</th>
                                     <th>ACCIONES</th>
                                 </tr>
                                 </thead>
-                                <tbody-->
-                                <!-- Lista de productos en el carrito -->
-                                <!--tr th:each="car : ${cart.items}">
-                                    <td th:text="${cart.idCar}"></td>
-                                    <td th:text="${car.product.code}"></td>
-                                    <td th:text="${car.product.name}"></td>
-                                    <td th:text="${car.product.price}"></td>
+                                <tbody>
+                                <!-- Lista de productos -->
+                                <tr th:each="car : ${cart.items}">
+                                    <td th:text="${cart.reference_code}"></td>
+                                    <td th:text="${cart.description}"></td>
+                                    <td th:text="${cart.customer.identification}"></td>
+                                    <td th:text="${cart.customer.names}"></td>
+                                    <td th:text="${car.code_reference}"></td>
+                                    <td th:text="${car.name}"></td>
                                     <td th:text="${car.quantity}"></td>
-                                    <td th:text="${car.product.price * car.quantity}"></td>
-                                    <td th:text="${cart.payment.method}"></td>
+                                    <td th:text="${car.price * car.quantity}"></td>
+                                    <td th:text="${cart.payment_method_code}"></td>
                                     <td>
-                                        <a th:href="@{/pos/update(id=${cart.idCar})}"
-                                           class="btn btn-warning btn-icon-split me-2">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-exclamation-triangle"></i>
-                                                </span>
-                                            <span class="text">UPDATE</span>
+                                        <a th:href="@{/pos/update(id=${cart.reference_code})}" class="btn btn-warning btn-sm mb-1">
+                                            <i class="fas fa-exclamation-triangle"></i> Actualizar
                                         </a>
-                                        <a th:href="@{/pos/cash}"
-                                           class="btn btn-success btn-icon-split me-2">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-check"></i>
-                                                </span>
-                                            <span class="text">GENERAR ORDEN</span>
+                                        <a th:href="@{/pos/cash}" class="btn btn-success btn-sm mb-1">
+                                            <i class="fas fa-check"></i> Generar Orden
                                         </a>
-                                        <a th:href="@{/pos/clear}"
-                                           class="btn btn-danger btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                            <span class="text">CLEAR</span>
+                                        <a th:href="@{/pos/clear}" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Vaciar
                                         </a>
                                     </td>
-                                </tr-->
+                                </tr>
 
-                                <!-- Fila del total general -->
-                                <!--tr class="table-success fw-bold">
-                                    <td colspan="5" class="text-end">TOTAL GENERAL</td>
+                                <!-- Total general -->
+                                <tr class="table-success font-weight-bold">
+                                    <td colspan="7" class="text-end">TOTAL GENERAL</td>
                                     <td th:text="${cart.total}"></td>
-                                    <td></td>
+                                    <td colspan="2"></td>
                                 </tr>
                                 </tbody>
                             </table>
-
-                            <td th:text="${cart}"></td>
-
                         </div>
                     </div>
                 </div>
+            </div>
 
-            </div-->
-            <!-- /.container-fluid -->
+            <!-- SCRIPT para desactivar client y paymentMethod -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const clientField = document.getElementById("client");
+                    const paymentField = document.getElementById("paymentMethod");
 
-        </div>
-        <!-- End of Main Content -->
+                    // Verificar si ya están llenos al cargar
+                    if (clientField.value.trim()) {
+                        clientField.setAttribute("readonly", "true");
+                    }
+
+                    if (paymentField.value.trim()) {
+                        paymentField.setAttribute("disabled", "true");
+                    }
+
+                    // Al cambiar cliente
+                    clientField.addEventListener("blur", () => {
+                        if (clientField.value.trim()) {
+                            clientField.setAttribute("readonly", "true");
+                        }
+                    });
+
+                    // Al cambiar medio de pago
+                    paymentField.addEventListener("change", () => {
+                        if (paymentField.value.trim()) {
+                            paymentField.setAttribute("disabled", "true");
+                        }
+                    });
+                });
+            </script>
+
+            <!-- End of Main Content -->
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
