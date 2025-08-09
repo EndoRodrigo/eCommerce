@@ -46,6 +46,7 @@ public class CustomerController {
         if (errors.hasErrors()) {
             return "customer";
         }
+        logger.info("Valor identificacion encontrada -> " + customer.getTribute_id());
         customerService.insert(customer);
         return "redirect:/customer";
     }

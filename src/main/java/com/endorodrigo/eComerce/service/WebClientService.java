@@ -23,7 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Service
 public class WebClientService {
 
-    private static final String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5ZGYzYzIwZS05N2ZhLTQyNDUtYmNmZS1mNTg4MWVjZmNiMzgiLCJqdGkiOiI3OGM2ODYyNDBhM2RhZDM1ODViNDEyOWJkYTZiM2QxY2NmZTZiNzE0ZDdmNmQxNTI5YzBmMWIzZTNiMTVhYzU5NjNiMmNlOWUwNDRjZGM0MyIsImlhdCI6MTc1NDc3ODUyNS40Nzk3MSwibmJmIjoxNzU0Nzc4NTI1LjQ3OTcxMywiZXhwIjoxNzU0NzgyMTI1LjQ2OTU0OCwic3ViIjoiMyIsInNjb3BlcyI6W119.UfHcUMmcXHRft5TnTWVPgIRvtGLflA2X23sco4SY9HW-Bly93UTOklU7OQ8_ClmLkroGJ1ZPiLQIrw6R4WvthKCbvzWFbnT3TZ7Fohrd8qbDVceIzj0bu9kp_yqrndUjT3sXcM7P2Rw-ZESW6qBKZmFzjFP6cFMUoVy67YuwUJHPyK7s0wBAGxB3hydtfG9w5SnbX5ncsk7SC01LyMIC0BWRyWy2Zr9Vy2HxfnUB6kdhCTh-94yUlhj0T01YiXyjBtvWb5bwrScSkoDVnwz1fVgm_19VRaG5_8ozrjvEnxDMQ_LHRQDwg63HxC2wDqrBbngzISblJD-5LnaK0UCi4jgcyWPRFZJPreJCbgtTV-Kn-_BVKYNGQ1Q1kN1OdKXxDUgN0klcvWouolU6jOf0W6H80i1K9T2HPjs_g2nTr5uzQJd9DGyb1HImeknXrEogAjDB8qPJ-XHt6anCs62V-ATx9tXJN2Ovw_iaXJys6LV4lvDqT-TsFu9iJfKTdqCtP1DprkAikmiJ1o2ci_AcF5qcfkLBx0jZImMfVJch9tGrd4c2SqCbNxwSJjuXhNVld6mBZO2kZQ9L4T_ZyFmoiuReaGey9S-sZhF1m-2W6tUsTcwI1Ek3fxUXt1Tus0j8Tx6aSHhX--AQqZ47fk959ys_WyQ7JaS1d47zJojKFMQ"; // coloca tu token real aquí
+    private static final String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5ZGYzYzIwZS05N2ZhLTQyNDUtYmNmZS1mNTg4MWVjZmNiMzgiLCJqdGkiOiI3M2IyMzZjY2ExMTEwMGEzMDcwYWY1MjUxOWFlYTA3YWM5OTAwOTQ5NTE4NjNmZmE4ZjZhZjA1ZGQ0NmViNjBjNGQ5OWEzNzYwZTViMGFmOSIsImlhdCI6MTc1NDc4MjMwMC43MjE2OTQsIm5iZiI6MTc1NDc4MjMwMC43MjE2OTYsImV4cCI6MTc1NDc4NTkwMC43MDkwNDIsInN1YiI6IjMiLCJzY29wZXMiOltdfQ.m796vlHKGNuSvhme41ck07efYPFs3q-RmhEWc_gQ01nPrHMKdEnnDi2e4fsYaiZM7LUWx6ngsHlvjXv5KUddWyVUE2BytZfyMtoct-pvxgDDVdb-b-wA6Ok4LPbJoGkfTNBa5kZjfxInbp1icrD2K6GhmugfNXME-PCwoLLiJ8BfOb2EkXmdW5S3jOLYbrtzcibSAxxFrY0pzCF83Hyd-2vTDrCDFlCdUyTiI9PZMh8b4n1QzAJjWndtaFT-lRM-JeR6d92UacOdU7mpPFxVgGrbEM6ldzhwA5aVJSisal6YxK-j7_sYS4lW4jNBSLbKl9nQIEuQnulpUYie41LEXlK7oQuKDISUC-67EGIh70z9PnpISeA_dtQXfzeE3s2Wix4tot9M89qCWihnzSMcUtFCN24D7HfIVCWCK92M7rgLXwDGC0pEEk9TSfz7tIDghgS-lJ4y8BR7DmODQqyxa7Sj3OFEARwijaAqKy2fjJNOI6TC9BNXRLJQYNykLYDXZbspTCzON2I_y7kEdFMyyL5v-6xyUv47zX3KhSHqFOqGhhrN9BwOg0sLjH3x5LjHR-zFjAiMwMt9YL_XXz6y969JQTar3cK4d7ScUKE_hrocjKYRcBpmN1dWKX7pY939l_CHIKhqw7DUfKminJT2L7IRR3wkB7Ptvj2VBGqwAcQ"; // coloca tu token real aquí
     private final Logger log = LoggerFactory.getLogger(WebClientService.class);
 
     private final RestClient restClient;
@@ -36,38 +36,31 @@ public class WebClientService {
 
     public String createPost(Cart factus) {
         try {
-            log.info("toke! {}", TOKEN);
+            log.info("Token: {}", TOKEN);
 
-            // Realizar la solicitud HTTP
             ResponseEntity<String> response = restClient.post()
                     .uri("/v1/bills/validate")
                     .header("Authorization", "Bearer " + TOKEN)
-                    .contentType(APPLICATION_JSON)
-                    .body(factus)  // Usamos bodyValue en lugar de body para enviar el cuerpo correctamente
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(factus) // ✅ Enviar el objeto como JSON
                     .retrieve()
                     .toEntity(String.class);
 
             log.info("Response status code: {}", response.getStatusCode());
+            log.info("Response body: {}", response.getBody());
 
-            if (response.getBody() != null) {
-                log.info("Response body: {}", response.getBody());
-            } else {
-                log.info("Response body is empty");
-            }
+            return (response.getBody() != null) ? "success" : "failure";
 
-            return response.getBody() != null ? "success" : "failure";
         } catch (HttpStatusCodeException e) {
-            // Si la respuesta HTTP tiene un error, puedes capturarlo aquí
             log.error("Error response: {}", e.getResponseBodyAsString());
             return "failure";
         } catch (RestClientException e) {
-            // Si ocurre un error en la ejecución de la solicitud
             log.error("Error in request: {}", e.getMessage());
             return "failure";
         } catch (Exception e) {
-            // Captura cualquier otra excepción que pueda ocurrir
             log.error("Unexpected error: {}", e.getMessage());
             return "failure";
         }
     }
+
 }
