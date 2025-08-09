@@ -32,7 +32,7 @@ public class Item {
     private Integer tribute_id;
 
     @ManyToOne
-    @JoinColumn(name = "codeReferenceCode") // o "code_reference" si así se llama la FK en la BD
+    @JoinColumn(name = "code_reference_code", referencedColumnName = "codeReferenceCode")
     private Cart cart;
 
     public Item() {
@@ -119,7 +119,13 @@ public class Item {
         this.tribute_id = tribute_id;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
 
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     @Override
     public String toString() {

@@ -1,8 +1,11 @@
 package com.endorodrigo.eComerce.service;
 
+import com.endorodrigo.eComerce.model.Cart;
 import com.endorodrigo.eComerce.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DashboardService {
@@ -37,4 +40,8 @@ public class DashboardService {
         return posRepository.count();
     }
     // Puedes agregar más métodos según los datos disponibles
+
+    public List<Cart> getCart(){
+        return (List<Cart>) posRepository.findAll();
+    }
 }

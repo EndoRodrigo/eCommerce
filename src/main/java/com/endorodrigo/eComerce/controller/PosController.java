@@ -71,6 +71,7 @@ public class PosController {
             return "pos";
         }
         cart.addProduct(product);
+
         return "redirect:/pos?step=2";
     }
 

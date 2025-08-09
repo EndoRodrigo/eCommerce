@@ -87,6 +87,7 @@ public class Cart {
 
     public void addProduct(Item product) {
         items.add(product);
+        product.setCart(this);
     }
 
     public void removeProduct(Item product) {
