@@ -1,5 +1,6 @@
 package com.endorodrigo.eComerce.controller;
 
+import com.endorodrigo.eComerce.model.Cart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.endorodrigo.eComerce.service.DashboardService;
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Controlador para la página principal del sistema.
@@ -32,7 +34,11 @@ public class HomeController {
         model.addAttribute("totalClientes", dashboardService.getTotalClientes());
         model.addAttribute("totalUsuarios", dashboardService.getTotalUsuarios());
         model.addAttribute("totalCarritos", dashboardService.getTotalCarritos());
+        List<Cart> carts = dashboardService.getCart();
+        logger.info("Carts -> {}", carts);
+        model.addAttribute("carts", carts);
         // Muestra la página principal
         return "index";
     }
+
 }

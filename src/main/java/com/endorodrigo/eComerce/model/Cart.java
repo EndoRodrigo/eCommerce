@@ -13,16 +13,20 @@ public class Cart {
     private static Logger LOG = LoggerFactory.getLogger(Cart.class);
 
     @Id
+    @Column(name = "codeReferenceCode")
     private String reference_code;
 
-    private String description;
+    private String description = "Factura de Venta";
 
     private String payment_method_code;
 
     private int numbering_range_id = 8;
 
-    @OneToOne
+
+    @ManyToOne
+    @JoinColumn(name = "identification") // este es el foreign key en la tabla 'cart'
     private Customer customer;
+
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
@@ -83,6 +87,7 @@ public class Cart {
 
     public void addProduct(Item product) {
         items.add(product);
+        product.setCart(this);
     }
 
     public void removeProduct(Item product) {

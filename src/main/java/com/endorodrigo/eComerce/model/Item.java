@@ -3,6 +3,8 @@ package com.endorodrigo.eComerce.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,11 +30,9 @@ public class Item {
     private Integer is_excluded;
     @NotNull
     private Integer tribute_id;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<WithholdingTaxes> withholding_taxes;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "code_reference_code", referencedColumnName = "codeReferenceCode")
     private Cart cart;
 
     public Item() {
@@ -119,12 +119,12 @@ public class Item {
         this.tribute_id = tribute_id;
     }
 
-    public List<WithholdingTaxes> getWithholding_taxes() {
-        return withholding_taxes;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setWithholding_taxes(List<WithholdingTaxes> withholding_taxes) {
-        this.withholding_taxes = withholding_taxes;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     @Override
@@ -140,8 +140,6 @@ public class Item {
                 ", standard_code_id=" + standard_code_id +
                 ", is_excluded=" + is_excluded +
                 ", tribute_id=" + tribute_id +
-                ", withholding_taxes=" + withholding_taxes +
-                ", cart=" + cart +
                 '}';
     }
 }

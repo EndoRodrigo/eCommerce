@@ -30,6 +30,7 @@ public class Customer {
     @NotEmpty(message = "{NotEmpty.customer.municipality_id}")
     private String municipality_id;
 
+
     public Customer() {
     }
 
