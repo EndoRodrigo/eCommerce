@@ -1,5 +1,6 @@
 package com.endorodrigo.eComerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,16 +85,17 @@ public class Cart {
     }
 
     // Métodos de negocio
-
+    @JsonIgnore
     public void addProduct(Item product) {
         items.add(product);
         product.setCart(this);
     }
-
+    @JsonIgnore
     public void removeProduct(Item product) {
         items.removeIf(item -> item.getCode_reference().equals(product.getCode_reference()));
     }
 
+    @JsonIgnore
     public void updateProductQuantity(Item product, int quantity) {
         for (Item item : items) {
             if (item.getCode_reference().equals(product.getCode_reference())) {
@@ -102,17 +104,17 @@ public class Cart {
             }
         }
     }
-
+    @JsonIgnore
     public boolean isEmpty() {
         return items.isEmpty();
     }
-
+    @JsonIgnore
     public double getTotal() {
         return items.stream()
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
     }
-
+    @JsonIgnore
     public void clear() {
         items.clear();
     }
