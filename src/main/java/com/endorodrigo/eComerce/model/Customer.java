@@ -25,8 +25,8 @@ public class Customer {
     private String address;
     @NotEmpty(message = "{NotEmpty.customer.legal_organization_id}")
     private String legal_organization_id;
-    @NotNull(message = "{NotNull.customer.tribute_id}")
-    private Integer tribute_id;
+    @NotEmpty(message = "{NotEmpty.customer.tribute_id}")
+    private String tribute_id;
     @NotEmpty(message = "{NotEmpty.customer.municipality_id}")
     private String municipality_id;
 
@@ -74,11 +74,11 @@ public class Customer {
         this.legal_organization_id = legal_organization_id;
     }
 
-    public Integer getTribute_id() {
+    public String getTribute_id() {
         return tribute_id;
     }
 
-    public void setTribute_id(Integer tribute_id) {
+    public void setTribute_id(String tribute_id) {
         this.tribute_id = tribute_id;
     }
 
@@ -97,6 +97,7 @@ public class Customer {
     public void setMunicipality_id(String municipality_id) {
         this.municipality_id = municipality_id;
     }
+
 
     @Override
     public String toString() {
