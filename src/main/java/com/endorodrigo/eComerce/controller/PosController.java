@@ -4,10 +4,12 @@ import com.endorodrigo.eComerce.model.*;
 import com.endorodrigo.eComerce.service.CustomerService;
 import com.endorodrigo.eComerce.service.PosService;
 import com.endorodrigo.eComerce.service.ItemService;
+import com.endorodrigo.eComerce.service.WebClientService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 
 /**
@@ -37,6 +40,9 @@ public class PosController {
 
     @Autowired
     private PosService posService;
+
+    @Autowired
+    private WebClientService webClientService;
 
     private final Cart cart = new Cart();
 
@@ -94,10 +100,16 @@ public class PosController {
 
     @PostMapping("/generate")
     public String submit(SessionStatus status) {
-        logger.info("Information cart = {}", cart);
-        // Guardar venta
+        logger.info("Information cart (antes de enviar) = {}", cart);
+
+        // Guardar venta local
         posService.insert(cart);
-        status.setComplete(); // Limpiar sesión
+
+        // Enviar a Factus
+        webClientService.createPost(cart);
+
+        // Limpiar sesión después
+        status.setComplete();
         cart.clear();
         return "redirect:/pos";
     }

@@ -98,6 +98,7 @@ public class Customer {
         this.municipality_id = municipality_id;
     }
 
+
     @Override
     public String toString() {
         return "Customer{" +

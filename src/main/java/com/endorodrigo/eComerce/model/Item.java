@@ -1,5 +1,6 @@
 package com.endorodrigo.eComerce.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -33,6 +34,7 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "code_reference_code", referencedColumnName = "codeReferenceCode")
+    @JsonBackReference
     private Cart cart;
 
     public Item() {
