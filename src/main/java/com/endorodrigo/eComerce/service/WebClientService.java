@@ -23,14 +23,23 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Service
 public class WebClientService {
 
-    private static final String TOKEN = ""; // coloca tu token real aquí
+    private static String TOKEN = ""; // coloca tu token real aquí
     private final Logger log = LoggerFactory.getLogger(WebClientService.class);
+
+
+    private final LoginService loginService;
 
     private final RestClient restClient;
 
-    public WebClientService(RestClient.Builder restClientBuilder) {
+    public WebClientService(LoginService loginService, RestClient.Builder restClientBuilder) {
+        this.loginService = loginService;
         this.restClient = restClientBuilder.baseUrl("https://api-sandbox.factus.com.co").build();
 
+    }
+
+    public String obtenerToken() {
+        TOKEN = loginService.login();
+        return TOKEN;
     }
 
 
