@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +49,7 @@ public class WebClientService {
 
             ResponseEntity<String> response = restClient.post()
                     .uri("/v1/bills/validate")
-                    .header("Authorization", "Bearer " + obtenerToken())
+                    .header("Authorization", "Bearer " + TOKEN)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(factus) // ✅ Enviar el objeto como JSON
                     .retrieve()
