@@ -49,7 +49,7 @@ public class WebClientService {
 
             ResponseEntity<String> response = restClient.post()
                     .uri("/v1/bills/validate")
-                    .header("Authorization", "Bearer " + TOKEN)
+                    .header("Authorization", "Bearer " + obtenerToken())
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(factus) // ✅ Enviar el objeto como JSON
                     .retrieve()

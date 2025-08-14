@@ -1,12 +1,22 @@
 package com.endorodrigo.eComerce.model;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class LoginFactus {
 
-    private String username = "sandbox@factus.com.co";
-    private String password = "sandbox2024%";
-    private String client_secret = "jiK7UVOiWd5nfQ9gwY5dgOoj9lgDPICqOcXnsQ1b";
-    private String client_id = "9df3c20e-97fa-4245-bcfe-f5881ecfcb38";;
-    private String grant_type = "password";
+    @Value("${factus.username}")
+    private String username;
+    @Value("${factus.password}")
+    private String password;
+    @Value("${factus.client-secret}")
+    private String client_secret;
+    @Value("${factus.client-id}")
+    private String client_id;
+    @Value("${factus.grant-type}")
+    private String grant_type;
+
     private String token;
     private String refresh_token;
 
