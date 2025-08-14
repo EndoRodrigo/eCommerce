@@ -15,16 +15,16 @@ public class LoginService {
     private final Logger log = LoggerFactory.getLogger(LoginService.class);
     public static String TOKEN = null;
     private final RestClient restClient;
+    private final LoginFactus loginFactus;
 
-    public LoginService(RestClient.Builder restClientBuilder) {
+    public LoginService(LoginFactus loginFactus, RestClient.Builder restClientBuilder) {
         this.restClient = restClientBuilder.baseUrl("https://api-sandbox.factus.com.co").build();
-
+        this.loginFactus = loginFactus;
     }
 
 
     public String login() {
-        LoginFactus login = new LoginFactus();
-        log.info("Datos body {}", login);
+        log.info("Datos body {}", loginFactus);
 
         JsonNode body = null;
 
@@ -32,11 +32,11 @@ public class LoginService {
             ResponseEntity<JsonNode> response = restClient.post()
                     .uri("/oauth/token")
                     .contentType(APPLICATION_JSON)
-                    .body(login) // Aquí sí va body, pero luego se pasa directo a toEntity
+                    .body(loginFactus) // Aquí sí va body, pero luego se pasa directo a toEntity
                     .retrieve()
                     .toEntity(JsonNode.class);
 
-            log.info("Request body {}", login);
+            log.info("Request body {}", loginFactus);
             log.info("Response status code: {}", response.getStatusCode());
             log.info("Response body: {}", response.getBody());
 
