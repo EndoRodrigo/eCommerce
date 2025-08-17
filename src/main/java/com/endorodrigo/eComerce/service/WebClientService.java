@@ -72,4 +72,44 @@ public class WebClientService {
         }
     }
 
+    public String getPost(){
+        try{
+            log.info("Token: {}", TOKEN);
+
+            ResponseEntity<String> response = restClient.get()
+                    .uri("/v1/bills")
+                    .header("Authorization", "Bearer " + obtenerToken())
+                    .retrieve()
+                    .toEntity(String.class);
+
+            log.info("Response status code: {}", response.getStatusCode());
+            log.info("Response body: {}", response.getBody());
+
+            return response.getBody();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public String getDetailPost(String number){
+        try{
+            log.info("Token: {}", TOKEN);
+
+            ResponseEntity<String> response = restClient.get()
+                    .uri("/v1/bills/show-bill/{number}",number)
+                    .header("Authorization", "Bearer " + obtenerToken())
+                    .retrieve()
+                    .toEntity(String.class);
+
+            log.info("Response status code: {}", response.getStatusCode());
+            log.info("Response body: {}", response.getBody());
+
+            return response.getBody();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
