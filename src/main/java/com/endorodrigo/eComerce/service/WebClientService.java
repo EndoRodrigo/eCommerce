@@ -94,10 +94,10 @@ public class WebClientService {
 
     public String getDetailPost(String number){
         try{
-            log.info("Token: {}", TOKEN);
+            log.info("Numero de factura: {}", number);
 
             ResponseEntity<String> response = restClient.get()
-                    .uri("/v1/bills/show-bill/{number}",number)
+                    .uri("/v1/bills/show/{number}",number)
                     .header("Authorization", "Bearer " + obtenerToken())
                     .retrieve()
                     .toEntity(String.class);
