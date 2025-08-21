@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Factura</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+        .invoice-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+        .table th {
+            background: #0d6efd;
+            color: white;
+        }
+        .invoice-header {
+            border-bottom: 2px solid #0d6efd;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        .invoice-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .total-box {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            background: #e9ecef;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+<div class="invoice-box">
+    <!-- Cabecera -->
+    <div class="row invoice-header">
+        <div class="col-8">
+            <h2 class="invoice-title">Factura</h2>
+            <p class="text-muted">Detalle de la transacción</p>
+        </div>
+        <div class="col-4 text-end">
+            <h5 th:text="'#' + ${bill['bill']['number']}"></h5>
+            <small th:text="'Referencia: ' + ${bill['bill']['reference_code']}"></small>
+        </div>
+    </div>
+
+    <!-- Datos de la factura -->
+    <h4 class="mt-4">Información de la Factura</h4>
+    <table class="table table-bordered">
+        <tr><th>ID</th><td th:text="${bill['bill']['id']}"></td></tr>
+        <tr>
+            <th>Documento</th>
+            <td th:text="${bill['bill']['document']['name']}"></td>
+        </tr>
+    </table>
+
+    <!-- Cliente y Empresa lado a lado -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4>Cliente</h4>
+            <table class="table table-sm table-striped">
+                <tr><th>ID</th><td th:text="${bill['customer']['identification']}"></td></tr>
+                <tr><th>Nombre</th><td th:text="${bill['customer']['names']}"></td></tr>
+                <tr><th>Email</th><td th:text="${bill['customer']['email']}"></td></tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4>Empresa</h4>
+            <table class="table table-sm table-striped">
+                <tr><th>Nombre</th><td th:text="${bill['company']['name']}"></td></tr>
+                <tr><th>NIT</th><td th:text="${bill['company']['nit']}"></td></tr>
+                <tr><th>Dirección</th><td th:text="${bill['company']['direction']}"></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Lista de productos -->
+    <h4 class="mt-4">Productos</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th class="text-center">Cantidad</th>
+            <th class="text-end">Precio Unitario</th>
+            <th class="text-end">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${bill['items']}">
+            <td th:text="${product['code_reference']}"></td>
+            <td th:text="${product['name']}"></td>
+            <td class="text-center" th:text="${product['quantity']}"></td>
+            <td class="text-end" th:text="${#numbers.formatDecimal(product['price'],1,2)}"></td>
+            <td class="text-end" th:text="${#numbers.formatDecimal(product['total'],1,2)}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Total -->
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <table class="table">
+                <tr>
+                    <td class="total-box">Total:</td>
+                    <td class="total-box" th:text="${#numbers.formatDecimal(bill['bill']['total'],1,2)}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
