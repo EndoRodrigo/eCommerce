@@ -3,80 +3,84 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:fragment="navegacion-seccion" th:remove="tag">
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Modern Futuristic Sidebar -->
+    <ul class="navbar-nav sidebar-modern" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/index}">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center glass-card" th:href="@{/index}" style="margin: 20px; padding: 20px; text-decoration: none;">
+            <div class="sidebar-brand-icon floating">
+                <i class="fas fa-rocket fa-2x" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3" style="font-family: 'Orbitron', monospace; font-weight: 700; font-size: 1.2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                eCommerce <sup style="font-size: 0.6rem;">PRO</sup>
+            </div>
         </a>
 
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider" style="border-color: rgba(255,255,255,0.1);">
 
         <!-- GESTION DE MÉTRICAS -->
-        <div class="sidebar-heading">GESTION DE METRICAS</div>
+        <div class="sidebar-heading" style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; padding: 20px 25px 10px; font-weight: 600;">GESTION DE METRICAS</div>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/index}">
-                <i class="fas fa-fw fa-chart-line"></i>
+                <i class="fas fa-fw fa-chart-line" style="margin-right: 10px;"></i>
                 <span>DASHBOARD</span>
             </a>
         </li>
 
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider" style="border-color: rgba(255,255,255,0.1);">
 
         <!-- GESTION DE USUARIOS -->
-        <div class="sidebar-heading">GESTION DE USUARIOS</div>
+        <div class="sidebar-heading" style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; padding: 20px 25px 10px; font-weight: 600;">GESTION DE USUARIOS</div>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/customer}">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-users" style="margin-right: 10px;"></i>
                 <span>CUSTOMERS</span>
             </a>
         </li>
 
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider" style="border-color: rgba(255,255,255,0.1);">
 
         <!-- GESTION DE PRODUCTOS -->
-        <div class="sidebar-heading">GESTION DE PRODUCTOS</div>
+        <div class="sidebar-heading" style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; padding: 20px 25px 10px; font-weight: 600;">GESTION DE PRODUCTOS</div>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/product}">
-                <i class="fas fa-fw fa-box-open"></i>
+                <i class="fas fa-fw fa-box-open" style="margin-right: 10px;"></i>
                 <span>PRODUCTS</span>
             </a>
         </li>
 
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider" style="border-color: rgba(255,255,255,0.1);">
 
         <!-- GESTION DE POST -->
-        <div class="sidebar-heading">GESTION DE POST</div>
+        <div class="sidebar-heading" style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; padding: 20px 25px 10px; font-weight: 600;">GESTION DE POST</div>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/pos}">
-                <i class="fas fa-fw fa-store"></i>
+                <i class="fas fa-fw fa-store" style="margin-right: 10px;"></i>
                 <span>POS</span>
             </a>
         </li>
 
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider" style="border-color: rgba(255,255,255,0.1);">
 
         <!-- GESTION DE FACTUS -->
-        <div class="sidebar-heading">GESTION DE FACTUS</div>
+        <div class="sidebar-heading" style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; padding: 20px 25px 10px; font-weight: 600;">GESTION DE FACTUS</div>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/factus}">
-                <i class="fas fa-fw fa-store"></i>
+                <i class="fas fa-fw fa-file-invoice-dollar" style="margin-right: 10px;"></i>
                 <span>FACTUS</span>
             </a>
         </li>
 
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider" style="border-color: rgba(255,255,255,0.1);">
 
         <!-- GESTION DE IDIOMAS -->
-        <div class="sidebar-heading">GESTION DE IDIOMAS</div>
-        <li class="nav-item text-center">
-            <i class="fas fa-cog"></i>
-            <a class="text-white" >ES</a> |
-            <a class="text-white" >EN</a>
+        <div class="sidebar-heading" style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; padding: 20px 25px 10px; font-weight: 600;">GESTION DE IDIOMAS</div>
+        <li class="nav-item text-center" style="padding: 15px 25px;">
+            <div class="glass-card" style="padding: 15px; text-align: center;">
+                <i class="fas fa-cog floating" style="color: var(--text-secondary); margin-bottom: 10px; display: block;"></i>
+                <a class="text-white btn-modern" style="padding: 5px 15px; font-size: 0.8rem; margin: 0 5px;">ES</a>
+                <a class="text-white btn-modern" style="padding: 5px 15px; font-size: 0.8rem; margin: 0 5px;">EN</a>
+            </div>
         </li>
 
     </ul>
