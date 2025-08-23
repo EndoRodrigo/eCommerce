@@ -1,11 +1,10 @@
-package com.endorodrigo.eComerce;
+package com.endorodrigo.eCommerce;
 
-import com.endorodrigo.eCommerce.ECommerceApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EComerceApplication {
+public class ECommerceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ECommerceApplication.class, args);

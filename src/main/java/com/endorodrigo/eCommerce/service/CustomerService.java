@@ -1,15 +1,10 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eComerce.model.Customer;
-import com.endorodrigo.eComerce.repository.ICustomerRepository;
-import org.springframework.stereotype.Service;
+import com.endorodrigo.eCommerce.model.*;
+import com.endorodrigo.eCommerce.repository.*;
+import org.springframework.stereotype.*;
 
 import java.util.List;
-
-/**
- * Servicio para la gestión de clientes.
- * Proporciona métodos CRUD para la entidad Customer.
- */
 
 /**
  * Servicio para la gestión de clientes.

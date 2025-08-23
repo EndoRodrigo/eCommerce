@@ -1,17 +1,12 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eComerce.model.Payment;
-import com.endorodrigo.eComerce.repository.IPayment;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Servicio para la gestión de pagos.
  * Proporciona métodos CRUD para la entidad Payment.
  */
 @Service
-public class PaymentService implements IGenericService<Payment, Integer>{
+public class PaymentService implements IGenericService<Payment, Integer> {
 
     /**
      * Repositorio para operaciones CRUD sobre la entidad Payment.

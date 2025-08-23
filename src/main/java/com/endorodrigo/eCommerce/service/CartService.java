@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
 import com.endorodrigo.eComerce.model.CartItem;
 import com.endorodrigo.eComerce.model.CartSession;
