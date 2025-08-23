@@ -1,6 +1,6 @@
 package com.endorodrigo.eComerce.controller;
 
-import com.endorodrigo.eComerce.model.Cart;
+import com.endorodrigo.eComerce.model.CartItem;
 import com.endorodrigo.eComerce.model.CartSession;
 import com.endorodrigo.eComerce.model.Customer;
 import com.endorodrigo.eComerce.model.Item;
@@ -67,10 +67,8 @@ public class SalesController {
             CartSession cartSession = cartService.getCartSession(sessionId);
             
             if (cartSession != null && !cartSession.getItems().isEmpty()) {
-                List<Cart> cartItems = cartSession.getItems();
-                BigDecimal total = cartItems.stream()
-                    .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+                List<CartItem> cartItems = cartSession.getItems();
+                BigDecimal total = cartSession.getSubtotal();
                 
                 model.addAttribute("cartItems", cartItems);
                 model.addAttribute("total", total);
@@ -120,18 +118,20 @@ public class SalesController {
                 Item item = product.get();
                 
                 // Verificar stock disponible
-                if (item.getStock() < quantity) {
+                if (item.getQuantity() < quantity) {
                     return ResponseEntity.badRequest()
-                        .body(Map.of("error", "Stock insuficiente. Disponible: " + item.getStock()));
+                        .body(Map.of("error", "Stock insuficiente. Disponible: " + item.getQuantity()));
                 }
                 
                 // Agregar al carrito
-                Cart cartItem = new Cart();
+                CartItem cartItem = new CartItem();
                 cartItem.setProductId(item.getId());
                 cartItem.setProductName(item.getName());
-                cartItem.setPrice(item.getPrice());
+                cartItem.setPrice(BigDecimal.valueOf(item.getPrice()));
                 cartItem.setQuantity(quantity);
-                cartItem.setImage(item.getImage());
+                cartItem.setProductCode(item.getCode_reference());
+                cartItem.setDescription(item.getName());
+                cartItem.setStockAvailable(item.getQuantity());
                 
                 cartService.addToCart(sessionId, cartItem);
                 
@@ -181,9 +181,9 @@ public class SalesController {
             
             // Verificar stock disponible
             Optional<Item> product = itemService.findById(productId);
-            if (product.isPresent() && product.get().getStock() < quantity) {
+            if (product.isPresent() && product.get().getQuantity() < quantity) {
                 return ResponseEntity.badRequest()
-                    .body(Map.of("error", "Stock insuficiente. Disponible: " + product.get().getStock()));
+                    .body(Map.of("error", "Stock insuficiente. Disponible: " + product.get().getQuantity()));
             }
             
             // Actualizar cantidad

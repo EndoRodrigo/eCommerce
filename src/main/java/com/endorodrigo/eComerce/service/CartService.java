@@ -1,6 +1,6 @@
 package com.endorodrigo.eComerce.service;
 
-import com.endorodrigo.eComerce.model.Cart;
+import com.endorodrigo.eComerce.model.CartItem;
 import com.endorodrigo.eComerce.model.CartSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class CartService {
     /**
      * Agregar producto al carrito
      */
-    public boolean addToCart(String sessionId, Cart cartItem) {
+    public boolean addToCart(String sessionId, CartItem cartItem) {
         try {
             CartSession cartSession = getCartSession(sessionId);
             if (cartSession == null) {
@@ -59,23 +59,18 @@ public class CartService {
             }
 
             // Verificar si el producto ya existe en el carrito
-            Cart existingItem = findCartItem(cartSession, cartItem.getProductId());
+            CartItem existingItem = findCartItem(cartSession, cartItem.getProductId());
             
             if (existingItem != null) {
                 // Actualizar cantidad si el producto ya existe
                 int newQuantity = existingItem.getQuantity() + cartItem.getQuantity();
                 existingItem.setQuantity(newQuantity);
                 
-                // Recalcular subtotal
-                existingItem.setSubtotal(existingItem.getPrice().multiply(BigDecimal.valueOf(newQuantity)));
-                
                 logger.info("Cantidad actualizada para producto {} en carrito: {}", 
                     cartItem.getProductName(), newQuantity);
             } else {
                 // Agregar nuevo producto al carrito
-                cartItem.setSubtotal(cartItem.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
-                cartItem.setAddedAt(java.time.LocalDateTime.now());
-                cartSession.getItems().add(cartItem);
+                cartSession.addItem(cartItem);
                 
                 logger.info("Producto {} agregado al carrito: {}", 
                     cartItem.getProductName(), cartItem.getQuantity());
@@ -103,16 +98,14 @@ public class CartService {
                 return false;
             }
 
-            Cart existingItem = findCartItem(cartSession, productId);
+            CartItem existingItem = findCartItem(cartSession, productId);
             if (existingItem == null) {
                 logger.warn("Producto {} no encontrado en carrito para sesión: {}", productId, sessionId);
                 return false;
             }
 
-            // Actualizar cantidad y subtotal
+            // Actualizar cantidad
             existingItem.setQuantity(newQuantity);
-            existingItem.setSubtotal(existingItem.getPrice().multiply(BigDecimal.valueOf(newQuantity)));
-            existingItem.setUpdatedAt(java.time.LocalDateTime.now());
 
             // Actualizar timestamp de la sesión
             cartSession.setUpdatedAt(java.time.LocalDateTime.now());
@@ -139,10 +132,11 @@ public class CartService {
                 return false;
             }
 
-            List<Cart> items = cartSession.getItems();
-            boolean removed = items.removeIf(item -> productId.equals(item.getProductId()));
+            // Verificar si el producto existe antes de removerlo
+            boolean existed = cartSession.containsProduct(productId);
+            cartSession.removeItemById(productId);
 
-            if (removed) {
+            if (existed) {
                 // Actualizar timestamp de la sesión
                 cartSession.setUpdatedAt(java.time.LocalDateTime.now());
                 
@@ -170,7 +164,7 @@ public class CartService {
                 return false;
             }
 
-            cartSession.getItems().clear();
+            cartSession.clearItems();
             cartSession.setUpdatedAt(java.time.LocalDateTime.now());
 
             logger.info("Carrito limpiado para sesión: {}", sessionId);
@@ -192,9 +186,7 @@ public class CartService {
                 return BigDecimal.ZERO;
             }
 
-            return cartSession.getItems().stream()
-                .map(Cart::getSubtotal)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+            return cartSession.getSubtotal();
                 
         } catch (Exception e) {
             logger.error("Error al calcular total del carrito para sesión: {}", sessionId, e);
@@ -212,9 +204,7 @@ public class CartService {
                 return 0;
             }
 
-            return cartSession.getItems().stream()
-                .mapToInt(Cart::getQuantity)
-                .sum();
+            return cartSession.getTotalQuantity();
                 
         } catch (Exception e) {
             logger.error("Error al contar items del carrito para sesión: {}", sessionId, e);
@@ -232,7 +222,7 @@ public class CartService {
                 return 0;
             }
 
-            return cartSession.getItems().size();
+            return cartSession.getItemCount();
                 
         } catch (Exception e) {
             logger.error("Error al contar productos únicos del carrito para sesión: {}", sessionId, e);
@@ -246,7 +236,7 @@ public class CartService {
     public boolean isCartEmpty(String sessionId) {
         try {
             CartSession cartSession = getCartSession(sessionId);
-            return cartSession == null || cartSession.getItems().isEmpty();
+            return cartSession == null || cartSession.isEmpty();
                 
         } catch (Exception e) {
             logger.error("Error al verificar si el carrito está vacío para sesión: {}", sessionId, e);
@@ -275,7 +265,7 @@ public class CartService {
             int uniqueItemCount = getCartUniqueItemCount(sessionId);
 
             return Map.of(
-                "isEmpty", cartSession.getItems().isEmpty(),
+                "isEmpty", cartSession.isEmpty(),
                 "itemCount", itemCount,
                 "uniqueItemCount", uniqueItemCount,
                 "total", total,
@@ -314,9 +304,7 @@ public class CartService {
             }
 
             // Aplicar descuento
-            cartSession.setDiscountCode(discountCode);
-            cartSession.setDiscountAmount(discountAmount);
-            cartSession.setUpdatedAt(java.time.LocalDateTime.now());
+            cartSession.applyDiscount(discountCode, discountAmount);
 
             logger.info("Descuento aplicado al carrito: {} - ${}", discountCode, discountAmount);
             return true;
@@ -338,9 +326,7 @@ public class CartService {
                 return false;
             }
 
-            cartSession.setDiscountCode(null);
-            cartSession.setDiscountAmount(BigDecimal.ZERO);
-            cartSession.setUpdatedAt(java.time.LocalDateTime.now());
+            cartSession.removeDiscount();
 
             logger.info("Descuento removido del carrito para sesión: {}", sessionId);
             return true;
@@ -384,7 +370,7 @@ public class CartService {
             List<Map<String, Object>> issues = new ArrayList<>();
             boolean isValid = true;
 
-            for (Cart item : cartSession.getItems()) {
+            for (CartItem item : cartSession.getItems()) {
                 // Aquí se debería verificar el stock real contra la base de datos
                 // Por ahora, simulamos la validación
                 if (item.getQuantity() > 100) { // Simular stock máximo
@@ -445,15 +431,15 @@ public class CartService {
         try {
             int totalSessions = cartSessions.size();
             int activeSessions = (int) cartSessions.values().stream()
-                .filter(session -> !session.getItems().isEmpty())
+                .filter(session -> !session.isEmpty())
                 .count();
 
             long totalItems = cartSessions.values().stream()
-                .mapToLong(session -> session.getItems().size())
+                .mapToLong(session -> session.getItemCount())
                 .sum();
 
             BigDecimal totalValue = cartSessions.values().stream()
-                .map(this::getCartTotal)
+                .map(session -> getCartTotal(session.getSessionId()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
             return Map.of(
@@ -474,20 +460,15 @@ public class CartService {
     /**
      * Métodos auxiliares privados
      */
-    private Cart findCartItem(CartSession cartSession, Long productId) {
-        return cartSession.getItems().stream()
-            .filter(item -> productId.equals(item.getProductId()))
-            .findFirst()
-            .orElse(null);
+    private CartItem findCartItem(CartSession cartSession, Long productId) {
+        return cartSession.findItemById(productId);
     }
 
     private BigDecimal getCartTotal(CartSession cartSession) {
-        if (cartSession == null || cartSession.getItems().isEmpty()) {
+        if (cartSession == null || cartSession.isEmpty()) {
             return BigDecimal.ZERO;
         }
 
-        return cartSession.getItems().stream()
-            .map(Cart::getSubtotal)
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return cartSession.getSubtotal();
     }
 }
