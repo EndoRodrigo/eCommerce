@@ -86,7 +86,7 @@ public class ProductController {
      * Vista de detalle de un producto
      */
     @GetMapping("/{id}")
-    public String viewProduct(@PathVariable Long id, Model model) {
+    public String viewProduct(@PathVariable String id, Model model) {
         try {
             Optional<Item> product = itemService.findById(id);
             if (product.isPresent()) {
@@ -137,7 +137,7 @@ public class ProductController {
             
             redirectAttributes.addFlashAttribute("success", 
                 "Producto '" + savedProduct.getName() + "' creado exitosamente");
-            return "redirect:/products/" + savedProduct.getId();
+            return "redirect:/products/" + savedProduct.getCode_reference();
             
         } catch (Exception e) {
             logger.error("Error al crear producto", e);
@@ -152,7 +152,7 @@ public class ProductController {
      */
     @GetMapping("/{id}/edit")
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
-    public String editProductForm(@PathVariable Long id, Model model) {
+    public String editProductForm(@PathVariable String id, Model model) {
         try {
             Optional<Item> product = itemService.findById(id);
             if (product.isPresent()) {
@@ -174,7 +174,7 @@ public class ProductController {
     @PostMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public String updateProduct(
-            @PathVariable Long id,
+            @PathVariable String id,
             @Valid @ModelAttribute("product") Item product,
             BindingResult result,
             RedirectAttributes redirectAttributes,
@@ -186,13 +186,13 @@ public class ProductController {
         }
         
         try {
-            product.setId(id);
+            product.setCode_reference(id);
             Item updatedProduct = itemService.save(product);
             notificationService.sendProductUpdatedNotification(updatedProduct);
             
             redirectAttributes.addFlashAttribute("success", 
                 "Producto '" + updatedProduct.getName() + "' actualizado exitosamente");
-            return "redirect:/products/" + updatedProduct.getId());
+            return "redirect:/products/" + updatedProduct.getCode_reference();
             
         } catch (Exception e) {
             logger.error("Error al actualizar producto con ID: {}", id, e);
@@ -208,7 +208,7 @@ public class ProductController {
     @PostMapping("/{id}/delete")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteProduct(
-            @PathVariable Long id,
+            @PathVariable String id,
             RedirectAttributes redirectAttributes) {
         
         try {
@@ -274,7 +274,7 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @ResponseBody
     public ResponseEntity<String> updateStock(
-            @PathVariable Long id,
+            @PathVariable String id,
             @RequestParam int quantity,
             @RequestParam String operation) {
         

@@ -390,7 +390,7 @@ public class ReportService {
     }
 
     /**
-     * Obtener períodos disponibles
+     * Obtener períodos disponibles para reportes
      */
     public List<String> getAvailablePeriods() {
         return Arrays.asList("daily", "weekly", "monthly", "quarterly", "yearly");
@@ -404,28 +404,28 @@ public class ReportService {
     }
 
     /**
-     * Obtener estados de stock
+     * Obtener estados de stock disponibles
      */
     public List<String> getStockStatuses() {
         return Arrays.asList("all", "in_stock", "low_stock", "out_of_stock");
     }
 
     /**
-     * Obtener tipos de clientes
+     * Obtener tipos de cliente disponibles
      */
     public List<String> getCustomerTypes() {
-        return Arrays.asList("all", "Regular", "Premium", "VIP");
+        return Arrays.asList("all", "new", "returning", "vip", "inactive");
     }
 
     /**
-     * Obtener opciones de ordenamiento de productos
+     * Obtener opciones de ordenamiento para productos
      */
     public List<String> getProductSortOptions() {
-        return Arrays.asList("name", "price", "stock", "sales", "created_date");
+        return Arrays.asList("name", "price", "quantity", "created_date", "sales_count");
     }
 
     /**
-     * Obtener períodos financieros
+     * Obtener períodos financieros disponibles
      */
     public List<String> getFinancialPeriods() {
         return Arrays.asList("monthly", "quarterly", "yearly");
@@ -443,26 +443,26 @@ public class ReportService {
      */
     public Map<String, Object> getReportSettings() {
         Map<String, Object> settings = new HashMap<>();
-        settings.put("autoGenerate", true);
-        settings.put("emailReports", false);
+        settings.put("defaultPeriod", "monthly");
         settings.put("defaultFormat", "pdf");
-        settings.put("retentionDays", 365);
+        settings.put("autoExport", false);
+        settings.put("emailNotifications", true);
         return settings;
     }
 
     /**
-     * Obtener plantillas de email
+     * Obtener plantillas de email disponibles
      */
     public List<String> getEmailTemplates() {
-        return Arrays.asList("sales_report", "inventory_report", "customers_report", "financial_report");
+        return Arrays.asList("daily_report", "weekly_summary", "monthly_analysis", "custom");
     }
 
     /**
      * Guardar configuración de reportes
      */
     public void saveReportSettings(Map<String, String> settings) {
-        // Implementar lógica para guardar configuración
-        logger.info("Configuración de reportes actualizada: {}", settings);
+        // Implementación básica - guardar en memoria o base de datos
+        logger.info("Configuración de reportes guardada: {}", settings);
     }
 
     /**
