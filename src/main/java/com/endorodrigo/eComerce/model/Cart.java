@@ -10,11 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "cart")
 public class Cart {
 
     private static Logger LOG = LoggerFactory.getLogger(Cart.class);
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name = "codeReferenceCode")
     private String reference_code;
 
@@ -24,11 +28,9 @@ public class Cart {
 
     private int numbering_range_id = 8;
 
-
     @ManyToOne
     @JoinColumn(name = "identification") // este es el foreign key en la tabla 'cart'
     private Customer customer;
-
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -37,6 +39,14 @@ public class Cart {
     public Cart() {}
 
     // Getters y Setters
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public int getNumbering_range_id() {
         return numbering_range_id;
@@ -92,6 +102,7 @@ public class Cart {
         items.add(product);
         product.setCart(this);
     }
+    
     @JsonIgnore
     public void removeProduct(Item product) {
         items.removeIf(item -> item.getCode_reference().equals(product.getCode_reference()));
@@ -106,16 +117,19 @@ public class Cart {
             }
         }
     }
+    
     @JsonIgnore
     public boolean isEmpty() {
         return items.isEmpty();
     }
+    
     @JsonIgnore
     public double getTotal() {
         return items.stream()
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
     }
+    
     @JsonIgnore
     public void clear() {
         items.clear();
@@ -124,7 +138,8 @@ public class Cart {
     @Override
     public String toString() {
         return "Cart{" +
-                "numbering_range_id=" + numbering_range_id +
+                "id=" + id +
+                ", numbering_range_id=" + numbering_range_id +
                 ", reference_code='" + reference_code + '\'' +
                 ", description='" + description + '\'' +
                 ", payment_method_code='" + payment_method_code + '\'' +

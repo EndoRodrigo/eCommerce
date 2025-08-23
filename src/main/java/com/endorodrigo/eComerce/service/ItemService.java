@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
  * Proporciona métodos CRUD para la entidad Product.
  */
 @Service
-public class ItemService implements IGenericService<Item, String> {
+public class ItemService implements IGenericService<Item, Long> {
 
     private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
@@ -37,7 +37,7 @@ public class ItemService implements IGenericService<Item, String> {
      * @param i Código del producto
      * @return Producto encontrado o null si no existe
      */
-    public Item findId(String i) {
+    public Item findId(Long i) {
         if (i == null) return null;
         return productRepository.findById(i).get();
     }
@@ -45,7 +45,7 @@ public class ItemService implements IGenericService<Item, String> {
     /**
      * Busca un producto por su ID
      */
-    public Optional<Item> findById(String id) {
+    public Optional<Item> findById(Long id) {
         return productRepository.findById(id);
     }
 
@@ -59,7 +59,7 @@ public class ItemService implements IGenericService<Item, String> {
     /**
      * Elimina un producto por ID
      */
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         productRepository.deleteById(id);
     }
 
@@ -100,10 +100,10 @@ public class ItemService implements IGenericService<Item, String> {
     /**
      * Obtiene productos relacionados
      */
-    public List<Item> getRelatedProducts(String productId) {
+    public List<Item> getRelatedProducts(Long productId) {
         // Implementación básica - retorna productos de la misma categoría
         return productRepository.findAll().stream()
-                .filter(item -> !item.getCode_reference().equals(productId))
+                .filter(item -> !item.getId().equals(productId))
                 .limit(5)
                 .toList();
     }
@@ -135,7 +135,7 @@ public class ItemService implements IGenericService<Item, String> {
     /**
      * Actualiza el stock de un producto
      */
-    public void updateStock(String productId, int quantity, String operation) {
+    public void updateStock(Long productId, int quantity, String operation) {
         Optional<Item> itemOpt = productRepository.findById(productId);
         if (itemOpt.isPresent()) {
             Item item = itemOpt.get();

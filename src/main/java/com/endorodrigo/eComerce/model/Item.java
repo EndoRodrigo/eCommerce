@@ -9,37 +9,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "item")
 public class Item {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
     @NotEmpty
     private String code_reference;
+    
+    @NotEmpty
     private String name;
+    
     @NotNull
     private Integer quantity;
+    
     @NotEmpty
     private String discount_rate;
+    
     @NotNull
     private float price;
+    
     @NotEmpty
     private String tax_rate;
+    
     @NotNull
     private Integer unit_measure_id;
+    
     @NotNull
     private Integer standard_code_id;
+    
     @NotNull
     private Integer is_excluded;
+    
     @NotNull
     private Integer tribute_id;
 
     @ManyToOne
-    @JoinColumn(name = "code_reference_code", referencedColumnName = "codeReferenceCode")
+    @JoinColumn(name = "cart_id")
     @JsonBackReference
     private Cart cart;
 
     public Item() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCode_reference() {
         return code_reference;
@@ -132,7 +154,8 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "code_reference='" + code_reference + '\'' +
+                "id=" + id +
+                ", code_reference='" + code_reference + '\'' +
                 ", name='" + name + '\'' +
                 ", quantity=" + quantity +
                 ", discount_rate='" + discount_rate + '\'' +
@@ -142,6 +165,7 @@ public class Item {
                 ", standard_code_id=" + standard_code_id +
                 ", is_excluded=" + is_excluded +
                 ", tribute_id=" + tribute_id +
+                ", cart=" + cart +
                 '}';
     }
 }

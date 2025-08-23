@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface IProductRepository extends CrudRepository<Item, String> {
+public interface IProductRepository extends CrudRepository<Item, Long> {
     /**
      * Repositorio para la entidad Product.
      * Proporciona operaciones CRUD sobre productos.

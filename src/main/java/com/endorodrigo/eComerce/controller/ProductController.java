@@ -86,7 +86,7 @@ public class ProductController {
      * Vista de detalle de un producto
      */
     @GetMapping("/{id}")
-    public String viewProduct(@PathVariable String id, Model model) {
+    public String viewProduct(@PathVariable Long id, Model model) {
         try {
             Optional<Item> product = itemService.findById(id);
             if (product.isPresent()) {
@@ -152,7 +152,7 @@ public class ProductController {
      */
     @GetMapping("/{id}/edit")
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
-    public String editProductForm(@PathVariable String id, Model model) {
+    public String editProductForm(@PathVariable Long id, Model model) {
         try {
             Optional<Item> product = itemService.findById(id);
             if (product.isPresent()) {
@@ -174,7 +174,7 @@ public class ProductController {
     @PostMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public String updateProduct(
-            @PathVariable String id,
+            @PathVariable Long id,
             @Valid @ModelAttribute("product") Item product,
             BindingResult result,
             RedirectAttributes redirectAttributes,
@@ -186,13 +186,13 @@ public class ProductController {
         }
         
         try {
-            product.setCode_reference(id);
+            product.setId(id);
             Item updatedProduct = itemService.save(product);
             notificationService.sendProductUpdatedNotification(updatedProduct);
             
             redirectAttributes.addFlashAttribute("success", 
                 "Producto '" + updatedProduct.getName() + "' actualizado exitosamente");
-            return "redirect:/products/" + updatedProduct.getCode_reference();
+            return "redirect:/products/" + updatedProduct.getId();
             
         } catch (Exception e) {
             logger.error("Error al actualizar producto con ID: {}", id, e);
@@ -208,7 +208,7 @@ public class ProductController {
     @PostMapping("/{id}/delete")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteProduct(
-            @PathVariable String id,
+            @PathVariable Long id,
             RedirectAttributes redirectAttributes) {
         
         try {
@@ -274,7 +274,7 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @ResponseBody
     public ResponseEntity<String> updateStock(
-            @PathVariable String id,
+            @PathVariable Long id,
             @RequestParam int quantity,
             @RequestParam String operation) {
         

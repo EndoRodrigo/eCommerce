@@ -11,11 +11,16 @@ import java.util.Optional;
  * Proporciona operaciones CRUD y búsqueda por ID.
  */
 @Repository
-public interface IPosRepository extends CrudRepository<Cart, Integer> {
+public interface ICartRepository extends CrudRepository<Cart, Integer> {
     /**
      * Busca un carrito por su identificador único.
      * @param id Identificador del carrito
      * @return Optional con el carrito si existe
      */
     Optional<Cart> findById(Integer id);
+    
+    /**
+     * Busca carritos por cliente
+     */
+    java.util.List<Cart> findByCustomerId(Integer customerId);
 }
