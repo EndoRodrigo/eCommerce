@@ -29,7 +29,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
-    public String getProduct(@RequestParam(value = "code", required = false) String id, Model model) {
+    public String getProduct(@RequestParam(value = "code", required = false) Long id, Model model) {
         List<Item> listProduct = productService.getAll();
         logger.info("Listado de productos: {}", listProduct);
         logger.info("Id: {}", id);
@@ -76,7 +76,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/product/delite/{code}", method = RequestMethod.GET)
-    public String deleteProduct(@PathVariable String code, Model model) {
+    public String deleteProduct(@PathVariable Long code, Model model) {
         Item product = productService.findId(code);
         logger.info("buscando product por id para eliminar: " + code);
         productService.delete(product);

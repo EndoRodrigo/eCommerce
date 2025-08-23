@@ -1,10 +1,6 @@
 package com.endorodrigo.eComerce.controller;
 
-import com.endorodrigo.eComerce.model.CartItem;
-import com.endorodrigo.eComerce.model.CartSession;
-import com.endorodrigo.eComerce.model.Customer;
-import com.endorodrigo.eComerce.model.Item;
-import com.endorodrigo.eComerce.model.Payment;
+import com.endorodrigo.eComerce.model.*;
 import com.endorodrigo.eComerce.service.CartService;
 import com.endorodrigo.eComerce.service.CustomerService;
 import com.endorodrigo.eComerce.service.ItemService;
@@ -344,7 +340,7 @@ public class SalesController {
             }
             
             // Crear o actualizar cliente
-            Customer savedCustomer = customerService.saveCustomer(customer);
+            Customer savedCustomer = customerService.insert(customer);
             
             // Crear orden
             String orderNumber = salesService.createOrder(cartSession, savedCustomer, shippingMethod);
@@ -357,7 +353,7 @@ public class SalesController {
             payment.setStatus("PENDING");
             payment.setCreatedAt(LocalDateTime.now());
             
-            Payment savedPayment = paymentService.savePayment(payment);
+            Payment savedPayment = paymentService.insert(payment);
             
             // Procesar pago con gateway (simulado)
             boolean paymentSuccess = processPaymentWithGateway(savedPayment, cardNumber, cardExpiry, cardCvv);
@@ -365,7 +361,7 @@ public class SalesController {
             if (paymentSuccess) {
                 // Actualizar estado de pago
                 savedPayment.setStatus("COMPLETED");
-                paymentService.savePayment(savedPayment);
+                paymentService.insert(savedPayment);
                 
                 // Actualizar estado de orden
                 salesService.updateOrderStatus(orderNumber, "PAID");
@@ -385,7 +381,7 @@ public class SalesController {
             } else {
                 // Pago fallido
                 savedPayment.setStatus("FAILED");
-                paymentService.savePayment(savedPayment);
+                paymentService.insert(savedPayment);
                 
                 model.addAttribute("error", "El pago no pudo ser procesado. Intente nuevamente.");
                 return checkout(session, model);
@@ -526,12 +522,12 @@ public class SalesController {
      * Métodos auxiliares privados
      */
     private boolean validateStock(CartSession cartSession) {
-        for (Cart item : cartSession.getItems()) {
-            Optional<Item> product = itemService.findById(item.getProductId());
+        /*for (Cart item : cartSession.getItems()) {
+            Optional<Item> product = itemService.findById(item.getId());
             if (product.isPresent() && product.get().getStock() < item.getQuantity()) {
                 return false;
             }
-        }
+        }*/
         return true;
     }
 
@@ -552,8 +548,8 @@ public class SalesController {
     }
 
     private void updateInventory(CartSession cartSession) {
-        for (Cart item : cartSession.getItems()) {
-            Optional<Item> product = itemService.findById(item.getProductId());
+        /*for (Cart item : cartSession.getItems()) {
+            Optional<Item> product = itemService.findById(item.getId());
             if (product.isPresent()) {
                 Item updatedProduct = product.get();
                 updatedProduct.setStock(updatedProduct.getStock() - item.getQuantity());
@@ -564,7 +560,7 @@ public class SalesController {
                     notificationService.sendLowStockAlert(updatedProduct);
                 }
             }
-        }
+        }*/
     }
 
     private void sendOrderNotifications(String orderNumber, Customer customer, CartSession cartSession) {
@@ -572,7 +568,7 @@ public class SalesController {
             // Notificar al cliente
             Map<String, Object> orderData = Map.of(
                 "orderNumber", orderNumber,
-                "customerName", customer.getName(),
+                "customerName", customer.getNames(),
                 "total", cartService.getCartTotal(cartSession.getSessionId()),
                 "items", cartSession.getItems()
             );

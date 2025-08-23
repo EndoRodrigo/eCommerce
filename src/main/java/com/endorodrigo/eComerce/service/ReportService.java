@@ -19,6 +19,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.IsoFields;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -573,7 +574,9 @@ public class ReportService {
             case "daily":
                 return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             case "weekly":
-                return "Week " + date.get(DateTimeFormatter.ISO.WEEK_BASED_YEAR);
+                int week = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+                int year = date.get(IsoFields.WEEK_BASED_YEAR);
+                return "Week " + week + " " + year;
             case "monthly":
                 return date.format(DateTimeFormatter.ofPattern("yyyy-MM"));
             case "quarterly":
@@ -584,6 +587,7 @@ public class ReportService {
                 return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
     }
+
 
     private String generateSalesReportContent(LocalDate startDate, LocalDate endDate, String period) {
         StringBuilder content = new StringBuilder();

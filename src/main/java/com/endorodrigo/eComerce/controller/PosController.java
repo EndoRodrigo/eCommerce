@@ -70,7 +70,7 @@ public class PosController {
 
     @PostMapping(params = "action=addProduct")
     public String addProduct(@ModelAttribute("data") Data data, Model model) {
-        Item product = productService.findId(data.getCode());
+        Item product = productService.findId(Long.valueOf(data.getCode()));
         logger.info("Information product = {}", product);
         if (product == null) {
             model.addAttribute("msg1", "Product not found");

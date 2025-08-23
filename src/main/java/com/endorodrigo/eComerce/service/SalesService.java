@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * Servicio para manejar ventas y órdenes del sistema eCommerce
@@ -58,9 +59,7 @@ public class SalesService {
             Map<String, Object> order = new HashMap<>();
             order.put("orderNumber", orderNumber);
             order.put("customerId", customer.getId());
-            order.put("customerName", customer.getName());
-            order.put("customerEmail", customer.getEmail());
-            order.put("customerPhone", customer.getPhone());
+            order.put("customerName", customer.getNames());
             order.put("shippingAddress", customer.getAddress());
             order.put("shippingMethod", shippingMethod);
             order.put("shippingCost", shipping);

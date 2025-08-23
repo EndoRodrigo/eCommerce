@@ -13,11 +13,9 @@ import java.util.List;
 @Table(name = "cart")
 public class Cart {
 
-    private static Logger LOG = LoggerFactory.getLogger(Cart.class);
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "codeReferenceCode")
     private String reference_code;
@@ -40,11 +38,12 @@ public class Cart {
 
     // Getters y Setters
 
-    public Integer getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

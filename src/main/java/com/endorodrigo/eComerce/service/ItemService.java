@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,7 @@ public class ItemService implements IGenericService<Item, Long> {
      */
     public Item findId(Long i) {
         if (i == null) return null;
-        return productRepository.findById(i).get();
+        return productRepository.findById(i).orElse(null);
     }
 
     /**
@@ -71,7 +72,8 @@ public class ItemService implements IGenericService<Item, Long> {
         if (search != null && !search.isEmpty()) {
             return productRepository.findByNameContainingIgnoreCase(search, pageable);
         }
-        return productRepository.findAll(pageable);
+        //return productRepository.findAll(pageable);
+        return productRepository.findByNameContainingIgnoreCase(category, pageable);
     }
 
     /**
@@ -101,12 +103,12 @@ public class ItemService implements IGenericService<Item, Long> {
      * Obtiene productos relacionados
      */
     public List<Item> getRelatedProducts(Long productId) {
-        // Implementación básica - retorna productos de la misma categoría
-        return productRepository.findAll().stream()
-                .filter(item -> !item.getId().equals(productId))
+        return StreamSupport.stream(productRepository.findAll().spliterator(), false)
+                .filter(item -> !item.getId().equals(productId)) // excluye el mismo producto
                 .limit(5)
-                .toList();
+                .toList(); // si usas Java 16+, en Java 8-15 usa .collect(Collectors.toList())
     }
+
 
     /**
      * Obtiene todas las categorías
@@ -129,7 +131,8 @@ public class ItemService implements IGenericService<Item, Long> {
      */
     public Page<Item> findByCategory(String category, Pageable pageable) {
         // Implementación básica - retorna todos los productos
-        return productRepository.findAll(pageable);
+        Page<Item> ddata = productRepository.findByNameContainingIgnoreCase(category, pageable);
+        return ddata;
     }
 
     /**

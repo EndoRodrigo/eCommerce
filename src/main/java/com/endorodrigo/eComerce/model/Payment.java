@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Entity
 public class Payment {
     @Id
@@ -83,5 +86,14 @@ public class Payment {
                 ", method='" + method + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    public void setOrderNumber(String orderNumber) {
+    }
+
+    public void setAmount(BigDecimal cartTotal) {
+    }
+
+    public void setCreatedAt(LocalDateTime now) {
     }
 }
