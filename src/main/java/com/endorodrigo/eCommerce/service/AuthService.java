@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final IUserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public AuthService(IUserRepository userRepository, PasswordEncoder passwordEncoder) {
+    private PasswordEncoder passwordEncoder = null;
+
+    public AuthService(IUserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     /**

@@ -1,25 +1,32 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
 
 import com.endorodrigo.eCommerce.model.Cart;
 import com.endorodrigo.eCommerce.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DashboardService {
-    @Autowired
-    private IProductRepository productRepository;
-    @Autowired
-    private ICustomerRepository customerRepository;
-    @Autowired
-    private IUserRepository userRepository;
-    @Autowired
-    private IPosRepository posRepository;
-    @Autowired
-    private IPayment paymentRepository;
+
+    private final IProductRepository productRepository;
+
+    private final ICustomerRepository customerRepository;
+
+    private final IUserRepository userRepository;
+
+    private final IPosRepository posRepository;
+
+    private final IPayment paymentRepository;
+
+    public DashboardService(IProductRepository productRepository, ICustomerRepository customerRepository, IUserRepository userRepository, IPosRepository posRepository, IPayment paymentRepository) {
+        this.productRepository = productRepository;
+        this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
+        this.posRepository = posRepository;
+        this.paymentRepository = paymentRepository;
+    }
 
     public long getTotalVentas() {
         return paymentRepository.count();

@@ -1,7 +1,7 @@
 package com.endorodrigo.eCommerce.controller;
 
 import com.endorodrigo.eCommerce.service.ReportService;
-import com.endorodrigo.eComerce.service.DashboardService;
+import com.endorodrigo.eCommerce.service.DashboardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
