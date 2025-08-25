@@ -5,7 +5,6 @@ import com.endorodrigo.eCommerce.model.Item;
 import com.endorodrigo.eCommerce.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -30,11 +29,8 @@ public class NotificationService {
 
     private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
-    @Autowired
-    private JavaMailSender emailSender;
-
-    @Autowired
-    private TemplateEngine templateEngine;
+    private final JavaMailSender emailSender;
+    private final TemplateEngine templateEngine;
 
     @Value("${spring.mail.username}")
     private String fromEmail;
@@ -50,6 +46,12 @@ public class NotificationService {
 
     @Value("${app.notifications.push.enabled:false}")
     private boolean pushEnabled;
+
+    // Constructor para inyección de dependencias
+    public NotificationService(JavaMailSender emailSender, TemplateEngine templateEngine) {
+        this.emailSender = emailSender;
+        this.templateEngine = templateEngine;
+    }
 
     /**
      * Enviar notificación de producto creado
