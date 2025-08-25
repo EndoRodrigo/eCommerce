@@ -30,6 +30,11 @@ public class HomeController {
     }
 
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String rootRedirect() {
+        return "redirect:/login";
+    }
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Principal principal, Model model) {
         logger.info("Usuario Logueado -> {}", principal.getName());
