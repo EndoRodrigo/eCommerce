@@ -35,8 +35,8 @@
                                     <!-- SECURE LOGIN FORM -->
                                     <form class="user" th:action="@{/login}" method="post" th:object="${formUser}" id="secureLoginForm">
                                         <!-- CSRF Protection -->
-                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                                        
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
                                         <div class="form-group">
                                             <input type="email" 
                                                    class="form-control-modern"

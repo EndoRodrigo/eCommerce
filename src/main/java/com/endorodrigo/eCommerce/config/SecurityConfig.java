@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.config;
+package com.endorodrigo.eCommerce.config;
 
 
 

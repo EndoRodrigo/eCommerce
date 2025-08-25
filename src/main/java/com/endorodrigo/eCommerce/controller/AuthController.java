@@ -30,7 +30,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/login")
     public String showLoginForm() {
         // Muestra el formulario de login
         return "login";
