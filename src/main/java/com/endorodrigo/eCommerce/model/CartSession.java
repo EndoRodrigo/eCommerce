@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.model;
+package com.endorodrigo.eCommerce.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

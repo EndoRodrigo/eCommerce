@@ -1,6 +1,12 @@
 package com.endorodrigo.eCommerce.service;
 
 
+import com.endorodrigo.eCommerce.model.Payment;
+import com.endorodrigo.eCommerce.repository.IPayment;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 /**
  * Servicio para la gestión de pagos.
  * Proporciona métodos CRUD para la entidad Payment.

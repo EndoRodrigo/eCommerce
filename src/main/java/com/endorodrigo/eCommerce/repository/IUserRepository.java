@@ -1,6 +1,7 @@
-package com.endorodrigo.eComerce.repository;
+package com.endorodrigo.eCommerce.repository;
 
-import com.endorodrigo.eComerce.model.User;
+
+import com.endorodrigo.eCommerce.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

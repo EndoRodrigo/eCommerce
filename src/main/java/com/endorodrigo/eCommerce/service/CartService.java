@@ -1,7 +1,7 @@
 package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eComerce.model.CartItem;
-import com.endorodrigo.eComerce.model.CartSession;
+
+import com.endorodrigo.eCommerce.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

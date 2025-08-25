@@ -1,12 +1,7 @@
-package com.endorodrigo.eComerce.controller;
+package com.endorodrigo.eCommerce.controller;
 
-import com.endorodrigo.eComerce.model.*;
-import com.endorodrigo.eComerce.service.CartService;
-import com.endorodrigo.eComerce.service.CustomerService;
-import com.endorodrigo.eComerce.service.ItemService;
-import com.endorodrigo.eComerce.service.NotificationService;
-import com.endorodrigo.eComerce.service.PaymentService;
-import com.endorodrigo.eComerce.service.SalesService;
+import com.endorodrigo.eCommerce.model.*;
+import com.endorodrigo.eCommerce.service.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -36,15 +31,15 @@ public class SalesController {
     private static final Logger logger = LoggerFactory.getLogger(SalesController.class);
     
     private final CartService cartService;
-    private final ItemService itemService;
+    private final com.endorodrigo.eCommerce.service.ItemService itemService;
     private final CustomerService customerService;
     private final PaymentService paymentService;
     private final SalesService salesService;
     private final NotificationService notificationService;
 
-    public SalesController(CartService cartService, ItemService itemService, 
-                         CustomerService customerService, PaymentService paymentService,
-                         SalesService salesService, NotificationService notificationService) {
+    public SalesController(CartService cartService, ItemService itemService,
+                           CustomerService customerService, PaymentService paymentService,
+                           SalesService salesService, NotificationService notificationService) {
         this.cartService = cartService;
         this.itemService = itemService;
         this.customerService = customerService;

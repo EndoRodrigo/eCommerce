@@ -1,9 +1,8 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
 
-import com.endorodrigo.eComerce.model.Item;
-
-import com.endorodrigo.eComerce.repository.IProductRepository;
+import com.endorodrigo.eCommerce.model.Item;
+import com.endorodrigo.eCommerce.repository.IProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

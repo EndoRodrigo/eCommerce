@@ -1,6 +1,6 @@
-package com.endorodrigo.eComerce.repository;
+package com.endorodrigo.eCommerce.repository;
 
-import com.endorodrigo.eComerce.model.Payment;
+import com.endorodrigo.eCommerce.model.Payment;
 import org.springframework.data.repository.CrudRepository;
 
 /**

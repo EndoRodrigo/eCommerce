@@ -1,8 +1,11 @@
 package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eCommerce.model.*;
-import com.endorodrigo.eCommerce.repository.*;
-import org.springframework.stereotype.*;
+
+
+
+import com.endorodrigo.eCommerce.model.Customer;
+import com.endorodrigo.eCommerce.repository.ICustomerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

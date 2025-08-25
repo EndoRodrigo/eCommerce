@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.model;
+package com.endorodrigo.eCommerce.model;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

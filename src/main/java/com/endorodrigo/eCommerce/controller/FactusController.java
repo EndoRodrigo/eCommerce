@@ -1,6 +1,6 @@
-package com.endorodrigo.eComerce.controller;
+package com.endorodrigo.eCommerce.controller;
 
-import com.endorodrigo.eComerce.service.WebClientService;
+import com.endorodrigo.eCommerce.service.WebClientService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;

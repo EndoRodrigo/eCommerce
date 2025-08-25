@@ -1,6 +1,7 @@
-package com.endorodrigo.eComerce.repository;
+package com.endorodrigo.eCommerce.repository;
 
-import com.endorodrigo.eComerce.model.Cart;
+
+import com.endorodrigo.eCommerce.model.Cart;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,6 @@
-package com.endorodrigo.eComerce.repository;
+package com.endorodrigo.eCommerce.repository;
 
-import com.endorodrigo.eComerce.model.Item;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.endorodrigo.eCommerce.model.Item;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

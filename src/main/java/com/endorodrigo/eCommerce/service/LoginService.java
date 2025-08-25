@@ -1,6 +1,7 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eComerce.model.LoginFactus;
+
+import com.endorodrigo.eCommerce.model.LoginFactus;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

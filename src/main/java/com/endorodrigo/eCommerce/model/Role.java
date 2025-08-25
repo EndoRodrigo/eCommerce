@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.model;
+package com.endorodrigo.eCommerce.model;
 
 /**
  * Enum que representa los roles de usuario en el sistema.

@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.model;
+package com.endorodrigo.eCommerce.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

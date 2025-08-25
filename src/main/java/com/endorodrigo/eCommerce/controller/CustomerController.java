@@ -1,18 +1,16 @@
-package com.endorodrigo.eComerce.controller;
+package com.endorodrigo.eCommerce.controller;
 
-import com.endorodrigo.eComerce.model.Customer;
-import com.endorodrigo.eComerce.service.CustomerService;
+
+import com.endorodrigo.eCommerce.model.Customer;
+import com.endorodrigo.eCommerce.service.CustomerService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -33,10 +31,8 @@ public class CustomerController {
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public String customerPage(@RequestParam(value = "id", required = false) Integer id, Model model) {
         List<Customer> customers = customerService.getAll();
-        Customer customer = (id != null) ? customerService.findId(id) : new Customer();
         model.addAttribute("customers", customers);
-        model.addAttribute("customer", customer);
-        logger.info("Informacion encontrada -> " + customer);
+        logger.info("Informacion encontrada -> " + customers);
         return "customer";
     }
 

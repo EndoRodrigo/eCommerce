@@ -1,8 +1,9 @@
 package com.endorodrigo.eCommerce.service;
 
 
-import com.endorodrigo.eComerce.model.User;
-import com.endorodrigo.eComerce.repository.IUserRepository;
+
+import com.endorodrigo.eCommerce.model.User;
+import com.endorodrigo.eCommerce.repository.IUserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

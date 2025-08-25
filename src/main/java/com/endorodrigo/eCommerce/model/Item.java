@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.model;
+package com.endorodrigo.eCommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

@@ -1,6 +1,6 @@
-package com.endorodrigo.eComerce.controller;
+package com.endorodrigo.eCommerce.controller;
 
-import com.endorodrigo.eComerce.model.Cart;
+import com.endorodrigo.eCommerce.model.Cart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

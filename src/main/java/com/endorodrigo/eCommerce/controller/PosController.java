@@ -1,24 +1,23 @@
-package com.endorodrigo.eComerce.controller;
+package com.endorodrigo.eCommerce.controller;
 
-import com.endorodrigo.eComerce.model.*;
-import com.endorodrigo.eComerce.service.CustomerService;
-import com.endorodrigo.eComerce.service.PosService;
-import com.endorodrigo.eComerce.service.ItemService;
-import com.endorodrigo.eComerce.service.WebClientService;
-import jakarta.validation.Valid;
+
+import com.endorodrigo.eCommerce.model.Item;
+import com.endorodrigo.eCommerce.service.PosService;
+import com.endorodrigo.eCommerce.service.ItemService;
+import com.endorodrigo.eCommerce.service.WebClientService;
+import com.endorodrigo.eCommerce.model.Cart;
+import com.endorodrigo.eCommerce.model.Customer;
+import com.endorodrigo.eCommerce.model.Data;
+import com.endorodrigo.eCommerce.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
+
 
 
 /**

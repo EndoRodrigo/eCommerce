@@ -1,7 +1,8 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eComerce.model.Item;
-import com.endorodrigo.eComerce.model.User;
+
+import com.endorodrigo.eCommerce.model.Item;
+import com.endorodrigo.eCommerce.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

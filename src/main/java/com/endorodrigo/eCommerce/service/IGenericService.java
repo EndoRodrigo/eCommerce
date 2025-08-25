@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
 import java.util.List;
 

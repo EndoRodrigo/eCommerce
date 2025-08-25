@@ -1,8 +1,8 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eComerce.model.Cart;
-import com.endorodrigo.eComerce.model.Item;
-import com.endorodrigo.eComerce.repository.IPosRepository;
+import com.endorodrigo.eCommerce.model.Cart;
+import com.endorodrigo.eCommerce.model.Item;
+import com.endorodrigo.eCommerce.repository.IPosRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

@@ -1,7 +1,8 @@
-package com.endorodrigo.eComerce.controller;
+package com.endorodrigo.eCommerce.controller;
 
-import com.endorodrigo.eComerce.model.User;
-import com.endorodrigo.eComerce.service.AuthService;
+
+import com.endorodrigo.eCommerce.model.User;
+import com.endorodrigo.eCommerce.service.AuthService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

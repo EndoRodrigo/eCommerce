@@ -1,10 +1,13 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eComerce.model.User;
-import com.endorodrigo.eComerce.repository.IUserRepository;
+
+import com.endorodrigo.eCommerce.model.User;
+import com.endorodrigo.eCommerce.repository.IUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -35,6 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     /**
      * Carga un usuario por su email para autenticación.
+     *
      * @param email Email del usuario
      * @return Detalles del usuario para Spring Security
      * @throws UsernameNotFoundException Si el usuario no existe

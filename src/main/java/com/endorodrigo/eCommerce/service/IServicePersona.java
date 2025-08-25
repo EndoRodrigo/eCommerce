@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
 /**
  * Interfaz para servicios relacionados con la entidad Persona.

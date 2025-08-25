@@ -1,7 +1,8 @@
 package com.endorodrigo.eComerce.service;
 
-import com.endorodrigo.eComerce.model.Cart;
-import com.endorodrigo.eComerce.repository.*;
+
+import com.endorodrigo.eCommerce.model.Cart;
+import com.endorodrigo.eCommerce.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

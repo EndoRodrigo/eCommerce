@@ -1,7 +1,8 @@
 package com.endorodrigo.eComerce.config;
 
 
-import com.endorodrigo.eComerce.service.CustomUserDetailsService;
+
+import com.endorodrigo.eCommerce.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

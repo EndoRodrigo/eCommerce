@@ -1,7 +1,8 @@
-package com.endorodrigo.eComerce.controller;
+package com.endorodrigo.eCommerce.controller;
 
-import com.endorodrigo.eComerce.model.Item;
-import com.endorodrigo.eComerce.service.ItemService;
+
+import com.endorodrigo.eCommerce.service.ItemService;
+import com.endorodrigo.eCommerce.model.Item;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

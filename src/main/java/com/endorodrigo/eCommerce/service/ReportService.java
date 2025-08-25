@@ -1,11 +1,9 @@
-package com.endorodrigo.eComerce.service;
+package com.endorodrigo.eCommerce.service;
 
-import com.endorodrigo.eComerce.model.Item;
-import com.endorodrigo.eComerce.model.Customer;
-import com.endorodrigo.eComerce.model.Payment;
-import com.endorodrigo.eComerce.repository.IProductRepository;
-import com.endorodrigo.eComerce.repository.ICustomerRepository;
-import com.endorodrigo.eComerce.repository.IPayment;
+
+import com.endorodrigo.eCommerce.repository.IProductRepository;
+import com.endorodrigo.eCommerce.repository.ICustomerRepository;
+import com.endorodrigo.eCommerce.repository.IPayment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
