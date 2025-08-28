@@ -404,3 +404,213 @@ body::before {
 .glow:hover {
   box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
 }
+
+/* Dashboard Cards Styles */
+.stat-card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    border-radius: 15px;
+    z-index: 1;
+}
+
+.stat-card .row {
+    position: relative;
+    z-index: 2;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.stat-change {
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stat-change i {
+    font-size: 0.7rem;
+}
+
+/* Card Color Variants */
+.card-primary {
+    background: var(--primary-gradient);
+    box-shadow: 0 8px 32px rgba(78, 115, 223, 0.3);
+}
+
+.card-success {
+    background: var(--success-gradient);
+    box-shadow: 0 8px 32px rgba(28, 200, 138, 0.3);
+}
+
+.card-warning {
+    background: var(--warning-gradient);
+    box-shadow: 0 8px 32px rgba(246, 194, 62, 0.3);
+}
+
+.card-danger {
+    background: var(--danger-gradient);
+    box-shadow: 0 8px 32px rgba(231, 74, 59, 0.3);
+}
+
+/* Chart Container Styles */
+.chart-area {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+.chart-pie {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+/* Progress Bar Enhancements */
+.progress {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dashboard Status Badge */
+.badge-success {
+    background: var(--success-gradient) !important;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Animation Enhancements */
+.animate-fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.animate-slide-in {
+    animation: slideInRight 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Chart Adjustments */
+@media (max-width: 768px) {
+    .chart-area {
+        height: 250px;
+    }
+    
+    .chart-pie {
+        height: 200px;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+}
+
+/* Glass Card Enhancements for Dashboard */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Chart Tooltip Customization */
+.chartjs-tooltip {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Loading States for Charts */
+.chart-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-secondary);
+}
+
+.chart-loading::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-muted);
+    border-top: 2px solid var(--primary-gradient);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

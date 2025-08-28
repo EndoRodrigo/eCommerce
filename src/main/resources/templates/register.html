@@ -28,6 +28,12 @@
                             <h1 class="h4 mb-4" style="font-family: 'Orbitron', monospace; font-weight: 700; background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" th:text="#{register.form.title}">Create</h1>
                         </div>
 
+                        <!-- Error message display -->
+                        <div th:if="${error}" class="alert alert-danger" role="alert" style="margin-bottom: 20px;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span th:text="${error}"></span>
+                        </div>
+
                         <!-- SECURE REGISTRATION FORM -->
                         <form class="user" th:action="@{/register}" method="post" th:object="${user}" id="secureRegisterForm">
                             <!-- CSRF Protection -->
@@ -51,16 +57,16 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <select class="form-control-modern" 
-                                            th:field="*{role}" 
+                                    <select class="form-control-modern"
+                                            th:field="*{roleId}"
                                             required>
-                                        <option value="">Select Role</option>
-                                        <option value="USER">User</option>
-                                        <option value="ADMIN">Admin</option>
+                                        <option th:value="1">ADMIN</option>
+                                        <option th:value="2">MANAGER</option>
+                                        <option th:value="3">USER</option>
                                     </select>
-                                    <span th:if="${#fields.hasErrors('role')}" 
-                                          class="text-danger small" 
-                                          th:errors="*{role}" 
+                                    <span th:if="${#fields.hasErrors('roleId')}"
+                                          class="text-danger small"
+                                          th:errors="*{roleId}"
                                           style="color: #ff6b6b;"></span>
                                 </div>
                             </div>
@@ -84,6 +90,7 @@
                                 <div class="col-sm-6">
                                     <input type="password" 
                                            class="form-control-modern"
+                                           th:field="*{confirmPassword}"
                                            th:placeholder="'Confirm Password'"
                                            required
                                            autocomplete="new-password"

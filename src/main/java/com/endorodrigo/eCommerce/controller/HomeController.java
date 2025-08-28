@@ -1,0 +1,62 @@
+package com.endorodrigo.eCommerce.controller;
+
+import com.endorodrigo.eCommerce.model.Cart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import com.endorodrigo.eCommerce.service.DashboardService;
+
+import java.security.Principal;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Controlador para la página principal del sistema.
+ * Muestra la vista de inicio para usuarios autenticados y dashboard.
+ */
+@Controller
+public class HomeController {
+
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+    @Autowired
+    private DashboardService dashboardService;
+
+    public HomeController() {
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String rootRedirect() {
+        return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(Principal principal, Model model) {
+        logger.info("Usuario Logueado -> {}", principal.getName());
+        
+        // Datos básicos del dashboard para las tarjetas
+        model.addAttribute("totalVentas", dashboardService.getTotalVentas());
+        model.addAttribute("totalProductos", dashboardService.getTotalProductos());
+        model.addAttribute("totalClientes", dashboardService.getTotalClientes());
+        model.addAttribute("totalUsuarios", dashboardService.getTotalUsuarios());
+        model.addAttribute("totalCarritos", dashboardService.getTotalCarritos());
+        
+        // Datos para las gráficas de seguimiento
+        model.addAttribute("ventasMensuales", dashboardService.getVentasMensuales());
+        model.addAttribute("productosPorCategoria", dashboardService.getProductosPorCategoria());
+        model.addAttribute("estadisticasRendimiento", dashboardService.getEstadisticasRendimiento());
+        model.addAttribute("tendenciasUsuarios", dashboardService.getTendenciasUsuarios());
+        
+        // Datos de carritos (si se necesitan)
+        List<Cart> carts = dashboardService.getCart();
+        logger.info("Carts -> {}", carts);
+        model.addAttribute("carts", carts);
+        
+        // Muestra la página principal
+        return "index";
+    }
+}

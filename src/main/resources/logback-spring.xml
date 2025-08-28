@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Perfil DEV (no prod) -->
+    <springProfile name="!prod">
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!-- Perfil PROD -->
+    <springProfile name="prod">
+        <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <!-- Loggers específicos -->
+    <logger name="com.endorodrigo.eCommerce" level="DEBUG"/>
+    <logger name="org.springframework.security" level="DEBUG"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+</configuration>
