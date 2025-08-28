@@ -1,6 +1,7 @@
 package com.endorodrigo.eCommerce.controller;
 
 
+import com.endorodrigo.eCommerce.model.Data;
 import com.endorodrigo.eCommerce.model.User;
 import com.endorodrigo.eCommerce.service.AuthService;
 import jakarta.validation.Valid;
@@ -12,7 +13,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 
 
 /**
@@ -38,13 +38,13 @@ public class AuthController {
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Data());
         // Muestra el formulario de registro
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("user") User user,
+    public String registerUser(@Valid @ModelAttribute("user") Data user,
                                Errors errors,
                                Model model) {
         logger.info("Datos recibidos: {}", user);
@@ -53,9 +53,12 @@ public class AuthController {
             return "register";
         }
         try {
-            logger.info("Guardando usuario: {}", user.getUsername());
-            authService.registerUser(user);
-            return "redirect:/";
+            User data = new User();
+            data.setEmail(user.getEmail());
+            data.setPassword(user.getPassword());
+            data.setRol();
+            authService.registerUser(data);
+            return "redirect:/login";
         } catch (RuntimeException ex) {
             // Muestra el error en el formulario
             model.addAttribute("error", ex.getMessage());

@@ -5,10 +5,13 @@ import com.endorodrigo.eCommerce.model.User;
 import com.endorodrigo.eCommerce.repository.IUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 
 /**
@@ -45,11 +48,14 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        logger.info("Email encontrado: " + email);
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + email));
-        logger.info("Usuario encontrado: " + user);
-        return new User(user.getEmail(), user.getPassword(), user.getRole()); // Asegúrate de que User implemente correctamente los roles
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+
+        return new User(
+                user.getEmail(),
+                user.getPassword(),
+                user.getRol()
+        );
     }
 }
 

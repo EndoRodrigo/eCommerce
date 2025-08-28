@@ -51,16 +51,16 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <select class="form-control-modern" 
-                                            th:field="*{role}" 
+                                    <select class="form-control-modern"
+                                            th:field="*{rol}"
                                             required>
-                                        <option value="">Select Role</option>
-                                        <option value="USER">User</option>
-                                        <option value="ADMIN">Admin</option>
+                                        <option th:value="1">ADMIN</option>
+                                        <option th:value="2">MANAGER</option>
+                                        <option th:value="3">USER</option>
                                     </select>
-                                    <span th:if="${#fields.hasErrors('role')}" 
-                                          class="text-danger small" 
-                                          th:errors="*{role}" 
+                                    <span th:if="${#fields.hasErrors('rol')}"
+                                          class="text-danger small"
+                                          th:errors="*{rol}"
                                           style="color: #ff6b6b;"></span>
                                 </div>
                             </div>

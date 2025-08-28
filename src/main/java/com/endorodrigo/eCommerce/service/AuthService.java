@@ -7,6 +7,8 @@ import com.endorodrigo.eCommerce.repository.IUserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 /**
  * Servicio para la gestión de autenticación y registro de usuarios.
  * Proporciona métodos para registrar usuarios y validar credenciales.
@@ -16,7 +18,7 @@ public class AuthService {
 
     private final IUserRepository userRepository;
 
-    private PasswordEncoder passwordEncoder = null;
+    private final PasswordEncoder passwordEncoder = null;
 
     public AuthService(IUserRepository userRepository) {
         this.userRepository = userRepository;

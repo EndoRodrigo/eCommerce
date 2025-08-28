@@ -6,7 +6,7 @@ INSERT INTO role (name) VALUES ('USER');
 INSERT INTO role (name) VALUES ('MANAGER');
 
 -- Insertar usuario administrador por defecto
-INSERT INTO user (email, password, role) VALUES ('admin@ecommerce.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'ROLE_ADMIN');
+INSERT INTO user (email, password, role_id) VALUES ('admin@ecommerce.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', '1');
 
 -- Insertar cliente de ejemplo
 INSERT INTO customer (identification_document_id, identification, names, address, legal_organization_id, tribute_id, municipality_id) 

@@ -33,7 +33,7 @@
                                     </div>
                                     
                                     <!-- SECURE LOGIN FORM -->
-                                    <form class="user" th:action="@{/login}" method="post" th:object="${formUser}" id="secureLoginForm">
+                                    <form class="user" th:action="@{/login}" method="post" id="secureLoginForm">
                                         <!-- CSRF Protection -->
                                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
@@ -43,7 +43,6 @@
                                                    id="username" 
                                                    name="username"
                                                    th:placeholder="'Enter Email Address...'"
-                                                   th:value="*{username}"
                                                    required
                                                    autocomplete="username"
                                                    maxlength="100"
