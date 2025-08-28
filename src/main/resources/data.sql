@@ -1,12 +1,10 @@
--- Datos iniciales para la base de datos
+-- Datos iniciales para roles de usuario
+INSERT INTO role (id, name) VALUES (1, 'ADMIN') ON DUPLICATE KEY UPDATE name = VALUES(name);
+INSERT INTO role (id, name) VALUES (2, 'MANAGER') ON DUPLICATE KEY UPDATE name = VALUES(name);
+INSERT INTO role (id, name) VALUES (3, 'USER') ON DUPLICATE KEY UPDATE name = VALUES(name);
 
--- Insertar roles de usuario
-INSERT INTO role (name) VALUES ('ADMIN');
-INSERT INTO role (name) VALUES ('USER');
-INSERT INTO role (name) VALUES ('MANAGER');
-
--- Insertar usuario administrador por defecto
-INSERT INTO user (email, password, role_id) VALUES ('admin@ecommerce.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', '1');
+-- Usuario administrador por defecto (password: Admin123!)
+-- INSERT INTO user (email, password, role_id) VALUES ('admin@ecommerce.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDa', 1) ON DUPLICATE KEY UPDATE email = VALUES(email);
 
 -- Insertar cliente de ejemplo
 INSERT INTO customer (identification_document_id, identification, names, address, legal_organization_id, tribute_id, municipality_id) 
