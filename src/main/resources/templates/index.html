@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragmentos/cabecera::cabecero-seccion}">
+<head th:replace="~{fragmentos/cabecera::cabecero-seccion}"></head>
 
 <body id="page-top">
 
@@ -24,99 +24,113 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4 animate-fade-in">
-                    <h1 class="h3 mb-0" style="font-family: 'Orbitron', monospace; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Dashboard</h1>
-                    <a href="#" class="btn btn-modern animate-pulse">
-                        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                    </a>
+                    <h1 class="h3 mb-0" style="font-family: 'Orbitron', monospace; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                    </h1>
+                    <div class="d-flex">
+                        <span class="badge badge-success mr-2" style="background: var(--success-gradient);">
+                            <i class="fas fa-circle fa-xs mr-1"></i>Online
+                        </span>
+                        <a href="#" class="btn btn-modern animate-pulse">
+                            <i class="fas fa-download fa-sm text-white-50"></i> Generar Reporte
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Content Row -->
+                <!-- Content Row - Tarjetas de Información -->
                 <div class="row">
 
-                    <!-- Earnings (Monthly) Card Example -->
+                    <!-- Total Ventas -->
                     <div class="col-xl-3 col-md-6 mb-4 animate-fade-in" style="animation-delay: 0.1s;">
                         <div class="stat-card card-primary">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="stat-label">
-                                        Earnings (Monthly)
+                                        <i class="fas fa-chart-line mr-1"></i>Total Ventas
                                     </div>
-                                    <div class="stat-number">$40,000</div>
+                                    <div class="stat-number" th:text="${totalVentas}">0</div>
+                                    <div class="stat-change text-success">
+                                        <i class="fas fa-arrow-up"></i> +12% este mes
+                                    </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x" style="color: var(--text-muted);"></i>
+                                    <i class="fas fa-chart-line fa-2x" style="color: var(--text-muted);"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Earnings (Annual) Card Example -->
+                    <!-- Total Productos -->
                     <div class="col-xl-3 col-md-6 mb-4 animate-fade-in" style="animation-delay: 0.2s;">
                         <div class="stat-card card-success">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="stat-label">
-                                        Earnings (Annual)
+                                        <i class="fas fa-boxes mr-1"></i>Total Productos
                                     </div>
-                                    <div class="stat-number">$215,000</div>
+                                    <div class="stat-number" th:text="${totalProductos}">0</div>
+                                    <div class="stat-change text-success">
+                                        <i class="fas fa-arrow-up"></i> +8% este mes
+                                    </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x" style="color: var(--text-muted);"></i>
+                                    <i class="fas fa-boxes fa-2x" style="color: var(--text-muted);"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tasks Card Example -->
+                    <!-- Total Clientes -->
                     <div class="col-xl-3 col-md-6 mb-4 animate-fade-in" style="animation-delay: 0.3s;">
                         <div class="stat-card card-warning">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="stat-label">Tasks</div>
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-auto">
-                                            <div class="stat-number">50%</div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="progress" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 50%; background: var(--warning-gradient); border-radius: 10px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
+                                    <div class="stat-label">
+                                        <i class="fas fa-users mr-1"></i>Total Clientes
+                                    </div>
+                                    <div class="stat-number" th:text="${totalClientes}">0</div>
+                                    <div class="stat-change text-success">
+                                        <i class="fas fa-arrow-up"></i> +15% este mes
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-clipboard-list fa-2x" style="color: var(--text-muted);"></i>
+                                    <i class="fas fa-users fa-2x" style="color: var(--text-muted);"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Pending Requests Card Example -->
+                    <!-- Total Usuarios -->
                     <div class="col-xl-3 col-md-6 mb-4 animate-fade-in" style="animation-delay: 0.4s;">
                         <div class="stat-card card-danger">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="stat-label">
-                                        Pending Requests
+                                        <i class="fas fa-user-shield mr-1"></i>Total Usuarios
                                     </div>
-                                    <div class="stat-number">18</div>
+                                    <div class="stat-number" th:text="${totalUsuarios}">0</div>
+                                    <div class="stat-change text-success">
+                                        <i class="fas fa-arrow-up"></i> +5% este mes
+                                    </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-comments fa-2x" style="color: var(--text-muted);"></i>
+                                    <i class="fas fa-user-shield fa-2x" style="color: var(--text-muted);"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Content Row -->
+                <!-- Content Row - Gráficas de Seguimiento -->
                 <div class="row">
 
-                    <!-- Area Chart -->
+                    <!-- Gráfico de Ventas Mensuales -->
                     <div class="col-xl-8 col-lg-7 animate-slide-in" style="animation-delay: 0.5s;">
                         <div class="glass-card">
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background: transparent; border-bottom: 1px solid var(--glass-border);">
-                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">Earnings Overview</h6>
+                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">
+                                    <i class="fas fa-chart-area mr-2"></i>Evolución de Ventas Mensuales
+                                </h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -124,27 +138,29 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in glass-card"
                                          aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header" style="color: var(--text-primary);">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Action</a>
-                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Another action</a>
+                                        <div class="dropdown-header" style="color: var(--text-primary);">Opciones:</div>
+                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Exportar Datos</a>
+                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Configurar Gráfico</a>
                                         <div class="dropdown-divider" style="border-color: var(--glass-border);"></div>
-                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Something else here</a>
+                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Ver Detalles</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
+                                    <canvas id="ventasMensualesChart"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Pie Chart -->
+                    <!-- Gráfico de Productos por Categoría -->
                     <div class="col-xl-4 col-lg-5 animate-slide-in" style="animation-delay: 0.6s;">
                         <div class="glass-card">
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background: transparent; border-bottom: 1px solid var(--glass-border);">
-                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">Revenue Sources</h6>
+                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">
+                                    <i class="fas fa-chart-pie mr-2"></i>Productos por Categoría
+                                </h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,27 +168,31 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in glass-card"
                                          aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header" style="color: var(--text-primary);">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Action</a>
-                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Another action</a>
-                                        <div class="dropdown-divider" style="border-color: var(--glass-border);"></div>
-                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Something else here</a>
+                                        <div class="dropdown-header" style="color: var(--text-primary);">Opciones:</div>
+                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Ver Detalles</a>
+                                        <a class="dropdown-item" href="#" style="color: var(--text-secondary);">Configurar</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="chart-pie pt-4 pb-2">
-                                    <canvas id="myPieChart"></canvas>
+                                    <canvas id="productosCategoriaChart"></canvas>
                                 </div>
                                 <div class="mt-4 text-center small">
                                     <span class="mr-2" style="color: var(--text-secondary);">
-                                        <i class="fas fa-circle" style="color: var(--primary-gradient);"></i> Direct
+                                        <i class="fas fa-circle" style="color: #4e73df;"></i> Electrónicos
                                     </span>
                                     <span class="mr-2" style="color: var(--text-secondary);">
-                                        <i class="fas fa-circle" style="color: var(--success-gradient);"></i> Social
+                                        <i class="fas fa-circle" style="color: #1cc88a;"></i> Ropa
                                     </span>
                                     <span class="mr-2" style="color: var(--text-secondary);">
-                                        <i class="fas fa-circle" style="color: var(--warning-gradient);"></i> Referral
+                                        <i class="fas fa-circle" style="color: #36b9cc;"></i> Hogar
+                                    </span>
+                                    <span class="mr-2" style="color: var(--text-secondary);">
+                                        <i class="fas fa-circle" style="color: #f6c23e;"></i> Deportes
+                                    </span>
+                                    <span class="mr-2" style="color: var(--text-secondary);">
+                                        <i class="fas fa-circle" style="color: #e74a3b;"></i> Otros
                                     </span>
                                 </div>
                             </div>
@@ -180,140 +200,83 @@
                     </div>
                 </div>
 
-                <!-- Content Row -->
+                <!-- Content Row - Gráficas Adicionales -->
                 <div class="row">
 
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4 animate-fade-in" style="animation-delay: 0.7s;">
-
-                        <!-- Project Card Example -->
+                    <!-- Gráfico de Tendencias de Usuarios -->
+                    <div class="col-xl-6 col-lg-6 animate-slide-in" style="animation-delay: 0.7s;">
                         <div class="glass-card">
                             <div class="card-header py-3" style="background: transparent; border-bottom: 1px solid var(--glass-border);">
-                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">Projects</h6>
+                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">
+                                    <i class="fas fa-chart-line mr-2"></i>Tendencias de Usuarios Activos
+                                </h6>
                             </div>
                             <div class="card-body">
-                                <h4 class="small font-weight-bold" style="color: var(--text-secondary);">Server Migration <span
-                                        class="float-right" style="color: var(--text-primary);">20%</span></h4>
-                                <div class="progress mb-4" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%; background: var(--danger-gradient); border-radius: 10px;"
-                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold" style="color: var(--text-secondary);">Sales Tracking <span
-                                        class="float-right" style="color: var(--text-primary);">40%</span></h4>
-                                <div class="progress mb-4" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%; background: var(--warning-gradient); border-radius: 10px;"
-                                         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold" style="color: var(--text-secondary);">Customer Database <span
-                                        class="float-right" style="color: var(--text-primary);">60%</span></h4>
-                                <div class="progress mb-4" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 60%; background: var(--primary-gradient); border-radius: 10px;"
-                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold" style="color: var(--text-secondary);">Payout Details <span
-                                        class="float-right" style="color: var(--text-primary);">80%</span></h4>
-                                <div class="progress mb-4" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%; background: var(--success-gradient); border-radius: 10px;"
-                                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold" style="color: var(--text-secondary);">Account Setup <span
-                                        class="float-right" style="color: var(--text-primary);">Complete!</span></h4>
-                                <div class="progress" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%; background: var(--success-gradient); border-radius: 10px;"
-                                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="chart-area">
+                                    <canvas id="tendenciasUsuariosChart"></canvas>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Color System -->
-                        <div class="row">
-                            <div class="col-lg-6 mb-4">
-                                <div class="card card-primary text-white shadow">
-                                    <div class="card-body" style="background: var(--primary-gradient); border-radius: 15px;">
-                                        Primary
-                                        <div class="text-white-50 small">#4e73df</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="card card-success text-white shadow">
-                                    <div class="card-body" style="background: var(--success-gradient); border-radius: 15px;">
-                                        Success
-                                        <div class="text-white-50 small">#1cc88a</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="card card-info text-white shadow">
-                                    <div class="card-body" style="background: var(--success-gradient); border-radius: 15px;">
-                                        Info
-                                        <div class="text-white-50 small">#36b9cc</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="card card-warning text-white shadow">
-                                    <div class="card-body" style="background: var(--warning-gradient); border-radius: 15px;">
-                                        Warning
-                                        <div class="text-white-50 small">#f6c23e</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="card card-danger text-white shadow">
-                                    <div class="card-body" style="background: var(--danger-gradient); border-radius: 15px;">
-                                        Danger
-                                        <div class="text-white-50 small">#e74a3b</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="card card-secondary text-white shadow">
-                                    <div class="card-body" style="background: var(--secondary-gradient); border-radius: 15px;">
-                                        Secondary
-                                        <div class="text-white-50 small">#858796</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
-                    <div class="col-lg-6 mb-4 animate-fade-in" style="animation-delay: 0.8s;">
-
-                        <!-- Illustrations -->
+                    <!-- Métricas de Rendimiento -->
+                    <div class="col-xl-6 col-lg-6 animate-slide-in" style="animation-delay: 0.8s;">
                         <div class="glass-card">
                             <div class="card-header py-3" style="background: transparent; border-bottom: 1px solid var(--glass-border);">
-                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">Illustrations</h6>
+                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">
+                                    <i class="fas fa-tasks mr-2"></i>Métricas de Rendimiento
+                                </h6>
                             </div>
                             <div class="card-body">
-                                <div class="text-center">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                         src="/img/undraw_posting_photo.svg" alt="">
+                                <div class="mb-4">
+                                    <h4 class="small font-weight-bold" style="color: var(--text-secondary);">
+                                        Productos <span class="float-right" style="color: var(--text-primary);" 
+                                        th:text="${estadisticasRendimiento.productosCompletitud + '%'}">0%</span>
+                                    </h4>
+                                    <div class="progress mb-4" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                        <div class="progress-bar" role="progressbar" 
+                                             th:style="'width: ' + ${estadisticasRendimiento.productosCompletitud} + '%; background: var(--primary-gradient); border-radius: 10px;'"
+                                             th:aria-valuenow="${estadisticasRendimiento.productosCompletitud}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
-                                <p style="color: var(--text-secondary);">Add some quality, svg illustrations to your project courtesy of <a
-                                        target="_blank" rel="nofollow" href="https://undraw.co/" style="color: var(--primary-gradient);">unDraw</a>, a
-                                    constantly updated collection of beautiful svg images that you can use
-                                    completely free and without attribution!</p>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/" class="btn btn-modern">Browse Illustrations on
-                                    unDraw →</a>
+                                
+                                <div class="mb-4">
+                                    <h4 class="small font-weight-bold" style="color: var(--text-secondary);">
+                                        Clientes <span class="float-right" style="color: var(--text-primary);"
+                                        th:text="${estadisticasRendimiento.clientesCompletitud + '%'}">0%</span>
+                                    </h4>
+                                    <div class="progress mb-4" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                        <div class="progress-bar" role="progressbar" 
+                                             th:style="'width: ' + ${estadisticasRendimiento.clientesCompletitud} + '%; background: var(--success-gradient); border-radius: 10px;'"
+                                             th:aria-valuenow="${estadisticasRendimiento.clientesCompletitud}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="small font-weight-bold" style="color: var(--text-secondary);">
+                                        Usuarios <span class="float-right" style="color: var(--text-primary);"
+                                        th:text="${estadisticasRendimiento.usuariosCompletitud + '%'}">0%</span>
+                                    </h4>
+                                    <div class="progress mb-4" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                        <div class="progress-bar" role="progressbar" 
+                                             th:style="'width: ' + ${estadisticasRendimiento.usuariosCompletitud} + '%; background: var(--warning-gradient); border-radius: 10px;'"
+                                             th:aria-valuenow="${estadisticasRendimiento.usuariosCompletitud}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="small font-weight-bold" style="color: var(--text-secondary);">
+                                        Ventas <span class="float-right" style="color: var(--text-primary);"
+                                        th:text="${estadisticasRendimiento.ventasCompletitud + '%'}">0%</span>
+                                    </h4>
+                                    <div class="progress mb-4" style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                        <div class="progress-bar" role="progressbar" 
+                                             th:style="'width: ' + ${estadisticasRendimiento.ventasCompletitud} + '%; background: var(--danger-gradient); border-radius: 10px;'"
+                                             th:aria-valuenow="${estadisticasRendimiento.ventasCompletitud}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <!-- Approach -->
-                        <div class="glass-card">
-                            <div class="card-header py-3" style="background: transparent; border-bottom: 1px solid var(--glass-border);">
-                                <h6 class="m-0 font-weight-bold" style="color: var(--text-primary);">Development Approach</h6>
-                            </div>
-                            <div class="card-body">
-                                <p style="color: var(--text-secondary);">SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                    CSS bloat and poor page performance. Custom CSS classes are used to create
-                                    custom components and custom utility classes.</p>
-                                <p class="mb-0" style="color: var(--text-secondary);">Before working with this theme, you should become familiar with the
-                                    Bootstrap framework, especially the utility classes.</p>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -352,9 +315,123 @@
 <script th:src="@{/static/vendor/chart.js/Chart.min.js}"></script>
 
 <!-- Page level custom scripts -->
-<script th:src="@{/static/js/demo/chart-area-demo.js}"></script>
-<script th:src="@{/static/js/demo/chart-pie-demo.js}"></script>
+<script th:inline="javascript">
+// Gráfico de Ventas Mensuales
+const ventasMensualesData = /*[[${ventasMensuales}]]*/ {};
+const ventasChart = new Chart(document.getElementById('ventasMensualesChart'), {
+    type: 'line',
+    data: {
+        labels: ventasMensualesData.labels || [],
+        datasets: [{
+            label: 'Ventas Mensuales',
+            data: ventasMensualesData.data || [],
+            backgroundColor: ventasMensualesData.backgroundColor || 'rgba(78, 115, 223, 0.1)',
+            borderColor: ventasMensualesData.borderColor || 'rgba(78, 115, 223, 1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.1)'
+                },
+                ticks: {
+                    color: '#858796'
+                }
+            },
+            x: {
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.1)'
+                },
+                ticks: {
+                    color: '#858796'
+                }
+            }
+        }
+    }
+});
+
+// Gráfico de Productos por Categoría
+const productosCategoriaData = /*[[${productosPorCategoria}]]*/ {};
+const productosChart = new Chart(document.getElementById('productosCategoriaChart'), {
+    type: 'doughnut',
+    data: {
+        labels: productosCategoriaData.labels || [],
+        datasets: [{
+            data: productosCategoriaData.data || [],
+            backgroundColor: productosCategoriaData.colors || ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'],
+            borderWidth: 2,
+            borderColor: '#fff'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        cutout: '60%'
+    }
+});
+
+// Gráfico de Tendencias de Usuarios
+const tendenciasUsuariosData = /*[[${tendenciasUsuarios}]]*/ {};
+const usuariosChart = new Chart(document.getElementById('tendenciasUsuariosChart'), {
+    type: 'bar',
+    data: {
+        labels: tendenciasUsuariosData.labels || [],
+        datasets: [{
+            label: 'Usuarios Activos',
+            data: tendenciasUsuariosData.data || [],
+            backgroundColor: tendenciasUsuariosData.backgroundColor || 'rgba(28, 200, 138, 0.8)',
+            borderColor: tendenciasUsuariosData.borderColor || 'rgba(28, 200, 138, 1)',
+            borderWidth: 1,
+            borderRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.1)'
+                },
+                ticks: {
+                    color: '#858796'
+                }
+            },
+            x: {
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.1)'
+                },
+                ticks: {
+                    color: '#858796'
+                }
+            }
+        }
+    }
+});
+</script>
 
 </body>
-
 </html>

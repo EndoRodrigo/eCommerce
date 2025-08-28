@@ -12,6 +12,7 @@ import com.endorodrigo.eCommerce.service.DashboardService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controlador para la página principal del sistema.
@@ -26,9 +27,7 @@ public class HomeController {
     private DashboardService dashboardService;
 
     public HomeController() {
-
     }
-
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String rootRedirect() {
@@ -38,17 +37,26 @@ public class HomeController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Principal principal, Model model) {
         logger.info("Usuario Logueado -> {}", principal.getName());
-        // Datos del dashboard
+        
+        // Datos básicos del dashboard para las tarjetas
         model.addAttribute("totalVentas", dashboardService.getTotalVentas());
         model.addAttribute("totalProductos", dashboardService.getTotalProductos());
         model.addAttribute("totalClientes", dashboardService.getTotalClientes());
         model.addAttribute("totalUsuarios", dashboardService.getTotalUsuarios());
         model.addAttribute("totalCarritos", dashboardService.getTotalCarritos());
+        
+        // Datos para las gráficas de seguimiento
+        model.addAttribute("ventasMensuales", dashboardService.getVentasMensuales());
+        model.addAttribute("productosPorCategoria", dashboardService.getProductosPorCategoria());
+        model.addAttribute("estadisticasRendimiento", dashboardService.getEstadisticasRendimiento());
+        model.addAttribute("tendenciasUsuarios", dashboardService.getTendenciasUsuarios());
+        
+        // Datos de carritos (si se necesitan)
         List<Cart> carts = dashboardService.getCart();
         logger.info("Carts -> {}", carts);
         model.addAttribute("carts", carts);
+        
         // Muestra la página principal
         return "index";
     }
-
 }
