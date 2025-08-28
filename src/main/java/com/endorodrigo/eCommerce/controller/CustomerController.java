@@ -32,6 +32,7 @@ public class CustomerController {
     public String customerPage(@RequestParam(value = "id", required = false) Integer id, Model model) {
         List<Customer> customers = customerService.getAll();
         model.addAttribute("customers", customers);
+        model.addAttribute("customer", new Customer());
         logger.info("Informacion encontrada -> " + customers);
         return "customer";
     }
