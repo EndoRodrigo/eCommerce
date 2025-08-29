@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error de Validación - eCommerce</title>
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/modern-futuristic.css" rel="stylesheet">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+</head>
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <i class="fas fa-exclamation-triangle fa-3x text-warning mb-4"></i>
+                                        <h1 class="h4 text-gray-900 mb-4">Error de Validación</h1>
+                                    </div>
+                                    
+                                    <div class="alert alert-danger" role="alert">
+                                        <h5 class="alert-heading">Se encontraron los siguientes errores:</h5>
+                                        <p class="mb-0">{{errorMessage}}</p>
+                                    </div>
+                                    
+                                    <div th:if="${errors}" class="mb-4">
+                                        <h6>Detalles de los errores:</h6>
+                                        <ul class="list-group">
+                                            <li th:each="error : ${errors}" 
+                                                th:text="${error.value}" 
+                                                class="list-group-item list-group-item-danger">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <hr>
+                                    
+                                    <div class="text-center">
+                                        <a href="/pos" class="btn btn-primary btn-user">
+                                            <i class="fas fa-arrow-left mr-2"></i>
+                                            Volver al POS
+                                        </a>
+                                        <a href="/" class="btn btn-secondary btn-user ml-2">
+                                            <i class="fas fa-home mr-2"></i>
+                                            Ir al Inicio
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/sb-admin-2.min.js"></script>
+</body>
+</html>
