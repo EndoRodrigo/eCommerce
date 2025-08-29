@@ -3,11 +3,13 @@ package com.endorodrigo.eCommerce.model;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.io.Serializable;
+
 /**
  * Entidad que representa datos generales asociados a un cliente o transacción.
  * Incluye identificador, código y referencia al cliente.
  */
-public class Data {
+public class Data implements Serializable {
 
     /** Identificador único de los datos. */
     private Integer id;
@@ -19,10 +21,6 @@ public class Data {
     private String client;
     /** Método de pago seleccionado */
     private String paymentMethod;
-    private String email;
-    private String password;
-    private String rol;
-
     /**
      * Constructor por defecto.
      */
@@ -105,29 +103,6 @@ public class Data {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
 
     /**
      * Representación en texto de la entidad Data.

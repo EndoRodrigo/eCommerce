@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,6 @@ public class Cart {
     public Cart() {}
 
     // Getters y Setters
-
 
     public Long getId() {
         return id;
@@ -95,42 +93,43 @@ public class Cart {
     }
 
     // Métodos de negocio
+
     @JsonIgnore
     public void addProduct(Item product) {
-        items.add(product);
-        product.setCart(this);
+        product.setCart(this);  // Asociar el cart con el item
+        items.add(product);  // Agregar el producto a la lista de items
     }
-    
+
     @JsonIgnore
     public void removeProduct(Item product) {
-        items.removeIf(item -> item.getCode_reference().equals(product.getCode_reference()));
+        items.removeIf(item -> item.getCodeReference().equals(product.getCodeReference()));  // Remover item de la lista
     }
 
     @JsonIgnore
     public void updateProductQuantity(Item product, int quantity) {
         for (Item item : items) {
-            if (item.getCode_reference().equals(product.getCode_reference())) {
-                item.setQuantity(quantity);
+            if (item.getCodeReference().equals(product.getCodeReference())) {
+                item.setQuantity(quantity);  // Actualizar la cantidad del producto
                 return;
             }
         }
     }
-    
+
     @JsonIgnore
     public boolean isEmpty() {
-        return items.isEmpty();
+        return items.isEmpty();  // Verificar si el carrito está vacío
     }
-    
+
     @JsonIgnore
     public double getTotal() {
         return items.stream()
-                .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                .mapToDouble(item -> item.getPrice() * item.getQuantity())  // Calcular el total
                 .sum();
     }
-    
+
     @JsonIgnore
     public void clear() {
-        items.clear();
+        items.clear();  // Limpiar todos los productos
     }
 
     @Override

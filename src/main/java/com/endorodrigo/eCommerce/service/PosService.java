@@ -65,7 +65,7 @@ public class PosService implements IGenericService<Cart, Integer>{
         for (Item item : entity.getItems()) {
             boolean found = false;
             for (Item unique : uniqueItems) {
-                if (unique.getCode_reference().equals(item.getCode_reference())) {
+                if (unique.getCodeReference().equals(item.getCodeReference())) {
                     unique.setQuantity(unique.getQuantity() + item.getQuantity());
                     found = true;
                     break;
@@ -91,7 +91,7 @@ public class PosService implements IGenericService<Cart, Integer>{
         for (Item item : entity.getItems()) {
             boolean found = false;
             for (Item unique : uniqueItems) {
-                if (unique.getCode_reference().equals(item.getCode_reference())) {
+                if (unique.getCodeReference().equals(item.getCodeReference())) {
                     unique.setQuantity(unique.getQuantity() + item.getQuantity());
                     found = true;
                     break;

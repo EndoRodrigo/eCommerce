@@ -29,8 +29,7 @@
                 </form>
 
                 <!-- Topbar Search -->
-                <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                aria-label="Search" aria-describedby="basic-addon2">
@@ -299,7 +298,7 @@
                                     <td th:text="${cart.description}"></td>
                                     <td th:text="${cart.customer.identification}"></td>
                                     <td th:text="${cart.customer.names}"></td>
-                                    <td th:text="${car.code_reference}"></td>
+                                    <td th:text="${cart.reference_code}"></td>
                                     <td th:text="${car.name}"></td>
                                     <td th:text="${car.quantity}"></td>
                                     <td th:text="${car.price * car.quantity}"></td>
@@ -317,7 +316,7 @@
                                 </tbody>
                             </table>
                             <form method="post" th:action="@{/pos/generate}">
-                                <button  type="submit" class="btn btn-success btn-sm mb-1">
+                                <button type="submit" class="btn btn-success btn-sm mb-1">
                                     <i class="fas fa-check"></i> Generar Orden
                                 </button>
                                 <a th:href="@{/pos/clear}" class="btn btn-danger btn-sm">
