@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,18 +27,33 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ValidationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleValidationException(ValidationException ex, Model model) {
+    public String handleValidationException(ValidationException ex, Model model, WebRequest request) {
         logger.error("Error de validación: {}", ex.getMessage());
         
-        Map<String, String> errors = new HashMap<>();
-        if (ex.getField() != null) {
-            errors.put(ex.getField(), ex.getMessage());
+        // Si es una petición AJAX o API, devolver vista de error
+        if (isAjaxRequest(request)) {
+            Map<String, String> errors = new HashMap<>();
+            if (ex.getField() != null) {
+                errors.put(ex.getField(), ex.getMessage());
+            }
+            
+            model.addAttribute("errors", errors);
+            model.addAttribute("errorMessage", ex.getMessage());
+            
+            return "error/validation-error";
+        } else {
+            // Si es una petición normal, redirigir al POS
+            return "redirect:/pos?error=" + ex.getMessage() + 
+                   (ex.getField() != null ? "&field=" + ex.getField() : "");
         }
-        
-        model.addAttribute("errors", errors);
-        model.addAttribute("errorMessage", ex.getMessage());
-        
-        return "error/validation-error";
+    }
+
+    /**
+     * Verifica si la petición es AJAX
+     */
+    private boolean isAjaxRequest(WebRequest request) {
+        String requestedWith = request.getHeader("X-Requested-With");
+        return requestedWith != null && "XMLHttpRequest".equals(requestedWith);
     }
 
     /**
@@ -82,20 +98,5 @@ public class GlobalExceptionHandler {
         model.addAttribute("timestamp", System.currentTimeMillis());
         
         return "error/generic-error";
-    }
-
-    /**
-     * Maneja excepciones de validación en el POS con redirección.
-     */
-    @ExceptionHandler(ValidationException.class)
-    public String handleValidationExceptionRedirect(ValidationException ex, RedirectAttributes redirectAttributes) {
-        logger.error("Error de validación (redirect): {}", ex.getMessage());
-        
-        redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-        if (ex.getField() != null) {
-            redirectAttributes.addFlashAttribute("errorField", ex.getField());
-        }
-        
-        return "redirect:/pos";
     }
 }
