@@ -48,6 +48,7 @@ public class Item {
     private Integer tribute_id;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonBackReference
     private Cart cart;
 
     public Item() {
