@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.config;
+package com.endorodrigo.eCommerce.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
