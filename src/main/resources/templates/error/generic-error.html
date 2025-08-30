@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,38 +38,43 @@
                                                         <span th:text="${#dates.format(timestamp, 'dd/MM/yyyy HH:mm:ss')}"></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <i class="fas fa-clock fa-2x text-gray-300"></i>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <span th:text="${#dates.format(#dates.create(timestamp != null ? timestamp : 0), 'dd/MM/yyyy HH:mm:ss')}">
+                                                        Fecha del error
+                                                    </span>
                                                 </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clock fa-2x text-gray-300"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="alert alert-info" role="alert">
-                                        <h6 class="alert-heading">¿Qué puedes hacer?</h6>
-                                        <ul class="mb-0">
-                                            <li>Verificar que todos los datos estén completos</li>
-                                            <li>Intentar la operación nuevamente</li>
-                                            <li>Si el problema persiste, contactar al administrador</li>
-                                        </ul>
-                                    </div>
-                                    
-                                    <hr>
-                                    
-                                    <div class="text-center">
-                                        <button onclick="window.history.back()" class="btn btn-primary btn-user">
-                                            <i class="fas fa-arrow-left mr-2"></i>
-                                            Página Anterior
-                                        </button>
-                                        <a href="/" class="btn btn-secondary btn-user ml-2">
-                                            <i class="fas fa-home mr-2"></i>
-                                            Ir al Inicio
-                                        </a>
-                                        <a href="/pos" class="btn btn-info btn-user ml-2">
-                                            <i class="fas fa-cash-register mr-2"></i>
-                                            Ir al POS
-                                        </a>
-                                    </div>
+                                </div>
+
+                                <div class="alert alert-info" role="alert">
+                                    <h6 class="alert-heading">¿Qué puedes hacer?</h6>
+                                    <ul class="mb-0">
+                                        <li>Verificar que todos los datos estén completos</li>
+                                        <li>Intentar la operación nuevamente</li>
+                                        <li>Si el problema persiste, contactar al administrador</li>
+                                    </ul>
+                                </div>
+
+                                <hr>
+
+                                <div class="text-center">
+                                    <button onclick="window.history.back()" class="btn btn-primary btn-user">
+                                        <i class="fas fa-arrow-left mr-2"></i>
+                                        Página Anterior
+                                    </button>
+                                    <a href="/" class="btn btn-secondary btn-user ml-2">
+                                        <i class="fas fa-home mr-2"></i>
+                                        Ir al Inicio
+                                    </a>
+                                    <a href="/pos" class="btn btn-info btn-user ml-2">
+                                        <i class="fas fa-cash-register mr-2"></i>
+                                        Ir al POS
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -78,10 +83,11 @@
             </div>
         </div>
     </div>
-    
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="/js/sb-admin-2.min.js"></script>
+</div>
+
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
 </body>
 </html>

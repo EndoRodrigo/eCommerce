@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
                                     
                                     <div class="alert alert-warning" role="alert">
                                         <h5 class="alert-heading">Error en el Sistema de Facturación:</h5>
-                                        <p class="mb-0">{{errorMessage}}</p>
+                                        <p class="mb-0" th:text="${errorMessage}">Error de facturación</p>
                                     </div>
                                     
                                     <div class="row mb-4">
@@ -36,8 +36,8 @@
                                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                                 Código de Error
                                                             </div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                                {{errorCode}}
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${errorCode}">
+                                                                Código
                                                             </div>
                                                         </div>
                                                         <div class="col-auto">
@@ -56,8 +56,8 @@
                                                                 Timestamp
                                                             </div>
                                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                                <span th:text="${#dates.format(#dates.create(timestamp), 'dd/MM/yyyy HH:mm:ss')}">
-                                                                    {{timestamp}}
+                                                                <span th:text="${#dates.format(#dates.create(timestamp != null ? timestamp : 0), 'dd/MM/yyyy HH:mm:ss')}">
+                                                                    Fecha del error
                                                                 </span>
                                                             </div>
                                                         </div>
