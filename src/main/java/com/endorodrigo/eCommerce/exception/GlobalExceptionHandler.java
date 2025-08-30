@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,7 +67,7 @@ public class GlobalExceptionHandler {
         
         model.addAttribute("errorMessage", ex.getMessage());
         model.addAttribute("errorCode", ex.getErrorCode());
-        model.addAttribute("timestamp", System.currentTimeMillis());
+        model.addAttribute("timestamp", new Date());
         
         return "error/pos-error";
     }
@@ -81,7 +82,7 @@ public class GlobalExceptionHandler {
         
         model.addAttribute("errorMessage", ex.getMessage());
         model.addAttribute("errorCode", ex.getErrorCode());
-        model.addAttribute("timestamp", System.currentTimeMillis());
+        model.addAttribute("timestamp", new Date());
         
         return "error/factura-error";
     }
@@ -95,7 +96,7 @@ public class GlobalExceptionHandler {
         logger.error("Error inesperado: {}", ex.getMessage(), ex);
         
         model.addAttribute("errorMessage", "Ha ocurrido un error inesperado. Por favor, inténtelo de nuevo.");
-        model.addAttribute("timestamp", System.currentTimeMillis());
+        model.addAttribute("timestamp", new Date());
         
         return "error/generic-error";
     }
