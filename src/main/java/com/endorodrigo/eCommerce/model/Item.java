@@ -16,9 +16,9 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false, name = "code_reference")
+    @Column(unique = true, nullable = false, name = "codeReference")
     @NotEmpty
-    private String codeReference;
+    private String code_reference;
     
     @NotEmpty
     private String name;
@@ -48,6 +48,7 @@ public class Item {
     private Integer tribute_id;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonBackReference
     private Cart cart;
 
     public Item() {
@@ -61,12 +62,12 @@ public class Item {
         this.id = id;
     }
 
-    public String getCodeReference() {
-        return codeReference;
+    public String getCode_reference() {
+        return code_reference;
     }
 
-    public void setCodeReference(String codeReference) {
-        this.codeReference = codeReference;
+    public void setCode_reference(String code_reference) {
+        this.code_reference = code_reference;
     }
 
     public String getName() {
@@ -153,7 +154,7 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", code_reference='" + codeReference + '\'' +
+                ", code_reference='" + code_reference + '\'' +
                 ", name='" + name + '\'' +
                 ", quantity=" + quantity +
                 ", discount_rate='" + discount_rate + '\'' +

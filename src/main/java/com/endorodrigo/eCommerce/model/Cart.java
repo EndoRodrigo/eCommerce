@@ -102,13 +102,13 @@ public class Cart {
 
     @JsonIgnore
     public void removeProduct(Item product) {
-        items.removeIf(item -> item.getCodeReference().equals(product.getCodeReference()));  // Remover item de la lista
+        items.removeIf(item -> item.getCode_reference().equals(product.getCode_reference()));  // Remover item de la lista
     }
 
     @JsonIgnore
     public void updateProductQuantity(Item product, int quantity) {
         for (Item item : items) {
-            if (item.getCodeReference().equals(product.getCodeReference())) {
+            if (item.getCode_reference().equals(product.getCode_reference())) {
                 item.setQuantity(quantity);  // Actualizar la cantidad del producto
                 return;
             }

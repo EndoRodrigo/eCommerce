@@ -1,4 +1,4 @@
-package com.endorodrigo.eComerce.config;
+package com.endorodrigo.eCommerce.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

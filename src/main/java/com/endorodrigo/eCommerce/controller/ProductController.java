@@ -138,7 +138,7 @@ public class ProductController {
             
             redirectAttributes.addFlashAttribute("success", 
                 "Producto '" + savedProduct.getName() + "' creado exitosamente");
-            return "redirect:/products/" + savedProduct.getCodeReference();
+            return "redirect:/products/" + savedProduct.getCode_reference();
             
         } catch (Exception e) {
             logger.error("Error al crear producto", e);

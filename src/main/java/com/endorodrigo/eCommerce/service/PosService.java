@@ -81,13 +81,13 @@ public class PosService implements IGenericService<Cart, Integer>{
             // Elimina duplicados y suma cantidades antes de guardar
             List<Item> uniqueItems = new ArrayList<>();
             for (Item item : entity.getItems()) {
-                if (item == null || item.getCodeReference() == null) {
+                if (item == null || item.getCode_reference() == null) {
                     throw new ValidationException("Los productos del carrito no pueden ser nulos", "item");
                 }
                 
                 boolean found = false;
                 for (Item unique : uniqueItems) {
-                    if (unique.getCodeReference().equals(item.getCodeReference())) {
+                    if (unique.getCode_reference().equals(item.getCode_reference())) {
                         unique.setQuantity(unique.getQuantity() + item.getQuantity());
                         found = true;
                         break;
@@ -139,13 +139,13 @@ public class PosService implements IGenericService<Cart, Integer>{
             // Elimina duplicados y suma cantidades antes de guardar
             List<Item> uniqueItems = new ArrayList<>();
             for (Item item : entity.getItems()) {
-                if (item == null || item.getCodeReference() == null) {
+                if (item == null || item.getCode_reference() == null) {
                     throw new ValidationException("Los productos del carrito no pueden ser nulos", "item");
                 }
                 
                 boolean found = false;
                 for (Item unique : uniqueItems) {
-                    if (unique.getCodeReference().equals(item.getCodeReference())) {
+                    if (unique.getCode_reference().equals(item.getCode_reference())) {
                         unique.setQuantity(unique.getQuantity() + item.getQuantity());
                         found = true;
                         break;

@@ -4,35 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error del Sistema - eCommerce</title>
-    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="/css/modern-futuristic.css" rel="stylesheet">
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+    <link th:href="@{/css/modern-futuristic.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 </head>
 <body class="bg-gradient-primary">
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <i class="fas fa-exclamation-circle fa-3x text-danger mb-4"></i>
-                                    <h1 class="h4 text-gray-900 mb-4">Error del Sistema</h1>
-                                </div>
-
-                                <div class="alert alert-danger" role="alert">
-                                    <h5 class="alert-heading">Ha ocurrido un error inesperado:</h5>
-                                    <p class="mb-0" th:text="${errorMessage}">Error del sistema</p>
-                                </div>
-
-                                <div class="card border-left-info shadow h-100 py-2 mb-4">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Timestamp del Error
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <i class="fas fa-exclamation-circle fa-3x text-danger mb-4"></i>
+                                        <h1 class="h4 text-gray-900 mb-4">Error del Sistema</h1>
+                                    </div>
+                                    
+                                    <div class="alert alert-danger" role="alert">
+                                        <h5 class="alert-heading">Ha ocurrido un error inesperado:</h5>
+                                        <p class="mb-0">{{errorMessage}}</p>
+                                    </div>
+                                    
+                                    <div class="card border-left-info shadow h-100 py-2 mb-4">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                        Timestamp del Error
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <span th:text="${#dates.format(timestamp, 'dd/MM/yyyy HH:mm:ss')}"></span>
+                                                    </div>
                                                 </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                     <span th:text="${#dates.format(#dates.create(timestamp != null ? timestamp : 0), 'dd/MM/yyyy HH:mm:ss')}">
