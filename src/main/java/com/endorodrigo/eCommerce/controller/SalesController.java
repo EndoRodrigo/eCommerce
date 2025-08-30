@@ -120,7 +120,7 @@ public class SalesController {
                 cartItem.setProductName(item.getName());
                 cartItem.setPrice(BigDecimal.valueOf(item.getPrice()));
                 cartItem.setQuantity(quantity);
-                cartItem.setProductCode(item.getCodeReference());
+                cartItem.setProductCode(item.getCode_reference());
                 cartItem.setDescription(item.getName());
                 cartItem.setStockAvailable(item.getQuantity());
                 

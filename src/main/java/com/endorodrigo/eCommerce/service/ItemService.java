@@ -43,7 +43,7 @@ public class ItemService implements IGenericService<Item, Long> {
     }
 
     public Item findReferenteCode(String referenteCode) {
-        return productRepository.findByCodeReference(referenteCode);
+        return productRepository.findById(Long.parseLong(referenteCode)).orElse(null);
     }
 
     /**

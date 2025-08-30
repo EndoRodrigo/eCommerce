@@ -25,6 +25,4 @@ public interface IProductRepository extends CrudRepository<Item, Long> {
      */
     java.util.List<Item> findByQuantity(Integer quantity);
 
-
-    Item findByCodeReference(String code_reference);
 }
